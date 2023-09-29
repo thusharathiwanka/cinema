@@ -1,0 +1,26 @@
+@import '~/assets/scss/variables';
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-bottom: 4rem;
+}
+
+.header__back-link {
+  font-size: $body-font-size;
+  color: $primary-accent-color;
+  position: absolute;
+  left: 0;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.header__logo {
+  width: 150px;
+  height: auto;
+}
