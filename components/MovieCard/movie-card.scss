@@ -3,27 +3,12 @@
 .movie-card {
   position: relative;
   display: inline-block;
-}
-
-.movie-card__image {
-  height: 340px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.movie-card__rating {
-  position: absolute;
-  background-color: $primary-accent-color;
-  color: $primary-background-color;
-  font-size: $body-font-size;
-  padding: 0.5rem;
-  border-radius: 50%;
-  right: -19px;
-  bottom: 120px;
+  padding: 1rem;
+  max-width: 250px;
 }
 
 .movie-card__text-container {
-  padding: 1rem 0;
+  padding: 0 1rem;
 }
 
 .movie-card__title {
