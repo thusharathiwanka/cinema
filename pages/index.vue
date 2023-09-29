@@ -1,5 +1,14 @@
 <template>
-  <MovieCard />
+  <main>
+    <MovieCard />
+    <MovieCard />
+    <MovieCard />
+    <MovieCard />
+    <MovieCard />
+    <MovieCard />
+    <MovieCard />
+    <MovieCard />
+  </main>
 </template>
 
 <script lang="ts">
