@@ -1,11 +1,11 @@
-@import '~/assets/scss/variables';
+@import '@/assets/scss/variables';
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding-bottom: 4rem;
+  padding-bottom: 2.5rem;
 }
 
 .header__back-link {

@@ -1,5 +1,21 @@
-@import '~/assets/scss/variables';
+@import '@/assets/scss/variables';
 
-h1 {
-  color: $primary-font-color;
+.movie-card {
+  position: relative;
+  display: inline-block;
+  padding: 1rem;
+  max-width: 250px;
+}
+
+.movie-card__text-container {
+  padding: 0 1rem;
+}
+
+.movie-card__title {
+  font-size: $title-font-size;
+}
+
+.movie-card__subtitle {
+  font-size: $body-font-size;
+  color: $secondary-accent-color;
 }

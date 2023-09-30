@@ -1,0 +1,9 @@
+@import '@/assets/scss/variables';
+
+.page-title {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  font-size: $page-title-font-size;
+}
