@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { MovieCardMockData } from './mockData'
-import MovieCardComponent from '@/components/MovieCard/MovieCard.vue'
+import MovieCard from '@/components/MovieCard/MovieCard.vue'
 
 describe('MovieCard.vue', () => {
   it('should render movie card component with correct props', () => {
-    const wrapper = mount(MovieCardComponent, {
+    const wrapper = mount(MovieCard, {
       propsData: MovieCardMockData,
     })
 
@@ -15,8 +15,8 @@ describe('MovieCard.vue', () => {
   })
 
   it('should not render movie card component without correct props', () => {
-    const wrapper = mount(MovieCardComponent, {
-      propsData: {},
+    const wrapper = mount(MovieCard, {
+      propsData: { movie: null },
     })
 
     expect(wrapper.find('.movie-card').exists()).toBeFalsy()
