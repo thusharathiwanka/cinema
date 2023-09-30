@@ -14,6 +14,7 @@
   // add your custom rules here
   "rules": {
     "vue/multi-word-component-names": 0,
-    "vue/attribute-hyphenation": 0
+    "vue/attribute-hyphenation": 0,
+    "vue/no-template-shadow": 0
   }
 }
