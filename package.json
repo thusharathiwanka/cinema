@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "./node_modules/nuxt/bin/nuxt.js build",
-    "start": "./node_modules/nuxt/bin/nuxt.js start",
+    "build": "nuxt build",
+    "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
