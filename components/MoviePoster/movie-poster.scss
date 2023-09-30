@@ -1,0 +1,29 @@
+@import '@/assets/scss/variables';
+
+.movie-poster {
+  position: relative;
+  display: inline-block;
+  padding: 1rem;
+  max-width: 250px;
+}
+
+.movie-poster__image {
+  height: auto;
+  width: 100%;
+  max-width: 250px;
+  object-fit: cover;
+}
+
+.movie-poster__rating {
+  position: absolute;
+  background-color: $primary-accent-color;
+  color: $primary-background-color;
+  font-size: $body-font-size;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  right: -4px;
+  bottom: 50px;
+  display: grid;
+  place-items: center;
+}
