@@ -1,14 +1,19 @@
 <template>
-  <MovieCardList :movies="movies" />
+  <div>
+    <h1 class="page-title">Now Showing</h1>
+    <MovieCardList :movies="movies" />
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { TextTypes } from '@/components/Text/types'
 
 export default Vue.extend({
   name: 'IndexPage',
   data() {
     return {
+      textTypes: TextTypes,
       movies: [
         {
           title: 'SAW X',
@@ -71,3 +76,7 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+@import 'index.scss';
+</style>

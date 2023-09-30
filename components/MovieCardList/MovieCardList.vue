@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <h1>Now Showing</h1>
-    <div v-if="movies.length > 0" class="movie-card-list">
-      <MovieCard v-for="movie in movies" :key="movie.title" :movie="movie" />
-    </div>
+  <div v-if="movies.length > 0" class="movie-card-list">
+    <MovieCard v-for="movie in movies" :key="movie.title" :movie="movie" />
   </div>
 </template>
 
