@@ -7,13 +7,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { TextTypes } from '@/components/Text/types'
 
 export default Vue.extend({
   name: 'IndexPage',
   data() {
     return {
-      textTypes: TextTypes,
       movies: [
         {
           title: 'SAW X',
