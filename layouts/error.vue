@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <h1 v-if="error.statusCode === 404">Page not found</h1>
-    <h1 v-else>An error occurred</h1>
-    <nuxt-link to="/">Home page</nuxt-link>
-  </div>
+  <NotFound />
 </template>
 
 <script>
+import NotFound from '@/components/NotFound/NotFound.vue'
+
 export default {
-  name: 'ErrorPage',
+  name: 'ErrorLayout',
+  components: { NotFound },
   layout: 'empty',
-  props: ['error'],
 }
 </script>
