@@ -7,7 +7,7 @@
     ]"
     @click="onClick"
   >
-    <slot></slot>
+    <slot />
   </button>
 </template>
 

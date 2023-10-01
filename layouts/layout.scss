@@ -1,5 +1,7 @@
-.default-layout {
+.default-layout,
+.empty-layout {
   max-width: 1140px;
+  min-height: 100vh;
   margin: auto;
   padding: 2.5rem 1.5rem;
 }

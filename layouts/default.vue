@@ -8,9 +8,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'DefaultLayout',
+}
 </script>
 
 <style lang="scss" scoped>
-@import 'layout.scss';
+@import 'layout';
 </style>

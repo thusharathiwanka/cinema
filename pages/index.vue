@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h1 class="page-title">Now Showing</h1>
+    <Typography type="h1" class="page-title">Now Showing</Typography>
     <MovieCardList :movies="movies" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Typography from '@/components/Typography/Typography.vue'
 
 export default Vue.extend({
   name: 'IndexPage',
+  components: { Typography },
   data() {
     return {
       movies: [
@@ -76,5 +78,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import 'index.scss';
+@import '@/assets/scss/utility';
 </style>

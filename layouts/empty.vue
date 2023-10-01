@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="empty-layout">
     <nuxt />
   </main>
 </template>
@@ -9,3 +9,7 @@ export default {
   name: 'EmptyLayout',
 }
 </script>
+
+<style lang="scss" scoped>
+@import 'layout';
+</style>
