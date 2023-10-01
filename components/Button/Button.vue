@@ -26,7 +26,7 @@ export default Vue.extend({
     },
     onClick: {
       type: Function as PropType<ButtonProps['onClick']>,
-      default: null,
+      default: () => null,
     },
   },
 })
