@@ -1,7 +1,7 @@
 <template>
   <nav class="header">
     <nuxt-link v-if="!isRoot" to="/" class="header__back-link"
-      >Back to Movies</nuxt-link
+      ><Typography>Back to Movies</Typography></nuxt-link
     >
     <img src="@/assets/images/logo.svg" alt="logo" class="header__logo" />
   </nav>
@@ -21,5 +21,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import 'header.scss';
+@import 'header';
 </style>

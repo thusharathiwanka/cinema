@@ -24,5 +24,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import 'movie-card-list.scss';
+@import 'movie-card-list';
 </style>
