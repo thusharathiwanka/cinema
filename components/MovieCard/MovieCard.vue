@@ -2,10 +2,15 @@
   <div v-if="movie" class="movie-card">
     <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
     <div class="movie-card__text-container">
-      <Typography type="h2" :truncate="true" :title="movie.title">
+      <Typography
+        type="h2"
+        :truncate="true"
+        :title="movie.title"
+        data-cy="movie-card__title"
+      >
         {{ movie.title }}
       </Typography>
-      <Typography color="secondary">
+      <Typography color="secondary" data-cy="movie-card__subtitle">
         <span v-for="(genre, index) in movie.genres" :key="genre">
           {{ genre }}
           <span v-if="index + 1 < movie.genres.length">,</span>
