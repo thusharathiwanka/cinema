@@ -1,0 +1,35 @@
+@import '@/assets/scss/variables';
+
+.typography--title {
+  font-size: $title-font-size;
+}
+
+.typography--subtitle {
+  font-size: $subtitle-font-size;
+}
+
+.typography--body {
+  font-size: $body-font-size;
+}
+
+.primary {
+  color: $primary-font-color;
+}
+
+.secondary {
+  color: $secondary-font-color;
+}
+
+.accent {
+  color: $primary-accent-color;
+}
+
+.background {
+  color: $primary-background-color;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
