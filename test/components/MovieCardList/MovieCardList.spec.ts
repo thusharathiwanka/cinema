@@ -17,7 +17,7 @@ describe('MovieCardList.vue', () => {
     })
     MovieCardListMockData.movies.forEach((movie, index) => {
       expect(
-        wrapper.findAll('.typography--subtitle').at(index).text()
+        wrapper.findAll('[data-cy="movie-card__title"]').at(index).text()
       ).toContain(movie.title)
     })
   })

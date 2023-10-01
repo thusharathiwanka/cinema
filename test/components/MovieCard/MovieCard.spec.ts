@@ -10,8 +10,12 @@ describe('MovieCard.vue', () => {
 
     expect(wrapper.find('.movie-card').exists()).toBeTruthy()
     expect(wrapper.find('.movie-card__text-container').exists()).toBeTruthy()
-    expect(wrapper.find('.typography--subtitle').text()).toContain('Saw X')
-    expect(wrapper.find('.typography--body').text()).toContain('Crime')
+    expect(wrapper.find('[data-cy="movie-card__title"]').text()).toContain(
+      'Saw X'
+    )
+    expect(wrapper.find('[data-cy="movie-card__subtitle"]').text()).toContain(
+      'Crime'
+    )
   })
 
   it('should not render movie card component without correct props', () => {
