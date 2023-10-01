@@ -10,10 +10,15 @@
       >
         {{ movie.title }}
       </Typography>
-      <Typography color="secondary" data-cy="movie-card__subtitle">
+      <Typography
+        color="secondary"
+        :truncate="true"
+        data-cy="movie-card__subtitle"
+        :title="movie.genres"
+      >
         <span v-for="(genre, index) in movie.genres" :key="genre">
           {{ genre }}
-          <span v-if="index + 1 < movie.genres.length">,</span>
+          <span v-if="index + 1 < movie.genres.length">, </span>
         </span>
       </Typography>
     </div>
