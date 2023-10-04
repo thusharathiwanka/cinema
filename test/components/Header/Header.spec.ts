@@ -1,4 +1,4 @@
-import { mount, RouterLinkStub } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Header from '@/components/Header/Header.vue'
 
 describe('Header.vue', () => {
@@ -10,9 +10,7 @@ describe('Header.vue', () => {
       mocks: {
         $route,
       },
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.header').exists()).toBeTruthy()
@@ -27,9 +25,7 @@ describe('Header.vue', () => {
       mocks: {
         $route,
       },
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.header__back-link').text()).toContain(
@@ -46,9 +42,7 @@ describe('Header.vue', () => {
       mocks: {
         $route,
       },
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.header__back-link').exists()).toBeTruthy()
@@ -62,9 +56,6 @@ describe('Header.vue', () => {
     const wrapper = mount(Header, {
       mocks: {
         $route,
-      },
-      stubs: {
-        NuxtLink: RouterLinkStub,
       },
     })
 
@@ -80,9 +71,7 @@ describe('Header.vue', () => {
       mocks: {
         $route,
       },
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.header__logo').exists()).toBeTruthy()

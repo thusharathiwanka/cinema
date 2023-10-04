@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { PropType } from 'vue/types'
-import { ButtonProps } from './props'
+import { ButtonProps } from '../../components/Button/props'
 
 export default Vue.extend({
   name: 'ButtonComponent',

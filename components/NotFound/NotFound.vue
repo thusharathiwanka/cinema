@@ -2,11 +2,11 @@
   <div class="not-found">
     <Typography type="h1">{{ title }}</Typography>
     <Typography type="h2" color="secondary">{{ subtitle }}</Typography>
-    <Button
-      ><nuxt-link :to="link"
-        ><Typography color="background">Back to Home</Typography></nuxt-link
-      ></Button
-    >
+    <nuxt-link :to="link">
+      <Button>
+        <Typography color="background">Back to Home</Typography>
+      </Button>
+    </nuxt-link>
   </div>
 </template>
 

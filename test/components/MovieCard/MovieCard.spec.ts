@@ -11,10 +11,10 @@ describe('MovieCard.vue', () => {
     expect(wrapper.find('.movie-card').exists()).toBeTruthy()
     expect(wrapper.find('.movie-card__text-container').exists()).toBeTruthy()
     expect(wrapper.find('[data-cy="movie-card__title"]').text()).toContain(
-      'Saw X'
+      'The Creator'
     )
     expect(wrapper.find('[data-cy="movie-card__subtitle"]').text()).toContain(
-      'Crime'
+      'Action'
     )
   })
 

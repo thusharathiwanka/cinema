@@ -7,6 +7,11 @@
   margin: 1rem;
   font-size: $body-font-size;
   cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .button--primary {
