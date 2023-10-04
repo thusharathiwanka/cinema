@@ -59,7 +59,6 @@ export default Vue.extend({
   props: {
     movie: {
       type: Object as PropType<MovieOverviewProps>,
-      required: true,
       default: null,
     },
   },

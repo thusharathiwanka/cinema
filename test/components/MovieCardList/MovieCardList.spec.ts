@@ -1,4 +1,4 @@
-import { mount, RouterLinkStub } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { MovieCardListMockData } from './mockData'
 import MovieCardList from '@/components/MovieCardList/MovieCardList.vue'
 
@@ -6,9 +6,7 @@ describe('MovieCardList.vue', () => {
   it('should render movie card list component with correct props', () => {
     const wrapper = mount(MovieCardList, {
       propsData: MovieCardListMockData,
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.movie-card-list').exists()).toBeTruthy()
@@ -17,9 +15,7 @@ describe('MovieCardList.vue', () => {
   it('should render movie card list component with movies mock data', () => {
     const wrapper = mount(MovieCardList, {
       propsData: MovieCardListMockData,
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
+      stubs: ['nuxt-link'],
     })
     MovieCardListMockData.movies.forEach((movie, index) => {
       expect(
@@ -31,9 +27,6 @@ describe('MovieCardList.vue', () => {
   it('should not render movie card list component without correct props', () => {
     const wrapper = mount(MovieCardList, {
       propsData: { movies: [] },
-      stubs: {
-        NuxtLink: RouterLinkStub,
-      },
     })
 
     expect(wrapper.find('.movie-card-list').exists()).toBeFalsy()

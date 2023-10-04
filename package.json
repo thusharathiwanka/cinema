@@ -11,7 +11,7 @@
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:js && yarn lint:prettier",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
-    "unit": "jest"
+    "unit": "export TS_JEST_DISABLE_VER_CHECKER=true && jest"
   },
   "dependencies": {
     "core-js": "^3.25.3",

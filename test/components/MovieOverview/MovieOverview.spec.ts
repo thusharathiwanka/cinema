@@ -6,6 +6,7 @@ describe('MovieOverview.vue', () => {
   it('should render movie overview component with correct props', () => {
     const wrapper = mount(MovieOverview, {
       propsData: MovieOverviewMockData,
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.movie-overview').exists()).toBeTruthy()
