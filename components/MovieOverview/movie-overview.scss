@@ -1,0 +1,16 @@
+.movie-overview {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-overview__details {
+  padding: 1rem 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-overview__extra {
+  display: flex;
+}
