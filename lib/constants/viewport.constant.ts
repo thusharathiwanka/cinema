@@ -1,0 +1,5 @@
+export const MOBILE_MAX_WIDTH = 480
+export const TABLET_MAX_WIDTH = 768
+export const DESKTOP_MAX_WIDTH = 1280
+export const DESKTOP_LARGE_MAX_WIDTH = 1440
+export const DESKTOP_EXTRA_LARGE_MAX_WIDTH = 1980
