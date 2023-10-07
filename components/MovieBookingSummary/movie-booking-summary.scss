@@ -1,0 +1,51 @@
+@import '@/assets/scss/variables';
+
+.booking-summary {
+  margin: 0 1rem;
+}
+
+.booking-summary__content,
+.booking-summary__details {
+  display: flex;
+  justify-content: center;
+}
+
+.booking-summary__content {
+  padding: 1.5rem;
+  margin-top: 3rem;
+  background-color: $secondary-background-color;
+
+  @media (max-width: $tablet-max-width) {
+    flex-wrap: wrap;
+  }
+}
+
+.booking-summary__movie-details {
+  padding-bottom: 1rem;
+}
+
+.booking-summary__time-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.booking-summary__details {
+  padding: 1rem 0 1rem 2rem;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.booking-summary__booked-date,
+.booking-summary__booked-time,
+.booking-summary__seats {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.booking-summary__done {
+  display: grid;
+  place-items: center;
+  margin-top: 5rem;
+}
