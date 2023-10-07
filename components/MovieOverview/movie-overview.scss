@@ -1,7 +1,13 @@
+@import '@/assets/scss/variables';
+
 .movie-overview {
   padding-top: 2rem;
   display: flex;
   justify-content: center;
+
+  @media (max-width: $tablet-max-width) {
+    flex-wrap: wrap;
+  }
 }
 
 .movie-overview__details {
