@@ -23,9 +23,11 @@
 import Vue from 'vue'
 import { PropType } from 'vue/types'
 import { SelectInputProps } from './props'
+import Typography from '@/components/Typography/Typography.vue'
 
 export default Vue.extend({
   name: 'SelectInputComponent',
+  components: { Typography },
   props: {
     label: {
       type: String as PropType<SelectInputProps['label']>,
