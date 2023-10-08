@@ -4,7 +4,7 @@ import {
   DESKTOP_MAX_WIDTH,
   DESKTOP_LARGE_MAX_WIDTH,
   DESKTOP_EXTRA_LARGE_MAX_WIDTH,
-} from '~/lib/constants/viewport.constant'
+} from '@/lib/constants/viewport.constant'
 
 describe('ViewportSizes', () => {
   test('MOBILE_MAX_WIDTH should be 480', () => {

@@ -1,12 +1,13 @@
 <template>
   <div>
     <MovieOverview :movie="movie" />
+    <MovieBookingForm />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import MovieOverview from '~/components/MovieOverview/MovieOverview.vue'
+import MovieOverview from '@/components/MovieOverview/MovieOverview.vue'
 
 export default Vue.extend({
   name: 'MoviePage',

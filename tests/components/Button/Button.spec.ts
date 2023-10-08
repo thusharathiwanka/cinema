@@ -32,19 +32,11 @@ describe('Button.vue', () => {
     )
   })
 
-  it('calls the onClick function when the button is clicked', async () => {
-    const onClickMock = jest.fn()
-    const wrapper = mount(Button, {
-      propsData: {
-        onClick: onClickMock,
-      },
-      slots: {
-        default: 'Click',
-      },
-    })
+  it('should emits a "click" event when clicked', async () => {
+    const wrapper = mount(Button)
 
-    await wrapper.find('.button.button--primary').trigger('click')
+    await wrapper.trigger('click')
 
-    expect(onClickMock).toHaveBeenCalled()
+    expect(wrapper.emitted().click).toBeTruthy()
   })
 })
