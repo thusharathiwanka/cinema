@@ -7,11 +7,26 @@
       <SeatDetailsForm v-show="isLastStep" />
     </div>
     <div class="booking-form__controls">
-      <Button v-show="!isFirstStep" type="secondary" @click.prevent="previous">
+      <Button
+        v-show="!isFirstStep"
+        type="secondary"
+        data-cy="booking-form__back"
+        @click.prevent="previous"
+      >
         Back
       </Button>
-      <Button v-show="!isLastStep" @click.prevent="next">Next</Button>
-      <Button v-show="isLastStep" @click.prevent="submit">Book</Button>
+      <Button
+        v-show="!isLastStep"
+        data-cy="booking-form__next"
+        @click.prevent="next"
+        >Next</Button
+      >
+      <Button
+        v-show="isLastStep"
+        data-cy="booking-form__book"
+        @click.prevent="submit"
+        >Book</Button
+      >
     </div>
   </form>
 </template>
