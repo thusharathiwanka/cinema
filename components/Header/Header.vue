@@ -16,7 +16,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Typography from '@/components/Typography/Typography.vue'
-import { TABLET_MAX_WIDTH } from '~/lib/constants/viewport.constant'
+import { TABLET_MAX_WIDTH } from '@/lib/constants/viewport.constant'
 
 export default Vue.extend({
   name: 'HeaderComponent',

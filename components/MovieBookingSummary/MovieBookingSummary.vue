@@ -81,6 +81,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import 'movie-booking-summary.scss';
-@import '@/assets/scss/utility.scss';
+@import 'movie-booking-summary';
+@import '@/assets/scss/utility';
 </style>

@@ -48,7 +48,7 @@ import { PropType } from 'vue/types'
 import { MovieOverviewProps } from './props'
 import MoviePoster from '@/components/MoviePoster/MoviePoster.vue'
 import Typography from '@/components/Typography/Typography.vue'
-import { convertMinutesToHoursAndMinutes } from '~/lib/utils/time.util'
+import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
 
 export default Vue.extend({
   name: 'MovieOverviewComponent',

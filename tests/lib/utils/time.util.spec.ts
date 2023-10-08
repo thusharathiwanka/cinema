@@ -1,4 +1,4 @@
-import { convertMinutesToHoursAndMinutes } from '~/lib/utils/time.util'
+import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
 
 describe('convertMinutesToHoursAndMinutes', () => {
   it('should converts runtime when hours and minutes are greater than zero', () => {

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import MovieBookingSummary from '~/components/MovieBookingSummary/MovieBookingSummary.vue'
+import MovieBookingSummary from '@/components/MovieBookingSummary/MovieBookingSummary.vue'
 
 export default Vue.extend({
   name: 'MoviePage',
