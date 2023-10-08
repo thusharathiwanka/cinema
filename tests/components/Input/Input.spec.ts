@@ -14,13 +14,13 @@ describe('Input.vue', () => {
   })
 
   it('should sets the input value and emits an "input" event when input is triggered', async () => {
-    const wrapper = mount(Input)
-    const inputValue = 'Test Input Value'
+    const wrapper = mount(Input, {
+      propsData: { value: 'Test Input Value' },
+    })
 
-    await wrapper.setData({ value: inputValue })
     const inputElement = wrapper.find('.text-input__area')
       .element as HTMLInputElement
-    expect(inputElement.value).toBe(inputValue)
+    expect(inputElement.value).toBe('Test Input Value')
 
     await wrapper.find('.text-input__area').setValue('New Input Value')
 
