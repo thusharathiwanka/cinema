@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import Input from '@/components/Input/Input.vue'
 
-describe('InputComponent.vue', () => {
+describe('Input.vue', () => {
   it('should render the input component label correctly', () => {
     const label = 'Test Label'
     const wrapper = mount(Input, {
