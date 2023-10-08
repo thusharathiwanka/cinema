@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="seat-details-form">
     <Typography>Select Seat</Typography>
     <SeatLayout :seats="seats" />
   </div>
@@ -25,4 +25,7 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import '@/assets/scss/utility';
+@import 'seat-details-form';
+</style>

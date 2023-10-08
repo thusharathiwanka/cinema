@@ -1,5 +1,5 @@
 <template>
-  <nav class="header">
+  <nav v-cloak class="header">
     <nuxt-link v-if="!isRoot" to="/" class="header__back-link">
       <Typography v-if="!isTablet" color="accent">Back to Movies</Typography>
       <img
@@ -40,6 +40,7 @@ export default Vue.extend({
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
     })
+    this.windowWidth = window.innerWidth
   },
 })
 </script>
