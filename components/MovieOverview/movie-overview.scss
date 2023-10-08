@@ -11,7 +11,7 @@
 }
 
 .movie-overview__details {
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,4 +19,5 @@
 
 .movie-overview__extra {
   display: flex;
+  padding-top: 1rem;
 }

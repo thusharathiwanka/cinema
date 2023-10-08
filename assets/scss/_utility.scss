@@ -7,3 +7,11 @@
   grid-gap: 1rem;
   white-space: nowrap;
 }
+
+.multistep-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

@@ -1,7 +1,13 @@
+@import '@/assets/scss/variables';
+
 .default-layout,
 .empty-layout {
   max-width: 1140px;
   min-height: 100vh;
   margin: auto;
   padding: 2.5rem 1.5rem;
+
+  @media (max-width: $tablet-max-width) {
+    padding: 2.5rem 0.5rem;
+  }
 }

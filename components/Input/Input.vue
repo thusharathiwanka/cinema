@@ -18,9 +18,11 @@
 import Vue from 'vue'
 import { PropType } from 'vue/types'
 import { InputProps } from './props'
+import Typography from '@/components/Typography/Typography.vue'
 
 export default Vue.extend({
   name: 'InputComponent',
+  components: { Typography },
   props: {
     label: { type: String as PropType<InputProps['label']>, default: null },
     placeholder: {
