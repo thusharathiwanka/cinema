@@ -35,7 +35,7 @@
           >&nbsp; • &nbsp;</Typography
         >
         <Typography color="secondary" data-cy="movie-overview__runtime">{{
-          getHoursAndMinutesFromMinutes()
+          movie.runtime
         }}</Typography>
       </div>
     </div>
@@ -48,7 +48,6 @@ import { PropType } from 'vue/types'
 import { MovieOverviewProps } from './props'
 import MoviePoster from '@/components/MoviePoster/MoviePoster.vue'
 import Typography from '@/components/Typography/Typography.vue'
-import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
 
 export default Vue.extend({
   name: 'MovieOverviewComponent',
@@ -60,11 +59,6 @@ export default Vue.extend({
     movie: {
       type: Object as PropType<MovieOverviewProps>,
       default: null,
-    },
-  },
-  methods: {
-    getHoursAndMinutesFromMinutes() {
-      return convertMinutesToHoursAndMinutes(this.movie.runtime)
     },
   },
 })

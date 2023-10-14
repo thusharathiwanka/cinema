@@ -6,6 +6,7 @@ describe('MovieCard.vue', () => {
   it('should render movie card component with correct props', () => {
     const wrapper = mount(MovieCard, {
       propsData: MovieCardMockData,
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.movie-card').exists()).toBeTruthy()
@@ -21,6 +22,7 @@ describe('MovieCard.vue', () => {
   it('should not render movie card component without correct props', () => {
     const wrapper = mount(MovieCard, {
       propsData: { movie: null },
+      stubs: ['nuxt-link'],
     })
 
     expect(wrapper.find('.movie-card').exists()).toBeFalsy()

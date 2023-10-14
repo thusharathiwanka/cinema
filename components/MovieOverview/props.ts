@@ -3,7 +3,7 @@ export type MovieOverviewProps = {
   genres: string[]
   overview: string
   year: string
-  runtime: number
+  runtime: string
   rating: number
   imageUrl: string
 }
