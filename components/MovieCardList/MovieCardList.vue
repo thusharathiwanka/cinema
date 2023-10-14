@@ -1,6 +1,8 @@
 <template>
   <div v-if="movies.length > 0" class="movie-card-list">
-    <MovieCard v-for="movie in movies" :key="movie.title" :movie="movie" />
+    <nuxt-link v-for="movie in movies" :key="movie.title" to="/movies/123">
+      <MovieCard :movie="movie" />
+    </nuxt-link>
   </div>
 </template>
 

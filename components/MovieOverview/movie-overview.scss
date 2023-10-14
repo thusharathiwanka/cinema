@@ -1,0 +1,23 @@
+@import '@/assets/scss/variables';
+
+.movie-overview {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $tablet-max-width) {
+    flex-wrap: wrap;
+  }
+}
+
+.movie-overview__details {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-overview__extra {
+  display: flex;
+  padding-top: 1rem;
+}

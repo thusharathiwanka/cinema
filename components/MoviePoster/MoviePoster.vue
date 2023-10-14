@@ -19,12 +19,10 @@ export default Vue.extend({
   props: {
     imageUrl: {
       type: String as PropType<MoviePosterProps['imageUrl']>,
-      required: true,
       default: null,
     },
     rating: {
       type: Number as PropType<MoviePosterProps['rating']>,
-      required: true,
       default: null,
     },
   },

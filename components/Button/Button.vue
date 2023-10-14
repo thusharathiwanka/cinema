@@ -5,7 +5,7 @@
       { 'button--primary': type === 'primary' },
       { 'button--secondary': type === 'secondary' },
     ]"
-    @click="onClick"
+    @click="triggerClickEvent"
   >
     <slot />
   </button>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { PropType } from 'vue/types'
-import { ButtonProps } from './props'
+import { ButtonProps } from '../../components/Button/props'
 
 export default Vue.extend({
   name: 'ButtonComponent',
@@ -24,9 +24,10 @@ export default Vue.extend({
       default: 'primary',
       validator: (value: string) => ['primary', 'secondary'].includes(value),
     },
-    onClick: {
-      type: Function as PropType<ButtonProps['onClick']>,
-      default: () => null,
+  },
+  methods: {
+    triggerClickEvent(event: Event) {
+      this.$emit('click', event)
     },
   },
 })
