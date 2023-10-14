@@ -1,28 +1,30 @@
 <template>
-  <div v-if="movie" class="movie-card">
-    <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
-    <div class="movie-card__text-container">
-      <Typography
-        type="h2"
-        :truncate="true"
-        :title="movie.title"
-        data-cy="movie-card__title"
-      >
-        {{ movie.title }}
-      </Typography>
-      <Typography
-        color="secondary"
-        :truncate="true"
-        data-cy="movie-card__subtitle"
-        :title="movie.genres"
-      >
-        <span v-for="(genre, index) in movie.genres" :key="genre">
-          {{ genre }}
-          <span v-if="index + 1 < movie.genres.length">, </span>
-        </span>
-      </Typography>
+  <nuxt-link v-if="movie" :to="`movies/${movie.id}`">
+    <div class="movie-card">
+      <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
+      <div class="movie-card__text-container">
+        <Typography
+          type="h2"
+          :truncate="true"
+          :title="movie.title"
+          data-cy="movie-card__title"
+        >
+          {{ movie.title }}
+        </Typography>
+        <Typography
+          color="secondary"
+          :truncate="true"
+          data-cy="movie-card__subtitle"
+          :title="movie.genres"
+        >
+          <span v-for="(genre, index) in movie.genres" :key="genre">
+            {{ genre }}
+            <span v-if="index + 1 < movie.genres.length">, </span>
+          </span>
+        </Typography>
+      </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
