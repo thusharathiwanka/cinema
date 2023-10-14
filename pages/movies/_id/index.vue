@@ -1,31 +1,54 @@
 <template>
   <div>
-    <MovieOverview :movie="movie" />
-    <MovieBookingForm />
+    <Spinner v-if="$fetchState.pending" />
+    <div v-else>
+      <MovieOverview :movie="modifiedMovie" />
+      <MovieBookingForm />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import MovieOverview from '@/components/MovieOverview/MovieOverview.vue'
+import Spinner from '@/components/Spinner/Spinner.vue'
+import { MovieDetailsResponse } from '@/lib/types/movie.type'
+import { getMovieGenresFromArray, getMovieYear } from '@/lib/utils/movie.util'
+import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
+import { MovieOverviewProps } from '@/components/MovieOverview/props'
 
 export default Vue.extend({
   name: 'MoviePage',
-  components: { MovieOverview },
+  components: { MovieOverview, Spinner },
   data() {
     return {
-      movie: {
-        title: 'The Creator',
-        genres: ['Action', 'Adventure'],
-        imageUrl:
-          'https://image.tmdb.org/t/p/w500/vBZ0qvaRxqEhZwl6LWmruJqWE8Z.jpg',
-        rating: 6.9,
-        year: '2023',
-        runtime: 90,
-        overview:
-          'Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war—and mankind itself.',
-      },
+      movie: {} as MovieDetailsResponse,
     }
+  },
+  async fetch() {
+    const id = this.$route.params.id
+
+    try {
+      const response: MovieDetailsResponse = await this.$axios.$get(
+        `movie/${id}`
+      )
+      this.movie = response
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  computed: {
+    modifiedMovie(): MovieOverviewProps {
+      return {
+        title: this.movie.title,
+        genres: getMovieGenresFromArray(this.movie.genres),
+        overview: this.movie.overview,
+        year: getMovieYear(this.movie.release_date),
+        runtime: convertMinutesToHoursAndMinutes(this.movie.runtime),
+        imageUrl: `${this.$config.imageBaseUrl}${this.movie.poster_path}`,
+        rating: this.movie.vote_average,
+      }
+    },
   },
 })
 </script>

@@ -1,6 +1,7 @@
 export const MovieCardListMockData = {
   movies: [
     {
+      id: 1,
       title: 'SAW X',
       genres: ['Crime', 'Horror', 'Thriller'],
       imageUrl:
@@ -8,6 +9,7 @@ export const MovieCardListMockData = {
       rating: 7.4,
     },
     {
+      id: 2,
       title: 'Expend4bles',
       genres: ['Action', 'Adventure', 'Thriller'],
       imageUrl:
@@ -15,6 +17,7 @@ export const MovieCardListMockData = {
       rating: 6.7,
     },
     {
+      id: 3,
       title: 'Gran Turismo',
       genres: ['Action', 'Adventure', 'Drama'],
       imageUrl:
@@ -22,6 +25,7 @@ export const MovieCardListMockData = {
       rating: 7.4,
     },
     {
+      id: 4,
       title: 'The Creator',
       genres: ['Comedy'],
       imageUrl:
@@ -29,6 +33,7 @@ export const MovieCardListMockData = {
       rating: 6.9,
     },
     {
+      id: 5,
       title: 'Quicksand',
       genres: ['Crime', 'Drama', 'Mystery'],
       imageUrl:
@@ -36,6 +41,7 @@ export const MovieCardListMockData = {
       rating: 7.4,
     },
     {
+      id: 6,
       title: 'Retribution',
       genres: ['Action', 'Crime', 'Drama'],
       imageUrl:
@@ -43,6 +49,7 @@ export const MovieCardListMockData = {
       rating: 6.6,
     },
     {
+      id: 7,
       title: 'Hypnotic',
       genres: ['Action', 'Mystery', 'Thriller'],
       imageUrl:
@@ -50,6 +57,7 @@ export const MovieCardListMockData = {
       rating: 5.5,
     },
     {
+      id: 8,
       title: 'Feed',
       genres: ['Horror'],
       imageUrl:
