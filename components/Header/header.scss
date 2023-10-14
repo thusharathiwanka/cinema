@@ -9,11 +9,10 @@
 }
 
 .header__back-link {
-  font-size: $body-font-size;
-  color: $primary-accent-color;
   position: absolute;
   left: 0;
   transition: opacity 0.2s ease-in-out;
+  padding-left: 1rem;
 
   &:hover {
     opacity: 0.8;
