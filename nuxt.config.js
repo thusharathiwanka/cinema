@@ -18,7 +18,7 @@ export default {
   css: ['@/assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/axios.plugin.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -30,8 +30,24 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+
+  axios: {
+    baseURL: process.env.BASE_URL,
+    https: true,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // Runtime configs
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL,
+    imageBaseUrl: process.env.IMAGE_BASE_URL,
+    authToken: process.env.AUTH_TOKEN,
+  },
+
+  privateRuntimeConfig: {
+    authToken: process.env.AUTH_TOKEN,
+  },
 }
