@@ -1,0 +1,13 @@
+@import '@/assets/scss/variables';
+
+.showtime {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.showtime__value {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
