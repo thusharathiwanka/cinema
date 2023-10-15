@@ -13,3 +13,12 @@
     border: 1px solid $primary-accent-color;
   }
 }
+
+.selected {
+  background: $secondary-accent-color;
+
+  &:hover {
+    border: 1px solid transparent;
+    cursor: not-allowed;
+  }
+}

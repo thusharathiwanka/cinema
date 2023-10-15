@@ -1,20 +1,22 @@
-export const saveDraftBookingForm = (label: string, value: string) => {
-  const draftBookingForm = localStorage.getItem('draftBookingForm') || null
+import { Seat } from '../types/seat.type'
 
-  if (draftBookingForm) {
-    const parsedBookingForm = JSON.parse(draftBookingForm)
-    parsedBookingForm[label] = value
+export const saveDraftBookingForm = (
+  label: string,
+  value: string | Record<number, Seat[]>
+) => {
+  if (!label || !value || Object.keys(value).length <= 0) return
 
-    localStorage.setItem(
-      'draftBookingForm',
-      JSON.stringify({ ...parsedBookingForm })
-    )
-    return
-  }
+  const draftBookingForm = JSON.parse(
+    localStorage.getItem('draftBookingForm') || '{}'
+  )
 
-  const newDraftBookingForm = { [label]: value }
-  localStorage.setItem('draftBookingForm', JSON.stringify(newDraftBookingForm))
+  draftBookingForm[label] = value
+
+  localStorage.setItem('draftBookingForm', JSON.stringify(draftBookingForm))
 }
 
 export const getDraftBookingForm = () =>
   JSON.parse(localStorage.getItem('draftBookingForm') || '{}')
+
+export const removeDraftBookingForm = () =>
+  localStorage.removeItem('draftBookingForm')
