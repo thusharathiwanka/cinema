@@ -46,7 +46,7 @@ export default Vue.extend({
         year: getMovieYear(this.movie.release_date),
         runtime: convertMinutesToHoursAndMinutes(this.movie.runtime),
         imageUrl: `${this.$config.imageBaseUrl}${this.movie.poster_path}`,
-        rating: this.movie.vote_average,
+        rating: Number(this.movie.vote_average.toFixed(1)),
       }
     },
   },
