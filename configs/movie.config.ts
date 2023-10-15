@@ -1,13 +1,4 @@
-import { SelectOptions } from '@/lib/types/input.type'
 import { Seat } from '@/lib/types/seat.type'
-
-export const movieTimeSlots: SelectOptions[] = [
-  { label: '10:30 AM', value: '10:30 AM' },
-  { label: '12:30 PM', value: '12:30 PM' },
-  { label: '02:30 PM', value: '02:30 PM' },
-  { label: '04:30 PM', value: '04:30 PM' },
-  { label: '07:30 PM', value: '07:30 PM' },
-]
 
 export const seatLayout: Record<number, Seat[]> = {
   1: [
@@ -125,4 +116,15 @@ export const movieGenres = [
     id: 37,
     name: 'Western',
   },
+]
+
+export const movieShowTimesWithMovie = [
+  { id: 951491, showtime: '8:30 AM' },
+  { id: 299054, showtime: '10:30 AM' },
+  { id: 980489, showtime: '12:30 PM' },
+  { id: 670292, showtime: '2:30 PM' },
+  { id: 954388, showtime: '4:30 PM' },
+  { id: 762430, showtime: '6:30 PM' },
+  { id: 536437, showtime: '8:30 PM' },
+  { id: 1015936, showtime: '10:30 PM' },
 ]

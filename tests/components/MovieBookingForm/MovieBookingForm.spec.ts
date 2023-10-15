@@ -7,7 +7,9 @@ import Typography from '@/components/Typography/Typography.vue'
 
 describe('MovieBookingForm.vue', () => {
   it('should render the component with the initial step', () => {
-    const wrapper = mount(MovieBookingForm)
+    const wrapper = mount(MovieBookingForm, {
+      mocks: { $route: { params: { id: '' } } },
+    })
 
     const typographyComponent = wrapper.findComponent(Typography)
     expect(typographyComponent.exists()).toBeTruthy()
@@ -33,7 +35,9 @@ describe('MovieBookingForm.vue', () => {
   })
 
   it('should allow navigating between steps', async () => {
-    const wrapper = mount(MovieBookingForm)
+    const wrapper = mount(MovieBookingForm, {
+      mocks: { $route: { params: { id: '' } } },
+    })
 
     await wrapper.find('[data-cy="booking-form__next"]').trigger('click')
 
@@ -53,7 +57,9 @@ describe('MovieBookingForm.vue', () => {
   })
 
   it('should submits the form on the last step', async () => {
-    const wrapper = mount(MovieBookingForm)
+    const wrapper = mount(MovieBookingForm, {
+      mocks: { $route: { params: { id: '' } } },
+    })
 
     await wrapper.find('[data-cy="booking-form__next"]').trigger('click')
     await wrapper.find('[data-cy="booking-form__next"]').trigger('click')
