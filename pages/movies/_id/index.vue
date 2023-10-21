@@ -1,6 +1,9 @@
 <template>
   <div>
     <Spinner v-if="$fetchState.pending" />
+    <FetchError v-else-if="$fetchState.error" :error="$fetchState.error">
+      <Button @click="$fetch">Retry</Button>
+    </FetchError>
     <div v-else>
       <MovieOverview :movie="modifiedMovie" />
       <MovieBookingForm />
@@ -12,6 +15,8 @@
 import Vue from 'vue'
 import MovieOverview from '@/components/MovieOverview/MovieOverview.vue'
 import Spinner from '@/components/Spinner/Spinner.vue'
+import FetchError from '@/components/FetchError/FetchError.vue'
+import Button from '@/components/Button/Button.vue'
 import { MovieDetailsResponse } from '@/lib/types/movie.type'
 import { getMovieGenresFromArray, getMovieYear } from '@/lib/utils/movie.util'
 import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
@@ -21,7 +26,7 @@ import { movieShowTimesWithMovie } from '@/configs/movie.config'
 
 export default Vue.extend({
   name: 'MoviePage',
-  components: { MovieOverview, Spinner },
+  components: { MovieOverview, Spinner, FetchError, Button },
   data() {
     return {
       movie: {} as MovieDetailsResponse,
@@ -37,7 +42,7 @@ export default Vue.extend({
       )
       this.movie = response
     } catch (error) {
-      console.error(error)
+      throw new Error('Something went wrong while fetching movie details.')
     }
   },
   computed: {
