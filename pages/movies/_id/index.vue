@@ -16,6 +16,8 @@ import { MovieDetailsResponse } from '@/lib/types/movie.type'
 import { getMovieGenresFromArray, getMovieYear } from '@/lib/utils/movie.util'
 import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
 import { MovieOverviewProps } from '@/components/MovieOverview/props'
+import { saveSeatLayoutsAndShowTimeForMovies } from '@/lib/utils/storage.util'
+import { movieShowTimesWithMovie } from '@/configs/movie.config'
 
 export default Vue.extend({
   name: 'MoviePage',
@@ -23,6 +25,7 @@ export default Vue.extend({
   data() {
     return {
       movie: {} as MovieDetailsResponse,
+      movies: movieShowTimesWithMovie,
     }
   },
   async fetch() {
@@ -49,6 +52,9 @@ export default Vue.extend({
         rating: Number(this.movie.vote_average.toFixed(1)),
       }
     },
+  },
+  mounted() {
+    this.movies.map((movie) => saveSeatLayoutsAndShowTimeForMovies(movie.id))
   },
 })
 </script>

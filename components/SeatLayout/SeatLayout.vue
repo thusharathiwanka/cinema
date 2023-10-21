@@ -4,7 +4,10 @@
       <Seat
         v-for="seat in row"
         :key="seat.seatNumber"
-        :class="{ selected: seat.status }"
+        :class="{
+          booked: seat.status === 'booked',
+          pending: seat.status === 'pending',
+        }"
         :name="seat.seatNumber"
         @seat-clicked="handleSeatClicked"
       />
@@ -33,41 +36,34 @@ export default Vue.extend({
   },
   data() {
     return {
-      selectedSeats: this.seats,
+      selectedSeats: {} as Record<number, SeatType[]>,
     }
   },
   mounted() {
-    saveDraftBookingForm('seats', this.selectedSeats)
+    this.selectedSeats = this.seats
+    saveDraftBookingForm('selectedSeatLayout', this.selectedSeats)
   },
   methods: {
     handleSeatClicked(seatNumber: string) {
-      let rowIndex
-      const rowLetter = seatNumber.split('')[0]
+      const rowLetter = seatNumber[0]
+      const rowIndex = ['A', 'B', 'C'].indexOf(rowLetter) + 1
 
-      switch (rowLetter) {
-        case 'A':
-          rowIndex = 1
-          break
-        case 'B':
-          rowIndex = 2
-          break
-        case 'C':
-          rowIndex = 3
-          break
-      }
+      if (rowIndex !== -1) {
+        const seatIndex = this.seats[rowIndex].findIndex((seat: SeatType) => {
+          return (
+            seat.seatNumber === `${seatNumber}` &&
+            (seat.status === 'idle' || seat.status === 'pending')
+          )
+        })
 
-      if (rowIndex) {
-        const seatIndex = this.selectedSeats[rowIndex].findIndex(
-          (seat: SeatType) =>
-            seat.seatNumber === seatNumber && seat.status === false
-        )
         if (seatIndex !== -1) {
+          const seat = this.seats[rowIndex][seatIndex]
           this.selectedSeats[rowIndex][seatIndex] = {
             seatNumber,
-            status: true,
+            status: seat.status === 'idle' ? 'pending' : 'idle',
           }
         }
-        saveDraftBookingForm('seats', this.selectedSeats)
+        saveDraftBookingForm('selectedSeatLayout', this.selectedSeats)
         this.$forceUpdate()
       }
     },

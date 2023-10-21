@@ -38,7 +38,7 @@ export default Vue.extend({
           title: movie.title,
           genres: getMovieGenresById(movie.genre_ids),
           imageUrl: `${this.$config.imageBaseUrl}${movie.poster_path}`,
-          rating: movie.vote_average,
+          rating: Number(movie.vote_average.toFixed(1)),
         }
       })
     },

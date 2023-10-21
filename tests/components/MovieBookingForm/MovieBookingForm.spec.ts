@@ -19,10 +19,10 @@ describe('MovieBookingForm.vue', () => {
     expect(timeDetailsForm.exists()).toBe(true)
 
     const personalDetailsForm = wrapper.findComponent(PersonalDetailsForm)
-    expect(personalDetailsForm.isVisible()).toBe(false)
+    expect(personalDetailsForm.exists()).toBe(false)
 
     const seatDetailsForm = wrapper.findComponent(SeatDetailsForm)
-    expect(seatDetailsForm.isVisible()).toBe(false)
+    expect(seatDetailsForm.exists()).toBe(false)
 
     const backButton = wrapper.find('[data-cy="booking-form__back"]')
     expect(backButton.isVisible()).toBe(false)
