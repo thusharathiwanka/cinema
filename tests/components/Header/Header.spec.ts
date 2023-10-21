@@ -42,9 +42,7 @@ describe('Header.vue', () => {
         $route: { path: '/movie/123' },
         windowWidth: viewPort,
       })
-      expect(
-        wrapper.find('[data-cy="header__back-link--arrow"]').exists()
-      ).toBeTruthy()
+      expect(wrapper.find('.header__back-link--img').exists()).toBeTruthy()
     })
   })
 

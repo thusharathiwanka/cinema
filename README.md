@@ -1,5 +1,7 @@
 # Cinema
 
+![cover](https://github.com/thushara-thiwanka/cinema/assets/142310256/e59d60fa-eed1-4b66-a5a1-c8a137295465)
+
 ## Build Setup
 
 ```bash

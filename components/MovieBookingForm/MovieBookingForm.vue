@@ -2,9 +2,9 @@
   <form class="booking-form">
     <Typography type="h1">Book My Show</Typography>
     <div class="booking-form__steps">
-      <TimeDetailsForm v-show="isFirstStep" />
-      <PersonalDetailsForm v-show="isSecondStep" />
-      <SeatDetailsForm v-show="isLastStep" />
+      <TimeDetailsForm v-if="isFirstStep" />
+      <PersonalDetailsForm v-if="isSecondStep" />
+      <SeatDetailsForm v-if="isLastStep" />
     </div>
     <div class="booking-form__controls">
       <Button
@@ -37,6 +37,12 @@ import TimeDetailsForm from '@/components/TimeDetailsForm/TimeDetailsForm.vue'
 import PersonalDetailsForm from '@/components/PersonalDetailsForm/PersonalDetailsForm.vue'
 import SeatDetailsForm from '@/components/SeatDetailsForm/SeatDetailsForm.vue'
 import Typography from '@/components/Typography/Typography.vue'
+import {
+  getDraftBookingForm,
+  removeDraftBookingForm,
+  replaceSeatLayoutsForMovies,
+} from '~/lib/utils/storage.util'
+import { Seat } from '~/lib/types/seat.type'
 
 const NUMBER_OF_STEPS = 3
 
@@ -75,7 +81,24 @@ export default Vue.extend({
       this.activeStep = this.activeStep - 1
     },
     submit() {
-      console.log('submitted')
+      const id = this.$route.params.id
+      const draftForm = getDraftBookingForm()
+      const seats: Record<number, Seat[]> = draftForm.selectedSeatLayout
+
+      if (seats && id) {
+        const updatedSeatLayout = {} as Record<number, Seat[]>
+
+        for (const rowIndex in seats) {
+          updatedSeatLayout[rowIndex] = seats[rowIndex].map((seat: Seat) => ({
+            ...seat,
+            status: seat.status === 'pending' ? 'booked' : seat.status,
+          }))
+        }
+
+        replaceSeatLayoutsForMovies(id, updatedSeatLayout)
+        removeDraftBookingForm()
+        this.$router.push(`${id}/booking-summary`)
+      }
     },
   },
 })

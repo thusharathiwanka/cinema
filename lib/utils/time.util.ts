@@ -1,7 +1,7 @@
 export const convertMinutesToHoursAndMinutes = (
   timeInMinutes: number
 ): string => {
-  if (timeInMinutes <= 0) return ''
+  if (!timeInMinutes || timeInMinutes <= 0) return ''
 
   const hours = Math.floor(timeInMinutes / 60)
   const remainingMinutes = timeInMinutes % 60

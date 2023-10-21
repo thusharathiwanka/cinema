@@ -19,6 +19,19 @@
   }
 }
 
+.header__back-link--text {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.header__back-link--img {
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
 .header__logo {
   width: 150px;
   height: auto;

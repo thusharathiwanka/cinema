@@ -1,6 +1,9 @@
 <template>
   <div>
     <Spinner v-if="$fetchState.pending" />
+    <FetchError v-else-if="$fetchState.error" :error="$fetchState.error">
+      <Button @click="$fetch">Retry</Button>
+    </FetchError>
     <div v-else>
       <MovieOverview :movie="modifiedMovie" />
       <MovieBookingForm />
@@ -12,17 +15,22 @@
 import Vue from 'vue'
 import MovieOverview from '@/components/MovieOverview/MovieOverview.vue'
 import Spinner from '@/components/Spinner/Spinner.vue'
+import FetchError from '@/components/FetchError/FetchError.vue'
+import Button from '@/components/Button/Button.vue'
 import { MovieDetailsResponse } from '@/lib/types/movie.type'
 import { getMovieGenresFromArray, getMovieYear } from '@/lib/utils/movie.util'
 import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
 import { MovieOverviewProps } from '@/components/MovieOverview/props'
+import { saveSeatLayoutsAndShowTimeForMovies } from '@/lib/utils/storage.util'
+import { movieShowTimesWithMovie } from '@/configs/movie.config'
 
 export default Vue.extend({
   name: 'MoviePage',
-  components: { MovieOverview, Spinner },
+  components: { MovieOverview, Spinner, FetchError, Button },
   data() {
     return {
       movie: {} as MovieDetailsResponse,
+      movies: movieShowTimesWithMovie,
     }
   },
   async fetch() {
@@ -34,7 +42,7 @@ export default Vue.extend({
       )
       this.movie = response
     } catch (error) {
-      console.error(error)
+      throw new Error('Something went wrong while fetching movie details.')
     }
   },
   computed: {
@@ -46,9 +54,12 @@ export default Vue.extend({
         year: getMovieYear(this.movie.release_date),
         runtime: convertMinutesToHoursAndMinutes(this.movie.runtime),
         imageUrl: `${this.$config.imageBaseUrl}${this.movie.poster_path}`,
-        rating: this.movie.vote_average,
+        rating: Number(this.movie.vote_average.toFixed(1)),
       }
     },
+  },
+  mounted() {
+    this.movies.map((movie) => saveSeatLayoutsAndShowTimeForMovies(movie.id))
   },
 })
 </script>

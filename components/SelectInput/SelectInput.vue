@@ -8,12 +8,8 @@
       class="select-input__area"
       @change="triggerChangeEvent"
     >
-      <option
-        v-for="(option, index) in options"
-        :key="index"
-        :value="option.value"
-      >
-        {{ option.label }}
+      <option v-for="(option, index) in options" :key="index" :value="option">
+        {{ option }}
       </option>
     </select>
   </div>
