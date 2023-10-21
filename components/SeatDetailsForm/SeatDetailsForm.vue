@@ -1,7 +1,7 @@
 <template>
   <div class="seat-details-form">
     <Typography>Select Seat</Typography>
-    <SeatLayout :seats="seats" />
+    <SeatLayout v-if="Object.keys(seats).length" :seats="seats" />
   </div>
 </template>
 
@@ -9,7 +9,8 @@
 import Vue from 'vue'
 import SeatLayout from '@/components/SeatLayout/SeatLayout.vue'
 import Typography from '@/components/Typography/Typography.vue'
-import { seatLayout } from '@/configs/movie.config'
+import { Seat } from '@/lib/types/seat.type'
+import { getSeatLayoutForMovie } from '@/lib/utils/storage.util'
 
 export default Vue.extend({
   name: 'SeatDetailsFormComponent',
@@ -19,7 +20,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      seats: seatLayout,
+      seats: {} as Record<number, Seat[]>,
+    }
+  },
+  mounted() {
+    const id = this.$route.params.id
+    if (id) {
+      this.seats = getSeatLayoutForMovie(id)
     }
   },
 })

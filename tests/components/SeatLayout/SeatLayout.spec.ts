@@ -51,6 +51,8 @@ describe('SeatLayout.vue', () => {
       await seatComponent.trigger('click')
     }
 
-    expect(wrapper.vm.$data.selectedSeats).toEqual(['A1', 'A2'])
+    expect(wrapper.vm.$data.selectedSeats).toEqual({
+      row1: [{ seatNumber: 'A1' }, { seatNumber: 'A2' }],
+    })
   })
 })

@@ -1,5 +1,5 @@
-import { Genres } from '../types/movie.type'
-import { movieGenres } from '@/configs/movie.config'
+import { Genres } from '@/lib/types/movie.type'
+import { movieGenres, movieShowTimesWithMovie } from '@/configs/movie.config'
 
 export const getMovieGenresById = (genresById: number[]): string[] => {
   return genresById
@@ -11,9 +11,19 @@ export const getMovieGenresById = (genresById: number[]): string[] => {
 }
 
 export const getMovieGenresFromArray = (genresArray: Genres[]) =>
-  !genresArray || genresArray.length > 0
-    ? genresArray.map((genre) => genre.name)
-    : []
+  !genresArray || genresArray.length <= 0
+    ? []
+    : genresArray.map((genre) => genre.name)
 
 export const getMovieYear = (releaseDate: Date) =>
   !releaseDate ? '' : new Date(releaseDate).getFullYear().toString()
+
+export const getShowTime = (movieId: number) => {
+  const movieWithShowTime = movieShowTimesWithMovie.find(
+    (showtime) => showtime.id === movieId
+  )
+
+  if (movieWithShowTime) return movieWithShowTime.showtime
+
+  return ''
+}

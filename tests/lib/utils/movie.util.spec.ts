@@ -2,6 +2,7 @@ import {
   getMovieGenresById,
   getMovieYear,
   getMovieGenresFromArray,
+  getShowTime,
 } from '@/lib/utils/movie.util'
 
 const sampleGenres = [
@@ -58,5 +59,21 @@ describe('getMovieYear', () => {
   it('should handle invalid input', () => {
     const year = getMovieYear(null as unknown as Date)
     expect(year).toEqual('')
+  })
+})
+
+describe('getShowTime', () => {
+  it('should returns the showtime when the movie exists in the list', () => {
+    const movieId = 951491
+    const result = getShowTime(movieId)
+
+    expect(result).toBe('8:30 AM')
+  })
+
+  it('should returns an empty string when the movie does not exist in the list', () => {
+    const movieId = 4
+    const result = getShowTime(movieId)
+
+    expect(result).toBe('')
   })
 })
