@@ -1,12 +1,13 @@
 <template>
   <nav v-cloak class="header">
     <nuxt-link v-if="!isRoot" to="/" class="header__back-link">
-      <Typography v-if="!isTablet" color="accent">Back to Movies</Typography>
+      <Typography color="accent" class="header__back-link--text"
+        >Back to Movies</Typography
+      >
       <img
-        v-else
         src="@/assets/images/back-arrow.svg"
         alt="back"
-        data-cy="header__back-link--arrow"
+        class="header__back-link--img"
       />
     </nuxt-link>
     <img src="@/assets/images/logo.svg" alt="logo" class="header__logo" />
@@ -32,15 +33,6 @@ export default Vue.extend({
     isRoot(): boolean {
       return this.$route.path === '/'
     },
-    isTablet(): boolean {
-      return this.windowWidth < TABLET_MAX_WIDTH
-    },
-  },
-  mounted() {
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-    })
-    this.windowWidth = window.innerWidth
   },
 })
 </script>
