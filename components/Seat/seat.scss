@@ -13,3 +13,19 @@
     border: 1px solid $primary-accent-color;
   }
 }
+
+.pending {
+  background: $secondary-accent-color;
+
+  &:hover {
+    border: 1px solid transparent;
+  }
+}
+
+.booked {
+  background: $secondary-accent-color;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}

@@ -4,6 +4,10 @@
       <Seat
         v-for="seat in row"
         :key="seat.seatNumber"
+        :class="{
+          booked: seat.status === 'booked',
+          pending: seat.status === 'pending',
+        }"
         :name="seat.seatNumber"
         @seat-clicked="handleSeatClicked"
       />
@@ -16,6 +20,8 @@ import Vue from 'vue'
 import { PropType } from 'vue/types'
 import { SeatLayoutProps } from './props'
 import Seat from '@/components/Seat/Seat.vue'
+import { saveDraftBookingForm } from '@/lib/utils/storage.util'
+import { Seat as SeatType } from '@/lib/types/seat.type'
 
 export default Vue.extend({
   name: 'SeatLayoutComponent',
@@ -30,12 +36,36 @@ export default Vue.extend({
   },
   data() {
     return {
-      selectedSeats: [] as string[],
+      selectedSeats: {} as Record<number, SeatType[]>,
     }
+  },
+  mounted() {
+    this.selectedSeats = this.seats
+    saveDraftBookingForm('selectedSeatLayout', this.selectedSeats)
   },
   methods: {
     handleSeatClicked(seatNumber: string) {
-      this.selectedSeats.push(seatNumber)
+      const rowLetter = seatNumber[0]
+      const rowIndex = ['A', 'B', 'C'].indexOf(rowLetter) + 1
+
+      if (rowIndex !== -1) {
+        const seatIndex = this.seats[rowIndex].findIndex((seat: SeatType) => {
+          return (
+            seat.seatNumber === `${seatNumber}` &&
+            (seat.status === 'idle' || seat.status === 'pending')
+          )
+        })
+
+        if (seatIndex !== -1) {
+          const seat = this.seats[rowIndex][seatIndex]
+          this.selectedSeats[rowIndex][seatIndex] = {
+            seatNumber,
+            status: seat.status === 'idle' ? 'pending' : 'idle',
+          }
+        }
+        saveDraftBookingForm('selectedSeatLayout', this.selectedSeats)
+        this.$forceUpdate()
+      }
     },
   },
 })
