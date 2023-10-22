@@ -99,8 +99,7 @@ export default Vue.extend({
         }
 
         replaceSeatLayoutsForMovies(id, updatedSeatLayout)
-        removeDraftBookingForm()
-        this.$router.push(`${id}/booking-summary`)
+        this.$router.replace(`${id}/booking-summary`)
       }
     },
   },
