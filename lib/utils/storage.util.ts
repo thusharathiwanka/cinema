@@ -17,10 +17,14 @@ export const saveDraftBookingForm = (
   localStorage.setItem('draftBookingForm', JSON.stringify(draftBookingForm))
 }
 
-export const saveSeatLayoutsAndShowTimeForMovies = (movieId: number) => {
+export const saveSeatLayoutsAndShowTimeForMovies = (movieId: string) => {
+  const existingMovieDetails = localStorage.getItem(`${movieId}`)
+
+  if (existingMovieDetails) return
+
   localStorage.setItem(
     `${movieId}`,
-    JSON.stringify({ seatLayout, showTime: getShowTime(movieId) })
+    JSON.stringify({ seatLayout, showTime: getShowTime(Number(movieId)) })
   )
 }
 

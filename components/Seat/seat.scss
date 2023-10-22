@@ -15,7 +15,7 @@
 }
 
 .pending {
-  background: $secondary-accent-color;
+  background: $primary-accent-color;
 
   &:hover {
     border: 1px solid transparent;
@@ -27,5 +27,6 @@
 
   &:hover {
     cursor: not-allowed;
+    border: none;
   }
 }

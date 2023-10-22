@@ -9,6 +9,7 @@
           pending: seat.status === 'pending',
         }"
         :name="seat.seatNumber"
+        :status="seat.status"
         @seat-clicked="handleSeatClicked"
       />
     </div>
