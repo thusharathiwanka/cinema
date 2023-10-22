@@ -1,6 +1,6 @@
 <template>
   <div class="seat-details-form">
-    <Typography>Select Seat</Typography>
+    <Typography>Select Seats*</Typography>
     <SeatLayout v-if="Object.keys(seats).length" :seats="seats" />
   </div>
 </template>

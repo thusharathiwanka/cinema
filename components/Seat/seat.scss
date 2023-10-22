@@ -24,6 +24,7 @@
 
 .booked {
   background: $secondary-accent-color;
+  pointer-events: none;
 
   &:hover {
     cursor: not-allowed;

@@ -12,7 +12,7 @@ describe('Button.vue', () => {
 
   it('should render primary button component with given text', () => {
     const wrapper = mount(Button, {
-      propsData: { type: 'primary' },
+      propsData: { variant: 'primary' },
       slots: { default: 'Primary Button' },
     })
 
@@ -23,7 +23,7 @@ describe('Button.vue', () => {
 
   it('should render secondary button component with given text', () => {
     const wrapper = mount(Button, {
-      propsData: { type: 'secondary' },
+      propsData: { variant: 'secondary' },
       slots: { default: 'Secondary Button' },
     })
 

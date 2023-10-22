@@ -34,6 +34,6 @@ describe('SeatDetailsFormComponent.vue', () => {
     })
 
     expect(typographyComponent.exists()).toBe(true)
-    expect(typographyComponent.text()).toBe('Select Seat')
+    expect(typographyComponent.text()).toBe('Select Seats*')
   })
 })

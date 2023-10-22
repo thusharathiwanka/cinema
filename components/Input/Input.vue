@@ -8,9 +8,13 @@
       :type="type"
       :name="label"
       :value="value"
+      :required="required"
       class="text-input__area"
       @input="triggerInputEvent($event)"
     />
+    <div class="error-message">
+      <Typography color="error">{{ error[0] }}</Typography>
+    </div>
   </div>
 </template>
 
@@ -39,12 +43,20 @@ export default Vue.extend({
       validator: (value: string) =>
         ['text', 'date', 'email', 'tel'].includes(value),
     },
+    required: {
+      type: Boolean as PropType<InputProps['required']>,
+      default: () => false,
+    },
+    error: {
+      type: Array as PropType<InputProps['error']>,
+      default: () => [],
+    },
   },
   methods: {
     triggerInputEvent(event: Event) {
       if (event && event.target) {
         const newValue = (event.target as HTMLInputElement).value
-        this.$emit('input', newValue)
+        this.$emit('input', newValue.trim())
       }
     },
   },

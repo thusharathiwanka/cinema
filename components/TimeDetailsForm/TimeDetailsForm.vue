@@ -2,8 +2,10 @@
   <div class="multistep-form" data-cy="personal-details-form">
     <Input
       v-model="bookedDate"
-      label="Select Date"
+      label="Select Date*"
       type="date"
+      required
+      :error="bookedDateError"
       @input="(e) => handleInputChange('bookedDate', e)"
     />
     <ShowTime :showTime="showTime" />
@@ -27,6 +29,7 @@ export default Vue.extend({
     return {
       bookedDate: '',
       showTime: '',
+      bookedDateError: [] as string[],
     }
   },
   mounted() {
@@ -41,6 +44,12 @@ export default Vue.extend({
   },
   methods: {
     handleInputChange(label: string, value: string) {
+      this.bookedDate = value
+      if (!value) {
+        this.bookedDateError = ['Please select date']
+        return
+      }
+      this.bookedDateError = []
       saveDraftBookingForm(label, value)
     },
   },

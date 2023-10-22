@@ -2,14 +2,14 @@
   <form class="booking-form">
     <Typography type="h1">Book My Show</Typography>
     <div class="booking-form__steps">
-      <TimeDetailsForm v-if="isFirstStep" />
+      <TimeDetailsForm v-if="isFirstStep" ref="timeDetailsForm" />
       <PersonalDetailsForm v-if="isSecondStep" />
       <SeatDetailsForm v-if="isLastStep" />
     </div>
     <div class="booking-form__controls">
       <Button
         v-show="!isFirstStep"
-        type="secondary"
+        variant="secondary"
         data-cy="booking-form__back"
         @click.prevent="previous"
       >
@@ -70,6 +70,9 @@ export default Vue.extend({
     isLastStep(): boolean {
       return this.activeStep === NUMBER_OF_STEPS
     },
+    // hasInputErrors(): boolean {
+    //   return this.$refs.timeDetailsForm?.bookedDateError?.length > 0
+    // },
   },
   methods: {
     next() {

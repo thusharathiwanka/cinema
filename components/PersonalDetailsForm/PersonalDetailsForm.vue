@@ -1,18 +1,26 @@
 <template>
   <div class="multistep-form" data-cy="personal-details-form">
     <Input
-      v-model="name"
-      label="Your Name"
+      v-model="inputValues.name"
+      label="Your Name*"
+      required
+      :error="nameError"
       @input="(e) => handleInputChange('name', e)"
     />
     <Input
-      v-model="email"
-      label="Your Email"
+      v-model="inputValues.email"
+      label="Your Email*"
+      type="email"
+      required
+      :error="emailError"
       @input="(e) => handleInputChange('email', e)"
     />
     <Input
-      v-model="mobileNumber"
-      label="Your Mobile Number"
+      v-model="inputValues.mobileNumber"
+      label="Your Mobile Number*"
+      type="tel"
+      required
+      :error="mobileNumberError"
       @input="(e) => handleInputChange('mobileNumber', e)"
     />
   </div>
@@ -31,22 +39,37 @@ export default Vue.extend({
   components: { Input },
   data() {
     return {
-      name: '',
-      email: '',
-      mobileNumber: '',
+      inputValues: { name: '', email: '', mobileNumber: '' },
+      nameError: [] as string[],
+      emailError: [] as string[],
+      mobileNumberError: [] as string[],
     }
   },
   mounted() {
     const draftForm = getDraftBookingForm()
 
     if (draftForm) {
-      this.name = draftForm.name
-      this.email = draftForm.email
-      this.mobileNumber = draftForm.mobileNumber
+      this.inputValues.name = draftForm.name
+      this.inputValues.email = draftForm.email
+      this.inputValues.mobileNumber = draftForm.mobileNumber
     }
   },
   methods: {
     handleInputChange(label: string, value: string) {
+      this.inputValues = { ...this.inputValues, [label]: value }
+
+      switch (label) {
+        case 'name':
+          this.nameError = !value ? ['Please input name'] : []
+          break
+        case 'email':
+          this.emailError = !value ? ['Please input email'] : []
+          break
+        case 'mobileNumber':
+          this.mobileNumberError = !value ? ['Please input mobile number'] : []
+          break
+      }
+
       saveDraftBookingForm(label, value)
     },
   },

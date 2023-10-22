@@ -1,10 +1,11 @@
+import { DraftBookingForm } from '../types/storage.type'
 import { Seat } from '@/lib/types/seat.type'
 import { getShowTime } from '@/lib/utils/movie.util'
 import { seatLayout } from '@/configs/movie.config'
 
 export const saveDraftBookingForm = (
   label: string,
-  value: string | Record<number, Seat[]>
+  value: string | Record<number, Seat[]> | string[]
 ) => {
   if (!label || !value || Object.keys(value).length <= 0) return
 
@@ -30,6 +31,18 @@ export const saveSeatLayoutsAndShowTimeForMovies = (movieId: string) => {
 
 export const getDraftBookingForm = () =>
   JSON.parse(localStorage.getItem('draftBookingForm') || '{}')
+
+export const getDraftBookingFormPropertyValue = (
+  property: keyof DraftBookingForm
+) => {
+  const draftBookingForm: DraftBookingForm = JSON.parse(
+    localStorage.getItem('draftBookingForm') || '{}'
+  )
+
+  return draftBookingForm[property] !== undefined
+    ? draftBookingForm[property]
+    : null
+}
 
 export const getSeatLayoutForMovie = (movieId: string) => {
   const movieDetails = JSON.parse(localStorage.getItem(movieId) || '{}')
