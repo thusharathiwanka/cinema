@@ -1,3 +1,5 @@
+@import '@/assets/scss/variables';
+
 .seat-layout {
   padding: 1rem 0;
   overflow-x: auto;
@@ -10,5 +12,10 @@
 
 .seat-layout__row {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+
+  @media (max-width: $tablet-max-width) {
+    justify-content: space-between;
+    width: 100%;
+  }
 }

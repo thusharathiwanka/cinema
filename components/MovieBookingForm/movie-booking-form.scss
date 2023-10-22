@@ -1,3 +1,5 @@
+@import '@/assets/scss/variables';
+
 .booking-form {
   padding: 1rem;
 }
@@ -5,6 +7,11 @@
 .booking-form__controls {
   margin-top: 1rem;
   display: flex;
+  gap: 1rem;
   justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+
+  @media (max-width: $mobile-max-width) {
+    flex-direction: column;
+  }
 }

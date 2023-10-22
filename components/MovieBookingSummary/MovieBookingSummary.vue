@@ -53,11 +53,11 @@
         </div>
       </div>
     </div>
-    <nuxt-link to="/" class="booking-summary__done">
+    <div class="booking-summary__back">
       <Button @click="handleClick">
         <Typography color="background">Back to Movies</Typography>
       </Button>
-    </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -89,5 +89,4 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import 'movie-booking-summary';
-@import '@/assets/scss/utility';
 </style>
