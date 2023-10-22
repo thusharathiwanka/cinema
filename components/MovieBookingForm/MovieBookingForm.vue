@@ -39,7 +39,6 @@ import SeatDetailsForm from '@/components/SeatDetailsForm/SeatDetailsForm.vue'
 import Typography from '@/components/Typography/Typography.vue'
 import {
   getDraftBookingForm,
-  removeDraftBookingForm,
   replaceSeatLayoutsForMovies,
 } from '~/lib/utils/storage.util'
 import { Seat } from '~/lib/types/seat.type'
@@ -70,13 +69,18 @@ export default Vue.extend({
     isLastStep(): boolean {
       return this.activeStep === NUMBER_OF_STEPS
     },
-    // hasInputErrors(): boolean {
-    //   return this.$refs.timeDetailsForm?.bookedDateError?.length > 0
-    // },
+    hasTimeDetailsFormErrors(): boolean {
+      const timeDetailsForm = this.$refs.timeDetailsForm as Vue
+      const parsedData = JSON.parse(JSON.stringify(timeDetailsForm.$data))
+      return timeDetailsForm
+        ? parsedData.bookedDateError.length > 0 || !parsedData.bookedDate
+        : false
+    },
   },
   methods: {
     next() {
-      if (this.activeStep >= NUMBER_OF_STEPS) return
+      if (this.activeStep >= NUMBER_OF_STEPS || this.hasTimeDetailsFormErrors)
+        return
       this.activeStep = this.activeStep + 1
     },
     previous() {

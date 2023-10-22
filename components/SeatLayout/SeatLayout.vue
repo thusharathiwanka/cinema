@@ -74,6 +74,7 @@ export default Vue.extend({
           return
         }
       } else {
+        this.error = ''
         this.selectedSeats.splice(seatIndexInSelectedSeats, 1)
       }
 
