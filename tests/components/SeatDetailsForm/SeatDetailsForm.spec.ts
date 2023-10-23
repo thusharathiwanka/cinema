@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import SeatDetailsForm from '@/components/SeatDetailsForm/SeatDetailsForm.vue'
 import SeatLayout from '@/components/SeatLayout/SeatLayout.vue'
-import { seatLayout } from '~/configs/movie.config'
+import { seatLayout } from '@/configs/movie.config'
 
 describe('SeatDetailsFormComponent.vue', () => {
   it('should render the SeatLayout component with seats data', async () => {
