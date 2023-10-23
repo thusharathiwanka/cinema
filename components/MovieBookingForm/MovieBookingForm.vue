@@ -9,7 +9,7 @@
     <div class="booking-form__controls">
       <Button
         v-show="!isFirstStep"
-        type="secondary"
+        variant="secondary"
         data-cy="booking-form__back"
         @click.prevent="previous"
       >
@@ -39,10 +39,10 @@ import SeatDetailsForm from '@/components/SeatDetailsForm/SeatDetailsForm.vue'
 import Typography from '@/components/Typography/Typography.vue'
 import {
   getDraftBookingForm,
-  removeDraftBookingForm,
   replaceSeatLayoutsForMovies,
-} from '~/lib/utils/storage.util'
-import { Seat } from '~/lib/types/seat.type'
+} from '@/lib/utils/storage.util'
+import { Seat } from '@/lib/types/seat.type'
+import { DraftBookingForm } from '@/lib/types/storage.type'
 
 const NUMBER_OF_STEPS = 3
 
@@ -73,6 +73,13 @@ export default Vue.extend({
   },
   methods: {
     next() {
+      const draftForm: DraftBookingForm = getDraftBookingForm()
+      if (!draftForm.bookedDate && this.activeStep === 1) return
+      if (
+        (!draftForm.name || !draftForm.email || !draftForm.mobileNumber) &&
+        this.activeStep === 2
+      )
+        return
       if (this.activeStep >= NUMBER_OF_STEPS) return
       this.activeStep = this.activeStep + 1
     },
@@ -81,8 +88,10 @@ export default Vue.extend({
       this.activeStep = this.activeStep - 1
     },
     submit() {
+      const draftForm: DraftBookingForm = getDraftBookingForm()
+      if (!draftForm.selectedSeats.length && this.activeStep === 3) return
+
       const id = this.$route.params.id
-      const draftForm = getDraftBookingForm()
       const seats: Record<number, Seat[]> = draftForm.selectedSeatLayout
 
       if (seats && id) {
@@ -96,8 +105,7 @@ export default Vue.extend({
         }
 
         replaceSeatLayoutsForMovies(id, updatedSeatLayout)
-        removeDraftBookingForm()
-        this.$router.push(`${id}/booking-summary`)
+        this.$router.replace(`${id}/booking-summary`)
       }
     },
   },

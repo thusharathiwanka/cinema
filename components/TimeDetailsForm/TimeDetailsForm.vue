@@ -2,8 +2,10 @@
   <div class="multistep-form" data-cy="personal-details-form">
     <Input
       v-model="bookedDate"
-      label="Select Date"
+      label="Select Date*"
       type="date"
+      required
+      :error="bookedDateError"
       @input="(e) => handleInputChange('bookedDate', e)"
     />
     <ShowTime :showTime="showTime" />
@@ -17,8 +19,8 @@ import ShowTime from '@/components/ShowTime/ShowTime.vue'
 import {
   getDraftBookingForm,
   saveDraftBookingForm,
-} from '~/lib/utils/storage.util'
-import { getShowTime } from '~/lib/utils/movie.util'
+} from '@/lib/utils/storage.util'
+import { getShowTime } from '@/lib/utils/movie.util'
 
 export default Vue.extend({
   name: 'TimeDetailsFormComponent',
@@ -27,6 +29,7 @@ export default Vue.extend({
     return {
       bookedDate: '',
       showTime: '',
+      bookedDateError: [] as string[],
     }
   },
   mounted() {
@@ -41,7 +44,12 @@ export default Vue.extend({
   },
   methods: {
     handleInputChange(label: string, value: string) {
+      this.bookedDate = value
+      this.bookedDateError = []
       saveDraftBookingForm(label, value)
+      if (!value) {
+        this.bookedDateError = ['Please select date']
+      }
     },
   },
 })

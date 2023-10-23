@@ -13,16 +13,18 @@ describe('PersonalDetailsForm.vue', () => {
       input.find('label').text()
     )
 
-    expect(labels).toEqual(['Your Name', 'Your Email', 'Your Mobile Number'])
+    expect(labels).toEqual(['Your Name*', 'Your Email*', 'Your Mobile Number*'])
   })
 
   it('should two-way binds data properties to the Input components', async () => {
     const wrapper = mount(PersonalDetailsForm)
 
     await wrapper.setData({
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      mobileNumber: '1234567890',
+      inputValues: {
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        mobileNumber: '1234567890',
+      },
     })
 
     const inputComponents = wrapper.findAllComponents(Input)
@@ -31,8 +33,8 @@ describe('PersonalDetailsForm.vue', () => {
     expect(inputComponents.at(1).props('value')).toBe('johndoe@example.com')
     expect(inputComponents.at(2).props('value')).toBe('1234567890')
 
-    expect(wrapper.vm.$data.name).toBe('John Doe')
-    expect(wrapper.vm.$data.email).toBe('johndoe@example.com')
-    expect(wrapper.vm.$data.mobileNumber).toBe('1234567890')
+    expect(wrapper.vm.$data.inputValues.name).toBe('John Doe')
+    expect(wrapper.vm.$data.inputValues.email).toBe('johndoe@example.com')
+    expect(wrapper.vm.$data.inputValues.mobileNumber).toBe('1234567890')
   })
 })

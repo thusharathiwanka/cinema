@@ -53,11 +53,11 @@
         </div>
       </div>
     </div>
-    <nuxt-link to="/" class="booking-summary__done">
-      <Button>
-        <Typography color="background">Done</Typography>
+    <div class="booking-summary__back">
+      <Button @click="handleClick">
+        <Typography color="background">Back to Movies</Typography>
       </Button>
-    </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -65,6 +65,7 @@
 import Vue from 'vue'
 import { PropType } from 'vue/types'
 import { MovieBookingSummaryProps } from './props'
+import { removeDraftBookingForm } from '@/lib/utils/storage.util'
 import MoviePoster from '@/components/MoviePoster/MoviePoster.vue'
 import Typography from '@/components/Typography/Typography.vue'
 
@@ -77,10 +78,15 @@ export default Vue.extend({
       default: null,
     },
   },
+  methods: {
+    handleClick() {
+      removeDraftBookingForm()
+      this.$router.replace('/')
+    },
+  },
 })
 </script>
 
 <style lang="scss" scoped>
 @import 'movie-booking-summary';
-@import '@/assets/scss/utility';
 </style>

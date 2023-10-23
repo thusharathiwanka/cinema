@@ -2,6 +2,12 @@
 
 .booking-summary {
   margin: 0 1rem;
+
+  @media (max-width: $mobile-max-width) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .booking-summary__content,
@@ -12,7 +18,7 @@
 
 .booking-summary__content {
   padding: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
   background-color: $secondary-background-color;
 
   @media (max-width: $tablet-max-width) {
@@ -44,7 +50,7 @@
   gap: 0.5rem;
 }
 
-.booking-summary__done {
+.booking-summary__back {
   display: grid;
   place-items: center;
   margin-top: 5rem;

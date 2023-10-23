@@ -5,6 +5,10 @@
   flex-direction: column;
   min-width: 300px;
   flex: 1;
+
+  @media (max-width: $mobile-small-max-width) {
+    min-width: unset;
+  }
 }
 
 .text-input__area {
