@@ -2,7 +2,7 @@
   <form class="booking-form">
     <Typography type="h1">Book My Show</Typography>
     <div class="booking-form__steps">
-      <TimeDetailsForm v-if="isFirstStep" ref="timeDetailsForm" />
+      <TimeDetailsForm v-if="isFirstStep" />
       <PersonalDetailsForm v-if="isSecondStep" />
       <SeatDetailsForm v-if="isLastStep" />
     </div>
@@ -40,8 +40,9 @@ import Typography from '@/components/Typography/Typography.vue'
 import {
   getDraftBookingForm,
   replaceSeatLayoutsForMovies,
-} from '~/lib/utils/storage.util'
-import { Seat } from '~/lib/types/seat.type'
+} from '@/lib/utils/storage.util'
+import { Seat } from '@/lib/types/seat.type'
+import { DraftBookingForm } from '@/lib/types/storage.type'
 
 const NUMBER_OF_STEPS = 3
 
@@ -69,18 +70,17 @@ export default Vue.extend({
     isLastStep(): boolean {
       return this.activeStep === NUMBER_OF_STEPS
     },
-    hasTimeDetailsFormErrors(): boolean {
-      const timeDetailsForm = this.$refs.timeDetailsForm as Vue
-      const parsedData = JSON.parse(JSON.stringify(timeDetailsForm.$data))
-      return timeDetailsForm
-        ? parsedData.bookedDateError.length > 0 || !parsedData.bookedDate
-        : false
-    },
   },
   methods: {
     next() {
-      if (this.activeStep >= NUMBER_OF_STEPS || this.hasTimeDetailsFormErrors)
+      const draftForm: DraftBookingForm = getDraftBookingForm()
+      if (!draftForm.bookedDate && this.activeStep === 1) return
+      if (
+        (!draftForm.name || !draftForm.email || !draftForm.mobileNumber) &&
+        this.activeStep === 2
+      )
         return
+      if (this.activeStep >= NUMBER_OF_STEPS) return
       this.activeStep = this.activeStep + 1
     },
     previous() {
@@ -88,8 +88,10 @@ export default Vue.extend({
       this.activeStep = this.activeStep - 1
     },
     submit() {
+      const draftForm: DraftBookingForm = getDraftBookingForm()
+      if (!draftForm.selectedSeats.length && this.activeStep === 3) return
+
       const id = this.$route.params.id
-      const draftForm = getDraftBookingForm()
       const seats: Record<number, Seat[]> = draftForm.selectedSeatLayout
 
       if (seats && id) {

@@ -52,8 +52,8 @@ export default Vue.extend({
   },
   mounted() {
     this.selectedSeatLayout = this.seats
-    // const selectedSeats = getDraftBookingFormPropertyValue('selectedSeats')
-    // if (Array.isArray(selectedSeats)) this.selectedSeats = selectedSeats
+    const selectedSeats = getDraftBookingFormPropertyValue('selectedSeats')
+    if (Array.isArray(selectedSeats)) this.selectedSeats = selectedSeats
     saveDraftBookingForm('selectedSeatLayout', this.selectedSeatLayout)
   },
   methods: {

@@ -19,8 +19,8 @@ import ShowTime from '@/components/ShowTime/ShowTime.vue'
 import {
   getDraftBookingForm,
   saveDraftBookingForm,
-} from '~/lib/utils/storage.util'
-import { getShowTime } from '~/lib/utils/movie.util'
+} from '@/lib/utils/storage.util'
+import { getShowTime } from '@/lib/utils/movie.util'
 
 export default Vue.extend({
   name: 'TimeDetailsFormComponent',
@@ -45,12 +45,11 @@ export default Vue.extend({
   methods: {
     handleInputChange(label: string, value: string) {
       this.bookedDate = value
-      if (!value) {
-        this.bookedDateError = ['Please select date']
-        return
-      }
       this.bookedDateError = []
       saveDraftBookingForm(label, value)
+      if (!value) {
+        this.bookedDateError = ['Please select date']
+      }
     },
   },
 })

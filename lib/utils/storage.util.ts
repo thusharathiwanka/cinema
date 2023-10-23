@@ -7,7 +7,7 @@ export const saveDraftBookingForm = (
   label: string,
   value: string | Record<number, Seat[]> | string[]
 ) => {
-  if (!label || !value || Object.keys(value).length <= 0) return
+  if (!label) return
 
   const draftBookingForm = JSON.parse(
     localStorage.getItem('draftBookingForm') || '{}'
