@@ -97,7 +97,13 @@ export default Vue.extend({
   },
   methods: {
     next() {
-      if (!this.validateSteps()) return
+      if (
+        !this.validateSteps() ||
+        this.emailError.length ||
+        this.mobileNumberError.length ||
+        this.nameError.length
+      )
+        return
       this.activeStep = this.activeStep + 1
       saveDraftBookingForm('activeStep', this.activeStep)
     },
