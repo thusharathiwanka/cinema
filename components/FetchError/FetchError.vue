@@ -1,5 +1,5 @@
 <template>
-  <div v-if="Object.keys(error).length" class="fetch-error">
+  <div v-if="hasError" class="fetch-error">
     <Typography type="h2">{{ error.message }}</Typography>
     <slot />
   </div>
@@ -9,7 +9,7 @@
 import Vue from 'vue'
 import { PropType } from 'vue/types'
 import Typography from '../Typography/Typography.vue'
-import { FetchErrorProps, FetchError } from './props'
+import { FetchErrorProps } from './props'
 
 export default Vue.extend({
   name: 'ErrorComponent',
@@ -17,7 +17,12 @@ export default Vue.extend({
   props: {
     error: {
       type: Object as PropType<FetchErrorProps['error']>,
-      default: () => ({} as FetchError),
+      default: () => ({} as Error),
+    },
+  },
+  computed: {
+    hasError() {
+      return Object.keys(this.error).length > 0
     },
   },
 })
