@@ -1,18 +1,5 @@
 <template>
-  <component
-    :is="type"
-    :class="[
-      { truncate: truncate },
-      { 'typography--title': type === 'h1' },
-      { 'typography--subtitle': type === 'h2' },
-      { 'typography--body': type === 'p' },
-      { primary: color === 'primary' },
-      { secondary: color === 'secondary' },
-      { accent: color === 'accent' },
-      { background: color === 'background' },
-      { error: color === 'error' },
-    ]"
-  >
+  <component :is="type" :class="computedClasses">
     <slot />
   </component>
 </template>
@@ -41,6 +28,21 @@ export default Vue.extend({
         ['primary', 'secondary', 'accent', 'background', 'error'].includes(
           value
         ),
+    },
+  },
+  computed: {
+    computedClasses(): Object {
+      return {
+        truncate: this.truncate,
+        'typography--title': this.type === 'h1',
+        'typography--subtitle': this.type === 'h2',
+        'typography--body': this.type === 'p',
+        primary: this.color === 'primary',
+        secondary: this.color === 'secondary',
+        accent: this.color === 'accent',
+        background: this.color === 'background',
+        error: this.color === 'error',
+      }
     },
   },
 })

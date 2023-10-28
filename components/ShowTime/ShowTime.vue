@@ -19,7 +19,7 @@ export default Vue.extend({
   props: {
     showTime: {
       type: String as PropType<ShowTimeProps['showTime']>,
-      default: '10:30 AM',
+      default: '',
     },
   },
 })
