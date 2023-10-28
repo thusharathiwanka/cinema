@@ -1,5 +1,5 @@
 <template>
-  <div v-if="movie" class="movie-overview">
+  <div v-if="!isMovieEmpty" class="movie-overview">
     <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
     <div class="movie-overview__details">
       <div class="movie-overview__content">
@@ -59,6 +59,11 @@ export default Vue.extend({
     movie: {
       type: Object as PropType<MovieOverviewProps>,
       default: null,
+    },
+  },
+  computed: {
+    isMovieEmpty() {
+      return Object.keys(this.movie).length <= 0
     },
   },
 })
