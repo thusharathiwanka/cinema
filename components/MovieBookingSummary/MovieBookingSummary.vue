@@ -1,5 +1,5 @@
 <template>
-  <div v-if="movie" class="booking-summary">
+  <div v-if="!isMovieEmpty" class="booking-summary">
     <Typography type="h1" data-cy="booking-summary__title">
       Booking Summary
     </Typography>
@@ -74,6 +74,11 @@ export default Vue.extend({
     movie: {
       type: Object as PropType<MovieBookingSummaryProps>,
       default: null,
+    },
+  },
+  computed: {
+    isMovieEmpty() {
+      return Object.keys(this.movie).length <= 0
     },
   },
   methods: {
