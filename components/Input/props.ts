@@ -3,4 +3,6 @@ export type InputProps = {
   placeholder: string
   value: string
   type: string
+  required: boolean
+  error: string[]
 }

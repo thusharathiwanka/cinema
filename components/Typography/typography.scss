@@ -30,6 +30,10 @@
   color: $primary-background-color;
 }
 
+.error {
+  color: $primary-error-color;
+}
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;

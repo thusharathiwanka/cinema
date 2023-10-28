@@ -4,7 +4,7 @@ export type MovieBookingSummaryProps = {
   overview: string
   rating: number
   imageUrl: string
-  bookedDate: Date
-  bookedTime: Date
+  bookedDate: string
+  bookedTime: string
   seats: string[]
 }

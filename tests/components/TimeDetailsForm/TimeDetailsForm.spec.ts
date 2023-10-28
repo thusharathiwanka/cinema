@@ -10,7 +10,7 @@ describe('TimeDetailsForm.vue', () => {
 
     const dateInput = wrapper.findComponent(Input)
     expect(dateInput.exists()).toBe(true)
-    expect(dateInput.props('label')).toBe('Select Date')
+    expect(dateInput.props('label')).toBe('Select Date*')
     expect(dateInput.props('type')).toBe('date')
   })
 

@@ -2,8 +2,8 @@
   <button
     :class="[
       'button',
-      { 'button--primary': type === 'primary' },
-      { 'button--secondary': type === 'secondary' },
+      { 'button--primary': variant === 'primary' },
+      { 'button--secondary': variant === 'secondary' },
     ]"
     @click="triggerClickEvent"
   >
@@ -19,8 +19,8 @@ import { ButtonProps } from '../../components/Button/props'
 export default Vue.extend({
   name: 'ButtonComponent',
   props: {
-    type: {
-      type: String as PropType<ButtonProps['type']>,
+    variant: {
+      type: String as PropType<ButtonProps['variant']>,
       default: 'primary',
       validator: (value: string) => ['primary', 'secondary'].includes(value),
     },

@@ -1,30 +1,65 @@
 <template>
   <div>
-    <MovieBookingSummary :movie="movie" />
+    <Spinner v-if="$fetchState.pending" />
+    <FetchError v-else-if="$fetchState.error" :error="$fetchState.error">
+      <Button @click="$fetch">Retry</Button>
+    </FetchError>
+    <MovieBookingSummary v-else :movie="modifiedMovie" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import MovieBookingSummary from '@/components/MovieBookingSummary/MovieBookingSummary.vue'
+import { MovieDetailsResponse } from '@/lib/types/movie.type'
+import { getMovieGenresFromArray } from '@/lib/utils/movie.util'
+import { MovieBookingSummaryProps } from '@/components/MovieBookingSummary/props'
+import { getDraftBookingForm } from '~/lib/utils/storage.util'
+import { DraftBookingForm } from '~/lib/types/storage.type'
 
 export default Vue.extend({
   name: 'MoviePage',
   components: { MovieBookingSummary },
   data() {
     return {
-      movie: {
-        title: 'The Creator',
-        genres: ['Action', 'Adventure'],
-        imageUrl:
-          'https://image.tmdb.org/t/p/w500/vBZ0qvaRxqEhZwl6LWmruJqWE8Z.jpg',
-        rating: 6.9,
-        bookedDate: '2023-12-20',
-        bookedTime: '2: 30PM',
-        seats: ['B1', 'B2'],
-        overview:
-          'Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war—and mankind itself.',
-      },
+      movie: {} as MovieDetailsResponse,
+      movieId: this.$route.params.id,
+      bookedTime: '',
+      bookedDate: '',
+      seats: [] as string[],
+    }
+  },
+  async fetch() {
+    try {
+      const response: MovieDetailsResponse = await this.$axios.$get(
+        `movie/${this.movieId}`
+      )
+      this.movie = response
+    } catch (error) {
+      throw new Error('Something went wrong while fetching booking summary.')
+    }
+  },
+  computed: {
+    modifiedMovie(): MovieBookingSummaryProps {
+      return {
+        title: this.movie.title,
+        genres: getMovieGenresFromArray(this.movie.genres),
+        overview: this.movie.overview,
+        imageUrl: `${this.$config.imageBaseUrl}${this.movie.poster_path}`,
+        rating: Number(this.movie.vote_average?.toFixed(1)),
+        bookedTime: this.bookedTime,
+        bookedDate: this.bookedDate,
+        seats: this.seats,
+      }
+    },
+  },
+  mounted() {
+    const draftForm: DraftBookingForm = getDraftBookingForm()
+
+    if (draftForm) {
+      this.bookedDate = draftForm.bookedDate
+      this.bookedTime = draftForm.showTime
+      this.seats = draftForm.selectedSeats
     }
   },
 })
