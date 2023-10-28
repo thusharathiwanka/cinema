@@ -4,13 +4,13 @@
     <div class="movie-overview__details">
       <div class="movie-overview__content">
         <Typography
-          type="h1"
+          variant="h1"
           :title="movie.title"
           data-cy="movie-overview__title"
           >{{ movie.title }}</Typography
         >
         <Typography
-          type="h2"
+          variant="h2"
           color="secondary"
           :truncate="true"
           :title="movie.genres"

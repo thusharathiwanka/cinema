@@ -4,7 +4,7 @@
       <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
       <div class="movie-card__text-container">
         <Typography
-          type="h2"
+          variant="h2"
           :truncate="true"
           :title="movie.title"
           data-cy="movie-card__title"

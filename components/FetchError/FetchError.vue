@@ -1,6 +1,6 @@
 <template>
   <div v-if="hasError" class="fetch-error">
-    <Typography type="h2">{{ error.message }}</Typography>
+    <Typography variant="h2">{{ error.message }}</Typography>
     <slot />
   </div>
 </template>

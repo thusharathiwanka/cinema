@@ -1,5 +1,5 @@
 <template>
-  <component :is="type" :class="computedClasses">
+  <component :is="variant" :class="computedClasses">
     <slot />
   </component>
 </template>
@@ -12,8 +12,8 @@ import { TypographyProps } from './props'
 export default Vue.extend({
   name: 'TypographyComponent',
   props: {
-    type: {
-      type: String as PropType<TypographyProps['type']>,
+    variant: {
+      type: String as PropType<TypographyProps['variant']>,
       default: 'p',
       validator: (value: string) => ['h1', 'h2', 'p'].includes(value),
     },
@@ -34,9 +34,9 @@ export default Vue.extend({
     computedClasses(): Object {
       return {
         truncate: this.truncate,
-        'typography--title': this.type === 'h1',
-        'typography--subtitle': this.type === 'h2',
-        'typography--body': this.type === 'p',
+        'typography--title': this.variant === 'h1',
+        'typography--subtitle': this.variant === 'h2',
+        'typography--body': this.variant === 'p',
         primary: this.color === 'primary',
         secondary: this.color === 'secondary',
         accent: this.color === 'accent',

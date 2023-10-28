@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
-    <Typography type="h1">{{ title }}</Typography>
-    <Typography type="h2" color="secondary">{{ subtitle }}</Typography>
+    <Typography variant="h1">{{ title }}</Typography>
+    <Typography variant="h2" color="secondary">{{ subtitle }}</Typography>
     <nuxt-link :to="link">
       <Button>
         <Typography color="background">Back to Home</Typography>

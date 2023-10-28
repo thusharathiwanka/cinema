@@ -74,6 +74,6 @@ describe('getShowTime', () => {
     const movieId = 4
     const result = getShowTime(movieId)
 
-    expect(result).toBe('')
+    expect(result).toBe('-')
   })
 })

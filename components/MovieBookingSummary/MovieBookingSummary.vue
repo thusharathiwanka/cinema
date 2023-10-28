@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isMovieEmpty" class="booking-summary">
-    <Typography type="h1" data-cy="booking-summary__title">
+    <Typography variant="h1" data-cy="booking-summary__title">
       Booking Summary
     </Typography>
     <div class="booking-summary__content">
@@ -8,14 +8,14 @@
       <div class="booking-summary__details">
         <div class="booking-summary__movie-details">
           <Typography
-            type="h1"
+            variant="h1"
             :title="movie.title"
             data-cy="booking-summary__movie-title"
           >
             {{ movie.title }}
           </Typography>
           <Typography
-            type="h2"
+            variant="h2"
             color="secondary"
             :truncate="true"
             :title="movie.genres"

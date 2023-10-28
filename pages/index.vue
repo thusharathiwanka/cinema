@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Typography type="h1" class="page-title">Now Showing</Typography>
+    <Typography variant="h1" class="page-title">Now Showing</Typography>
     <Spinner v-if="$fetchState.pending" />
     <FetchError v-else-if="$fetchState.error" :error="$fetchState.error">
       <Button @click="$fetch">Retry</Button>
