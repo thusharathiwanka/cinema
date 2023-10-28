@@ -18,5 +18,3 @@ Any other PRs that are related to the changes effected by this PR
 ### Checklist
 
 - [ ] I have added unit tests for the code added/modified
-- [ ] This code requires a content model change (or content change) to be done to the PROD content stack
-- [ ] Atlas component(s) was added/modified for this feature and it has been published
