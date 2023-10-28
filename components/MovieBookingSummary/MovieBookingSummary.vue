@@ -34,15 +34,13 @@
         </div>
         <div class="booking-summary__time-details">
           <div class="booking-summary__booked-date">
-            <Typography color="secondary">Booked Date:</Typography>
-            <Typography>{{ movie.bookedDate }}</Typography>
+            <Typography>Booked Date:&nbsp; {{ movie.bookedDate }}</Typography>
           </div>
           <div class="booking-summary__booked-time">
-            <Typography color="secondary">Booked Time:</Typography>
-            <Typography>{{ movie.bookedTime }}</Typography>
+            <Typography>Booked Time:&nbsp; {{ movie.bookedTime }}</Typography>
           </div>
           <div class="booking-summary__seats">
-            <Typography color="secondary">Seats: </Typography>
+            <Typography>Seats:</Typography>
             <Typography>
               <span v-for="(seat, index) in movie.seats" :key="seat">
                 {{ seat }}

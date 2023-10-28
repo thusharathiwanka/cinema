@@ -97,7 +97,13 @@ export default Vue.extend({
   },
   methods: {
     next() {
-      if (!this.validateSteps()) return
+      if (
+        !this.validateSteps() ||
+        this.emailError.length ||
+        this.mobileNumberError.length ||
+        this.nameError.length
+      )
+        return
       this.activeStep = this.activeStep + 1
       saveDraftBookingForm('activeStep', this.activeStep)
     },
@@ -180,7 +186,7 @@ export default Vue.extend({
       }
     },
     validateSteps() {
-      if (this.bookedDateError.length > 0) return false
+      if (this.bookedDateError?.length > 0) return false
 
       const draftForm: DraftBookingForm = getDraftBookingForm()
 
@@ -205,7 +211,7 @@ export default Vue.extend({
         return false
       }
 
-      if (draftForm.selectedSeats.length < 0 && this.isLastStep) {
+      if (draftForm.selectedSeats?.length < 0 && this.isLastStep) {
         this.validate('name', '')
         return false
       }
