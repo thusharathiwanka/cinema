@@ -2,9 +2,21 @@
   <form class="booking-form">
     <Typography type="h1">Book My Show</Typography>
     <div class="booking-form__steps">
-      <TimeDetailsForm v-if="isFirstStep" />
-      <PersonalDetailsForm v-if="isSecondStep" />
-      <SeatDetailsForm v-if="isLastStep" />
+      <TimeDetailsForm
+        v-if="isFirstStep"
+        :errors="bookedDateError"
+        :validate="validate"
+      />
+      <PersonalDetailsForm
+        v-if="isSecondStep"
+        :errors="[nameError, emailError, mobileNumberError]"
+        :validate="validate"
+      />
+      <SeatDetailsForm
+        v-if="isLastStep"
+        :errors="seatSelectionError"
+        :validate="validate"
+      />
     </div>
     <div class="booking-form__controls">
       <Button
@@ -40,11 +52,12 @@ import Typography from '@/components/Typography/Typography.vue'
 import {
   getDraftBookingForm,
   replaceSeatLayoutsForMovies,
+  saveDraftBookingForm,
 } from '@/lib/utils/storage.util'
 import { Seat } from '@/lib/types/seat.type'
 import { DraftBookingForm } from '@/lib/types/storage.type'
-
-const NUMBER_OF_STEPS = 3
+import { NUMBER_OF_BOOKING_STEPS } from '@/configs/app.config'
+import { validateEmail, validateMobileNumber } from '@/lib/utils/validator.util'
 
 export default Vue.extend({
   name: 'MovieBookingFormComponent',
@@ -57,7 +70,11 @@ export default Vue.extend({
   data() {
     return {
       activeStep: 1,
-      steps: 3,
+      bookedDateError: [] as string[],
+      nameError: [] as string[],
+      emailError: [] as string[],
+      mobileNumberError: [] as string[],
+      seatSelectionError: [] as string[],
     }
   },
   computed: {
@@ -68,28 +85,33 @@ export default Vue.extend({
       return this.activeStep === 2
     },
     isLastStep(): boolean {
-      return this.activeStep === NUMBER_OF_STEPS
+      return this.activeStep === NUMBER_OF_BOOKING_STEPS
     },
+  },
+  mounted() {
+    const draftForm = getDraftBookingForm()
+    if (Object.keys(draftForm).length) {
+      this.activeStep = draftForm.activeStep || 1
+      saveDraftBookingForm('activeStep', this.activeStep)
+    }
   },
   methods: {
     next() {
-      const draftForm: DraftBookingForm = getDraftBookingForm()
-      if (!draftForm.bookedDate && this.activeStep === 1) return
-      if (
-        (!draftForm.name || !draftForm.email || !draftForm.mobileNumber) &&
-        this.activeStep === 2
-      )
-        return
-      if (this.activeStep >= NUMBER_OF_STEPS) return
+      if (!this.validateSteps()) return
       this.activeStep = this.activeStep + 1
+      saveDraftBookingForm('activeStep', this.activeStep)
     },
     previous() {
       if (this.activeStep <= 0) return
       this.activeStep = this.activeStep - 1
+      saveDraftBookingForm('activeStep', this.activeStep)
     },
     submit() {
       const draftForm: DraftBookingForm = getDraftBookingForm()
-      if (!draftForm.selectedSeats.length && this.activeStep === 3) return
+      if (!draftForm.selectedSeats?.length && this.activeStep === 3) {
+        this.seatSelectionError = ['Please select seats']
+        return
+      }
 
       const id = this.$route.params.id
       const seats: Record<number, Seat[]> = draftForm.selectedSeatLayout
@@ -107,6 +129,90 @@ export default Vue.extend({
         replaceSeatLayoutsForMovies(id, updatedSeatLayout)
         this.$router.replace(`${id}/booking-summary`)
       }
+    },
+    validate(label: string, value: string) {
+      if (!value) {
+        if (this.isFirstStep) {
+          this.bookedDateError = [`Please enter ${label}`]
+          return
+        }
+        if (this.isSecondStep) {
+          switch (label) {
+            case 'name':
+              this.nameError = ['Please enter name']
+              break
+            case 'email':
+              this.emailError = ['Please enter email']
+              break
+            case 'mobileNumber':
+              this.mobileNumberError = ['Please enter mobile number']
+              break
+          }
+        }
+        if (this.isLastStep) {
+          this.seatSelectionError = ['Please select seats']
+        }
+      } else {
+        if (this.isFirstStep) {
+          this.bookedDateError = []
+          return
+        }
+        if (this.isSecondStep) {
+          switch (label) {
+            case 'name':
+              this.nameError = []
+              break
+            case 'email':
+              this.emailError = []
+              if (!validateEmail(value))
+                this.emailError = ['Please enter valid email']
+              break
+            case 'mobileNumber':
+              this.mobileNumberError = []
+              if (!validateMobileNumber(value))
+                this.mobileNumberError = ['Please enter valid mobile number']
+              break
+          }
+        }
+        if (this.isLastStep) {
+          this.seatSelectionError = []
+        }
+      }
+    },
+    validateSteps() {
+      if (this.bookedDateError.length > 0) return false
+
+      const draftForm: DraftBookingForm = getDraftBookingForm()
+
+      if (!draftForm.bookedDate && this.isFirstStep) {
+        this.validate('date', '')
+        return false
+      }
+
+      if (
+        (!draftForm.name || !draftForm.email || !draftForm.mobileNumber) &&
+        this.isSecondStep
+      ) {
+        if (!draftForm.name) {
+          this.validate('name', '')
+        }
+        if (!draftForm.email) {
+          this.validate('email', '')
+        }
+        if (!draftForm.mobileNumber) {
+          this.validate('mobileNumber', '')
+        }
+        return false
+      }
+
+      if (draftForm.selectedSeats.length < 0 && this.isLastStep) {
+        this.validate('name', '')
+        return false
+      }
+
+      if (this.activeStep >= NUMBER_OF_BOOKING_STEPS) return false
+
+      return true
     },
   },
 })

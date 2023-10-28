@@ -11,7 +11,7 @@
       :required="required"
       :min="type === 'date' ? getMinDate() : undefined"
       :max="type === 'date' ? getMaxDate() : undefined"
-      class="text-input__area"
+      :class="['text-input__area', { error: error.length > 0 }]"
       @input="triggerInputEvent($event)"
     />
     <div class="error-message">

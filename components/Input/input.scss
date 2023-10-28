@@ -18,6 +18,11 @@
   margin-top: 1rem;
   background: $secondary-background-color;
 
+  &.error {
+    border: 1px solid $primary-error-color !important;
+    padding: calc(0.8rem - 1px) calc(1rem - 1px);
+  }
+
   &:hover {
     opacity: 0.8;
     filter: brightness(0.95);

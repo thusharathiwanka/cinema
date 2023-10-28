@@ -5,7 +5,7 @@ import { seatLayout } from '@/configs/movie.config'
 
 export const saveDraftBookingForm = (
   label: string,
-  value: string | Record<number, Seat[]> | string[]
+  value: string | number | Record<number, Seat[]> | string[]
 ) => {
   if (!label) return
 

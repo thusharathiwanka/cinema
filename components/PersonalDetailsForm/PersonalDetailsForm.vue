@@ -4,7 +4,7 @@
       v-model="inputValues.name"
       label="Your Name*"
       required
-      :error="nameError"
+      :error="errors[0]"
       @input="(e) => handleInputChange('name', e)"
     />
     <Input
@@ -12,7 +12,7 @@
       label="Your Email*"
       type="email"
       required
-      :error="emailError"
+      :error="errors[1]"
       @input="(e) => handleInputChange('email', e)"
     />
     <Input
@@ -20,7 +20,7 @@
       label="Your Mobile Number*"
       type="tel"
       required
-      :error="mobileNumberError"
+      :error="errors[2]"
       @input="(e) => handleInputChange('mobileNumber', e)"
     />
   </div>
@@ -28,6 +28,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { PropType } from 'vue/types'
+import { PersonalDetailsFormProps, ValidationError } from './props'
 import Input from '@/components/Input/Input.vue'
 import {
   getDraftBookingForm,
@@ -37,12 +39,23 @@ import {
 export default Vue.extend({
   name: 'PersonalDetailsFormComponent',
   components: { Input },
+  props: {
+    errors: {
+      type: Array as PropType<PersonalDetailsFormProps['errors']>,
+      default: [] as ValidationError[],
+    },
+    validate: {
+      type: Function,
+      default: null,
+    },
+    isStepValidated: {
+      type: Boolean as PropType<PersonalDetailsFormProps['isStepValidated']>,
+      default: false,
+    },
+  },
   data() {
     return {
       inputValues: { name: '', email: '', mobileNumber: '' },
-      nameError: [] as string[],
-      emailError: [] as string[],
-      mobileNumberError: [] as string[],
     }
   },
   mounted() {
@@ -58,19 +71,10 @@ export default Vue.extend({
     handleInputChange(label: string, value: string) {
       this.inputValues = { ...this.inputValues, [label]: value }
 
-      switch (label) {
-        case 'name':
-          this.nameError = !value ? ['Please input name'] : []
-          break
-        case 'email':
-          this.emailError = !value ? ['Please input email'] : []
-          break
-        case 'mobileNumber':
-          this.mobileNumberError = !value ? ['Please input mobile number'] : []
-          break
-      }
+      if (!label) return
 
       saveDraftBookingForm(label, value)
+      this.validate(label, value)
     },
   },
 })

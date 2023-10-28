@@ -28,6 +28,7 @@ export default Vue.extend({
   methods: {
     toggleSeatStatus() {
       this.$emit('seat-clicked', this.name)
+      this.$parent?.$emit('seat-clicked', this.name)
     },
   },
 })
