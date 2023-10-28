@@ -1,8 +1,8 @@
 @import '@/assets/scss/variables';
 
 .seat {
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@
 }
 
 .pending {
-  background: $secondary-accent-color;
+  background: $primary-accent-color;
 
   &:hover {
     border: 1px solid transparent;
@@ -24,8 +24,10 @@
 
 .booked {
   background: $secondary-accent-color;
+  pointer-events: none;
 
   &:hover {
     cursor: not-allowed;
+    border: none;
   }
 }

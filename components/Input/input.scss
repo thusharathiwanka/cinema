@@ -5,6 +5,10 @@
   flex-direction: column;
   min-width: 300px;
   flex: 1;
+
+  @media (max-width: $mobile-small-max-width) {
+    min-width: unset;
+  }
 }
 
 .text-input__area {
@@ -13,6 +17,11 @@
   padding: 0.8rem 1rem;
   margin-top: 1rem;
   background: $secondary-background-color;
+
+  &.error {
+    border: 1px solid $primary-error-color !important;
+    padding: calc(0.8rem - 1px) calc(1rem - 1px);
+  }
 
   &:hover {
     opacity: 0.8;

@@ -1,6 +1,8 @@
 <template>
   <div class="seat" @click="toggleSeatStatus">
-    <Typography color="secondary">{{ name }}</Typography>
+    <Typography :color="status === 'idle' ? 'secondary' : 'background'">{{
+      name
+    }}</Typography>
   </div>
 </template>
 
@@ -19,13 +21,14 @@ export default Vue.extend({
       default: '',
     },
     status: {
-      type: Boolean as PropType<SeatProps['status']>,
-      default: false,
+      type: String as PropType<SeatProps['status']>,
+      default: 'idle',
     },
   },
   methods: {
     toggleSeatStatus() {
       this.$emit('seat-clicked', this.name)
+      this.$parent?.$emit('seat-clicked', this.name)
     },
   },
 })

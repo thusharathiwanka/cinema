@@ -53,6 +53,6 @@ describe('MovieBookingSummary.vue', () => {
   })
 
   it('should render a "Done" button', () => {
-    expect(wrapper.find('.booking-summary__done').exists()).toBe(true)
+    expect(wrapper.find('.booking-summary__back').exists()).toBe(true)
   })
 })

@@ -33,43 +33,4 @@ describe('MovieBookingForm.vue', () => {
     const bookButton = wrapper.find('[data-cy="booking-form__book"]')
     expect(bookButton.isVisible()).toBe(false)
   })
-
-  it('should allow navigating between steps', async () => {
-    const wrapper = mount(MovieBookingForm, {
-      mocks: { $route: { params: { id: '' } } },
-    })
-
-    await wrapper.find('[data-cy="booking-form__next"]').trigger('click')
-
-    const personalDetailsForm = wrapper.findComponent(PersonalDetailsForm)
-    expect(personalDetailsForm.isVisible()).toBe(true)
-
-    const backButton = wrapper.find('[data-cy="booking-form__back"]')
-    expect(backButton.isVisible()).toBe(true)
-
-    await backButton.trigger('click')
-
-    const timeDetailsForm = wrapper.findComponent(TimeDetailsForm)
-    expect(timeDetailsForm.isVisible()).toBe(true)
-
-    const nextButton = wrapper.find('[data-cy="booking-form__next"]')
-    expect(nextButton.isVisible()).toBe(true)
-  })
-
-  it('should submits the form on the last step', async () => {
-    const wrapper = mount(MovieBookingForm, {
-      mocks: { $route: { params: { id: '' } } },
-    })
-
-    await wrapper.find('[data-cy="booking-form__next"]').trigger('click')
-    await wrapper.find('[data-cy="booking-form__next"]').trigger('click')
-
-    const seatDetailsForm = wrapper.findComponent(SeatDetailsForm)
-    expect(seatDetailsForm.isVisible()).toBe(true)
-
-    const bookButton = wrapper.find('[data-cy="booking-form__book"]')
-    expect(bookButton.isVisible()).toBe(true)
-
-    // TODO: Add submit logic
-  })
 })

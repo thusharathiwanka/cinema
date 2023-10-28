@@ -20,14 +20,14 @@
 }
 
 .header__back-link--text {
-  @media (max-width: 768px) {
+  @media (max-width: $tablet-max-width) {
     display: none;
   }
 }
 
 .header__back-link--img {
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: $tablet-max-width) {
     display: block;
   }
 }

@@ -15,9 +15,9 @@ import Typography from '@/components/Typography/Typography.vue'
 import Spinner from '@/components/Spinner/Spinner.vue'
 import FetchError from '@/components/FetchError/FetchError.vue'
 import Button from '@/components/Button/Button.vue'
-import { getMovieGenresById } from '~/lib/utils/movie.util'
-import { MovieListMovie, MovieListResponse } from '~/lib/types/movie.type'
-import { MovieCardProps } from '~/components/MovieCard/props'
+import { getMovieGenresById } from '@/lib/utils/movie.util'
+import { MovieListMovie, MovieListResponse } from '@/lib/types/movie.type'
+import { MovieCardProps } from '@/components/MovieCard/props'
 
 export default Vue.extend({
   name: 'HomePage',

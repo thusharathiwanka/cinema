@@ -10,6 +10,7 @@
       { secondary: color === 'secondary' },
       { accent: color === 'accent' },
       { background: color === 'background' },
+      { error: color === 'error' },
     ]"
   >
     <slot />
@@ -37,7 +38,9 @@ export default Vue.extend({
       type: String as PropType<TypographyProps['color']>,
       default: 'primary',
       validator: (value: string) =>
-        ['primary', 'secondary', 'accent', 'background'].includes(value),
+        ['primary', 'secondary', 'accent', 'background', 'error'].includes(
+          value
+        ),
     },
   },
 })

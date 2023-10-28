@@ -1,12 +1,20 @@
 <template>
   <div class="seat-details-form">
-    <Typography>Select Seat</Typography>
-    <SeatLayout v-if="Object.keys(seats).length" :seats="seats" />
+    <Typography>Select Seats*</Typography>
+    <Typography v-if="errors.length > 0" color="error">{{
+      errors[0]
+    }}</Typography>
+    <SeatLayout
+      v-if="Object.keys(seats).length"
+      :seats="seats"
+      @seat-clicked="handleSeatClicked"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
+import { SeatDetailsFormProps, ValidationError } from './props'
 import SeatLayout from '@/components/SeatLayout/SeatLayout.vue'
 import Typography from '@/components/Typography/Typography.vue'
 import { Seat } from '@/lib/types/seat.type'
@@ -18,6 +26,20 @@ export default Vue.extend({
     SeatLayout,
     Typography,
   },
+  props: {
+    errors: {
+      type: Array as PropType<SeatDetailsFormProps['errors']>,
+      default: [] as ValidationError[],
+    },
+    validate: {
+      type: Function,
+      default: null,
+    },
+    isStepValidated: {
+      type: Boolean as PropType<SeatDetailsFormProps['isStepValidated']>,
+      default: false,
+    },
+  },
   data() {
     return {
       seats: {} as Record<number, Seat[]>,
@@ -28,6 +50,11 @@ export default Vue.extend({
     if (id) {
       this.seats = getSeatLayoutForMovie(id)
     }
+  },
+  methods: {
+    handleSeatClicked(e: string) {
+      this.validate('seat', e)
+    },
   },
 })
 </script>
