@@ -31,6 +31,7 @@ import {
   saveDraftBookingForm,
 } from '@/lib/utils/storage.util'
 import { Seat as SeatType } from '@/lib/types/seat.type'
+import { NUMBER_OF_MAX_SEATS } from '~/configs/app.config'
 
 export default Vue.extend({
   name: 'SeatLayoutComponent',
@@ -68,7 +69,7 @@ export default Vue.extend({
       if (seatIndexInSelectedSeats === -1) {
         this.selectedSeats.push(seatNumber)
 
-        if (this.selectedSeats.length > 3) {
+        if (this.selectedSeats.length > NUMBER_OF_MAX_SEATS) {
           this.error = 'You cannot book more than 3 seats'
           this.selectedSeats.pop()
           return
