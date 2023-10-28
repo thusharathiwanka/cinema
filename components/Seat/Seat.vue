@@ -1,5 +1,5 @@
 <template>
-  <div class="seat" @click="toggleSeatStatus">
+  <div class="seat" @click="triggerSeatClickedEvent">
     <Typography :color="status === 'idle' ? 'secondary' : 'background'">{{
       name
     }}</Typography>
@@ -26,7 +26,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    toggleSeatStatus() {
+    triggerSeatClickedEvent() {
       this.$emit('seat-clicked', this.name)
       this.$parent?.$emit('seat-clicked', this.name)
     },
