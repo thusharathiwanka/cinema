@@ -2,7 +2,7 @@ export type InputProps = {
   label: string
   placeholder: string
   value: string
-  type: string
+  variant: string
   required: boolean
   error: string[]
 }

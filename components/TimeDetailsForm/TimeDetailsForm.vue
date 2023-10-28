@@ -3,7 +3,7 @@
     <Input
       v-model="bookedDate"
       label="Select Date*"
-      type="date"
+      variant="date"
       required
       :error="errors"
       @input="(e) => handleInputChange('date', 'bookedDate', e)"
