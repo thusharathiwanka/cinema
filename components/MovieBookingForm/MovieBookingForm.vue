@@ -180,7 +180,7 @@ export default Vue.extend({
       }
     },
     validateSteps() {
-      if (this.bookedDateError.length > 0) return false
+      if (this.bookedDateError?.length > 0) return false
 
       const draftForm: DraftBookingForm = getDraftBookingForm()
 
@@ -205,7 +205,7 @@ export default Vue.extend({
         return false
       }
 
-      if (draftForm.selectedSeats.length < 0 && this.isLastStep) {
+      if (draftForm.selectedSeats?.length < 0 && this.isLastStep) {
         this.validate('name', '')
         return false
       }
