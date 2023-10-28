@@ -21,15 +21,34 @@ import { MovieDetailsResponse } from '@/lib/types/movie.type'
 import { getMovieGenresFromArray, getMovieYear } from '@/lib/utils/movie.util'
 import { convertMinutesToHoursAndMinutes } from '@/lib/utils/time.util'
 import { MovieOverviewProps } from '@/components/MovieOverview/props'
-import { saveSeatLayoutsAndShowTimeForMovies } from '@/lib/utils/storage.util'
+import {
+  getDraftBookingForm,
+  removeDraftBookingForm,
+  saveSeatLayoutsAndShowTimeForMovies,
+} from '@/lib/utils/storage.util'
 
 export default Vue.extend({
   name: 'MoviePage',
   components: { MovieOverview, Spinner, FetchError, Button },
+  beforeRouteLeave(to, _, next) {
+    if (to.path.includes('booking-summary')) return next()
+
+    if (this.isConfirmationNeeded()) {
+      if (confirm('You have unsaved changes. Do you really want to leave?')) {
+        removeDraftBookingForm()
+        next()
+      } else {
+        next(false)
+      }
+    } else {
+      next()
+    }
+  },
   data() {
     return {
       movie: {} as MovieDetailsResponse,
       movieId: this.$route.params.id,
+      showConfirmation: false,
     }
   },
   async fetch() {
@@ -57,6 +76,11 @@ export default Vue.extend({
   },
   mounted() {
     saveSeatLayoutsAndShowTimeForMovies(this.movieId)
+  },
+  methods: {
+    isConfirmationNeeded() {
+      return Object.keys(getDraftBookingForm()).length > 0
+    },
   },
 })
 </script>
