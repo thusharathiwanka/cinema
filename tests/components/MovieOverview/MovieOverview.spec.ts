@@ -38,7 +38,7 @@ describe('MovieOverview.vue', () => {
   it('should not render movie overview component without correct props', () => {
     const wrapper = mount(MovieOverview, {
       propsData: {
-        movie: null,
+        movie: {},
       },
     })
 

@@ -10,10 +10,8 @@ export const getMovieGenresById = (genresById: number[]): string[] => {
     .filter((genreName) => genreName !== null) as string[]
 }
 
-export const getMovieGenresFromArray = (genresArray: Genres[]) =>
-  !genresArray || genresArray.length <= 0
-    ? []
-    : genresArray.map((genre) => genre.name)
+export const getMovieGenresFromArray = (genresArray: Genres[] = []) =>
+  genresArray.map((genre) => genre.name)
 
 export const getMovieYear = (releaseDate: Date) =>
   !releaseDate ? '' : new Date(releaseDate).getFullYear().toString()
@@ -23,7 +21,5 @@ export const getShowTime = (movieId: number) => {
     (showtime) => showtime.id === movieId
   )
 
-  if (movieWithShowTime) return movieWithShowTime.showtime
-
-  return ''
+  return movieWithShowTime?.showtime || '-'
 }

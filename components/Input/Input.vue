@@ -5,12 +5,12 @@
     </label>
     <input
       :id="label"
-      :type="type"
+      :type="variant"
       :name="label"
       :value="value"
       :required="required"
-      :min="type === 'date' ? getMinDate() : undefined"
-      :max="type === 'date' ? getMaxDate() : undefined"
+      :min="variant === 'date' ? getMinDate() : undefined"
+      :max="variant === 'date' ? getMaxDate() : undefined"
       :class="['text-input__area', { error: error.length > 0 }]"
       @input="triggerInputEvent($event)"
     />
@@ -30,24 +30,24 @@ export default Vue.extend({
   name: 'InputComponent',
   components: { Typography },
   props: {
-    label: { type: String as PropType<InputProps['label']>, default: null },
+    label: { type: String as PropType<InputProps['label']>, default: '' },
     placeholder: {
       type: String as PropType<InputProps['placeholder']>,
-      default: null,
+      default: '',
     },
     value: {
       type: String as PropType<InputProps['value']>,
-      default: null,
+      default: '',
     },
-    type: {
-      type: String as PropType<InputProps['type']>,
+    variant: {
+      type: String as PropType<InputProps['variant']>,
       default: 'text',
       validator: (value: string) =>
         ['text', 'date', 'email', 'tel'].includes(value),
     },
     required: {
       type: Boolean as PropType<InputProps['required']>,
-      default: () => false,
+      default: false,
     },
     error: {
       type: Array as PropType<InputProps['error']>,

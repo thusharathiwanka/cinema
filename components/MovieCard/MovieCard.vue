@@ -1,10 +1,10 @@
 <template>
-  <nuxt-link v-if="movie" :to="`movies/${movie.id}`">
+  <nuxt-link v-if="!isMovieEmpty" :to="`movies/${movie.id}`">
     <div class="movie-card">
       <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
       <div class="movie-card__text-container">
         <Typography
-          type="h2"
+          variant="h2"
           :truncate="true"
           :title="movie.title"
           data-cy="movie-card__title"
@@ -41,6 +41,11 @@ export default Vue.extend({
     movie: {
       type: Object as PropType<MovieCardProps>,
       default: null,
+    },
+  },
+  computed: {
+    isMovieEmpty() {
+      return Object.keys(this.movie).length <= 0
     },
   },
 })

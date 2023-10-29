@@ -1,5 +1,5 @@
 <template>
-  <nav v-cloak class="header">
+  <nav class="header">
     <nuxt-link
       v-if="!isRootRoute && !isBookingSummaryRoute"
       to="/"

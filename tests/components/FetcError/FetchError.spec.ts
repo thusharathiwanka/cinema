@@ -21,7 +21,7 @@ describe('FetchError.vue', () => {
     expect(wrapper.find('.fetch-error').exists()).toBe(false)
   })
 
-  it('renders child content in the slot', () => {
+  it('should renders child content in the slot', () => {
     const slotContent = '<p>Some content in the slot</p>'
     const wrapper = mount(FetchError, {
       slots: {

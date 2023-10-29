@@ -3,7 +3,7 @@
     <Input
       v-model="bookedDate"
       label="Select Date*"
-      type="date"
+      variant="date"
       required
       :error="errors"
       @input="(e) => handleInputChange('date', 'bookedDate', e)"
@@ -35,10 +35,6 @@ export default Vue.extend({
     validate: {
       type: Function,
       default: null,
-    },
-    isStepValidated: {
-      type: Boolean as PropType<TimeDetailsFormProps['isStepValidated']>,
-      default: false,
     },
   },
   data() {

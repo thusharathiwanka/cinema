@@ -21,7 +21,7 @@ describe('MovieBookingSummary.vue', () => {
   })
 
   it('should not render booking summary component', async () => {
-    await wrapper.setProps({ movie: null })
+    await wrapper.setProps({ movie: {} })
     expect(wrapper.find('.booking-summary').exists()).toBeFalsy()
   })
 

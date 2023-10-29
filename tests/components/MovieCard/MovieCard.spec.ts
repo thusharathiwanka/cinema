@@ -21,7 +21,7 @@ describe('MovieCard.vue', () => {
 
   it('should not render movie card component without correct props', () => {
     const wrapper = mount(MovieCard, {
-      propsData: { movie: null },
+      propsData: { movie: {} },
       stubs: ['nuxt-link'],
     })
 
