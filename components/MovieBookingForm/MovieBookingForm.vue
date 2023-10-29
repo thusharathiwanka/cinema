@@ -126,10 +126,12 @@ export default Vue.extend({
         const updatedSeatLayout = {} as Record<number, Seat[]>
 
         for (const rowIndex in seats) {
-          updatedSeatLayout[rowIndex] = seats[rowIndex].map((seat: Seat) => ({
-            ...seat,
-            status: seat.status === 'pending' ? 'booked' : seat.status,
-          }))
+          updatedSeatLayout[rowIndex] = seats[rowIndex].map((seat: Seat) => {
+            seat.bookings.forEach((booking) => {
+              if (booking.status === 'pending') booking.status = 'booked'
+            })
+            return { ...seat }
+          })
         }
 
         replaceSeatLayoutsForMovies(id, updatedSeatLayout)

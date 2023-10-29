@@ -82,10 +82,11 @@ export const removePastBookings = () => {
 
     for (const row in seatLayout) {
       seatLayout[row].forEach((seat) => {
-        if (new Date(seat.date) < yesterday) {
-          seat.date = ''
-          seat.status = 'idle'
-        }
+        const pastBookingIndex = seat.bookings.findIndex(
+          (booking) => new Date(booking.date) < yesterday
+        )
+        console.log(pastBookingIndex)
+        if (pastBookingIndex !== -1) seat.bookings.splice(pastBookingIndex, 1)
       })
     }
 

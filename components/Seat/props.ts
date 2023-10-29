@@ -1,6 +1,6 @@
+import { Seat } from '~/lib/types/seat.type'
+
 export type SeatProps = {
-  name: string
-  status: string
-  date: string
+  seat: Seat
   bookedDate: string
 }
