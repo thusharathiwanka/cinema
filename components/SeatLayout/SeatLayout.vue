@@ -99,7 +99,10 @@ export default Vue.extend({
           this.selectedSeatLayout[rowIndex][seatIndex] = {
             seatNumber,
             status: seat.status === 'idle' ? 'pending' : 'idle',
-            date: getDraftBookingFormPropertyValue('bookedDate') as string,
+            date:
+              seat.status === 'idle'
+                ? (getDraftBookingFormPropertyValue('bookedDate') as string)
+                : '',
           }
         }
 
