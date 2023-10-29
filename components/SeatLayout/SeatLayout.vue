@@ -9,9 +9,11 @@
           v-for="seat in row"
           :key="seat.seatNumber"
           :class="{
-            booked: seat.status === 'booked',
+            booked: seat.status === 'booked' && seat.date === bookedDate,
             pending: seat.status === 'pending',
           }"
+          :bookedDate="bookedDate"
+          :date="seat.date"
           :name="seat.seatNumber"
           :status="seat.status"
           @seat-clicked="handleSeatClicked"
@@ -49,13 +51,16 @@ export default Vue.extend({
     return {
       selectedSeatLayout: {} as Record<number, SeatType[]>,
       selectedSeats: [] as string[],
+      bookedDate: getDraftBookingFormPropertyValue('bookedDate') || '',
       error: '',
     }
   },
   mounted() {
     this.selectedSeatLayout = this.seats
     const selectedSeats = getDraftBookingFormPropertyValue('selectedSeats')
+
     if (Array.isArray(selectedSeats)) this.selectedSeats = selectedSeats
+
     saveDraftBookingForm('selectedSeatLayout', this.selectedSeatLayout)
   },
 
@@ -94,6 +99,7 @@ export default Vue.extend({
           this.selectedSeatLayout[rowIndex][seatIndex] = {
             seatNumber,
             status: seat.status === 'idle' ? 'pending' : 'idle',
+            date: getDraftBookingFormPropertyValue('bookedDate') as string,
           }
         }
 

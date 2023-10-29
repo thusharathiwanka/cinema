@@ -1,8 +1,13 @@
 <template>
   <div class="seat" @click="triggerSeatClickedEvent">
-    <Typography :color="status === 'idle' ? 'secondary' : 'background'">{{
-      name
-    }}</Typography>
+    <Typography
+      :color="
+        status === 'idle' || (status === 'booked' && date !== bookedDate)
+          ? 'secondary'
+          : 'background'
+      "
+      >{{ name }}</Typography
+    >
   </div>
 </template>
 
@@ -23,6 +28,19 @@ export default Vue.extend({
     status: {
       type: String as PropType<SeatProps['status']>,
       default: 'idle',
+    },
+    date: {
+      type: String as PropType<SeatProps['date']>,
+      default: '',
+    },
+    bookedDate: {
+      type: String as PropType<SeatProps['bookedDate']>,
+      default: '',
+    },
+  },
+  computed: {
+    computedColor() {
+      return this.status === 'idle' ? 'secondary' : 'background'
     },
   },
   methods: {
