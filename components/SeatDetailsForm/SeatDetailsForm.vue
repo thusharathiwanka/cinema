@@ -35,10 +35,6 @@ export default Vue.extend({
       type: Function,
       default: null,
     },
-    isStepValidated: {
-      type: Boolean as PropType<SeatDetailsFormProps['isStepValidated']>,
-      default: false,
-    },
   },
   data() {
     return {
@@ -48,7 +44,7 @@ export default Vue.extend({
   mounted() {
     const id = this.$route.params.id
     if (id) {
-      this.seats = getSeatLayoutForMovie(id)
+      this.seats = getSeatLayoutForMovie(id) || {}
     }
   },
   methods: {

@@ -48,10 +48,6 @@ export default Vue.extend({
       type: Function,
       default: null,
     },
-    isStepValidated: {
-      type: Boolean as PropType<PersonalDetailsFormProps['isStepValidated']>,
-      default: false,
-    },
   },
   data() {
     return {

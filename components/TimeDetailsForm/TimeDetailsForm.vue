@@ -36,10 +36,6 @@ export default Vue.extend({
       type: Function,
       default: null,
     },
-    isStepValidated: {
-      type: Boolean as PropType<TimeDetailsFormProps['isStepValidated']>,
-      default: false,
-    },
   },
   data() {
     return {
