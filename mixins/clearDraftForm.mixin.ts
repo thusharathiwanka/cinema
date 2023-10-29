@@ -2,9 +2,9 @@ import { removeDraftBookingForm } from '@/lib/utils/storage.util'
 
 export default {
   beforeMount() {
-    window.addEventListener('beforeunload', removeDraftBookingForm)
+    window.addEventListener('closed', removeDraftBookingForm)
   },
   beforeDestroy() {
-    window.removeEventListener('beforeunload', removeDraftBookingForm)
+    window.removeEventListener('closed', removeDraftBookingForm)
   },
 }
