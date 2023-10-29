@@ -1,16 +1,16 @@
 <template>
-  <div v-if="movie" class="movie-overview">
+  <div v-if="!isMovieEmpty" class="movie-overview">
     <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
     <div class="movie-overview__details">
       <div class="movie-overview__content">
         <Typography
-          type="h1"
+          variant="h1"
           :title="movie.title"
           data-cy="movie-overview__title"
           >{{ movie.title }}</Typography
         >
         <Typography
-          type="h2"
+          variant="h2"
           color="secondary"
           :truncate="true"
           :title="movie.genres"
@@ -59,6 +59,11 @@ export default Vue.extend({
     movie: {
       type: Object as PropType<MovieOverviewProps>,
       default: null,
+    },
+  },
+  computed: {
+    isMovieEmpty() {
+      return Object.keys(this.movie).length <= 0
     },
   },
 })

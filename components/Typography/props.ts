@@ -1,5 +1,5 @@
 export type TypographyProps = {
-  type: string
+  variant: string
   truncate: boolean
   color: string
 }

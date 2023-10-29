@@ -5,5 +5,4 @@ export type ValidationError = {
 
 export type SeatDetailsFormProps = {
   errors: ValidationError[]
-  isStepValidated: boolean
 }

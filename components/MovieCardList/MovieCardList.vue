@@ -1,5 +1,5 @@
 <template>
-  <div v-if="movies.length > 0" class="movie-card-list">
+  <div v-if="!isMoviesEmpty" class="movie-card-list">
     <MovieCard v-for="movie in movies" :key="movie.title" :movie="movie" />
   </div>
 </template>
@@ -18,6 +18,11 @@ export default Vue.extend({
       type: Array as PropType<MovieCardListProps['movies']>,
       required: true,
       default: () => [],
+    },
+  },
+  computed: {
+    isMoviesEmpty() {
+      return this.movies.length <= 0
     },
   },
 })

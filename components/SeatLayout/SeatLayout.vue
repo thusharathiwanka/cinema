@@ -9,9 +9,11 @@
           v-for="seat in row"
           :key="seat.seatNumber"
           :class="{
-            booked: seat.status === 'booked',
+            booked: seat.status === 'booked' && seat.date === bookedDate,
             pending: seat.status === 'pending',
           }"
+          :bookedDate="bookedDate"
+          :date="seat.date"
           :name="seat.seatNumber"
           :status="seat.status"
           @seat-clicked="handleSeatClicked"
@@ -28,10 +30,11 @@ import { SeatLayoutProps } from './props'
 import Seat from '@/components/Seat/Seat.vue'
 import {
   getDraftBookingFormPropertyValue,
+  replaceSeatLayoutsForMovies,
   saveDraftBookingForm,
 } from '@/lib/utils/storage.util'
 import { Seat as SeatType } from '@/lib/types/seat.type'
-import { NUMBER_OF_MAX_SEATS } from '~/configs/app.config'
+import { NUMBER_OF_MAX_SEATS, SEAT_ROWS } from '~/configs/app.config'
 
 export default Vue.extend({
   name: 'SeatLayoutComponent',
@@ -48,19 +51,23 @@ export default Vue.extend({
     return {
       selectedSeatLayout: {} as Record<number, SeatType[]>,
       selectedSeats: [] as string[],
+      bookedDate: getDraftBookingFormPropertyValue('bookedDate') || '',
       error: '',
     }
   },
   mounted() {
     this.selectedSeatLayout = this.seats
     const selectedSeats = getDraftBookingFormPropertyValue('selectedSeats')
+
     if (Array.isArray(selectedSeats)) this.selectedSeats = selectedSeats
+
     saveDraftBookingForm('selectedSeatLayout', this.selectedSeatLayout)
   },
+
   methods: {
     handleSeatClicked(seatNumber: string) {
       const rowLetter = seatNumber[0]
-      const rowIndex = ['A', 'B', 'C'].indexOf(rowLetter) + 1
+      const rowIndex = SEAT_ROWS.indexOf(rowLetter) + 1
 
       const seatIndexInSelectedSeats = this.selectedSeats.findIndex(
         (seat) => seat === seatNumber
@@ -92,11 +99,18 @@ export default Vue.extend({
           this.selectedSeatLayout[rowIndex][seatIndex] = {
             seatNumber,
             status: seat.status === 'idle' ? 'pending' : 'idle',
+            date:
+              seat.status === 'idle'
+                ? (getDraftBookingFormPropertyValue('bookedDate') as string)
+                : '',
           }
         }
 
+        const id = this.$route.params.id
+
         saveDraftBookingForm('selectedSeats', this.selectedSeats)
         saveDraftBookingForm('selectedSeatLayout', this.selectedSeatLayout)
+        replaceSeatLayoutsForMovies(id, this.selectedSeatLayout)
         this.$forceUpdate()
       }
     },

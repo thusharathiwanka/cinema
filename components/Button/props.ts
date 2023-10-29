@@ -1,3 +1,3 @@
 export type ButtonProps = {
-  variant: 'string'
+  variant: string
 }

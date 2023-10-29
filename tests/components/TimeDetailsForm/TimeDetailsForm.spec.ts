@@ -11,7 +11,7 @@ describe('TimeDetailsForm.vue', () => {
     const dateInput = wrapper.findComponent(Input)
     expect(dateInput.exists()).toBe(true)
     expect(dateInput.props('label')).toBe('Select Date*')
-    expect(dateInput.props('type')).toBe('date')
+    expect(dateInput.props('variant')).toBe('date')
   })
 
   it('two-way binds data properties to the Input components', async () => {
