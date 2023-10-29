@@ -2,7 +2,7 @@
   <div v-if="showTime" class="showtime">
     <Typography>Show Time</Typography>
     <div class="showtime__value">
-      <Typography type="h1">{{ showTime }}</Typography>
+      <Typography variant="h1">{{ showTime }}</Typography>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default Vue.extend({
   props: {
     showTime: {
       type: String as PropType<ShowTimeProps['showTime']>,
-      default: '10:30 AM',
+      default: '',
     },
   },
 })

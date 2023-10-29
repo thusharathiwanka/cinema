@@ -29,16 +29,16 @@ describe('Input.vue', () => {
   })
 
   it('should renders with the correct type attribute', () => {
-    const types = ['text', 'date', 'email', 'tel']
+    const variants = ['text', 'date', 'email', 'tel']
 
-    types.forEach((type) => {
+    variants.forEach((variant) => {
       const wrapper = mount(Input, {
         propsData: {
-          type,
+          variant,
         },
       })
 
-      expect(wrapper.find('.text-input__area').attributes('type')).toBe(type)
+      expect(wrapper.find('.text-input__area').attributes('type')).toBe(variant)
     })
   })
 })

@@ -10,7 +10,7 @@
     <Input
       v-model="inputValues.email"
       label="Your Email*"
-      type="email"
+      variant="email"
       required
       :error="errors[1]"
       @input="(e) => handleInputChange('email', e)"
@@ -18,7 +18,7 @@
     <Input
       v-model="inputValues.mobileNumber"
       label="Your Mobile Number*"
-      type="tel"
+      variant="tel"
       required
       :error="errors[2]"
       @input="(e) => handleInputChange('mobileNumber', e)"
@@ -47,10 +47,6 @@ export default Vue.extend({
     validate: {
       type: Function,
       default: null,
-    },
-    isStepValidated: {
-      type: Boolean as PropType<PersonalDetailsFormProps['isStepValidated']>,
-      default: false,
     },
   },
   data() {

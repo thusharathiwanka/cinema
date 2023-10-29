@@ -10,7 +10,7 @@ describe('Typography.vue', () => {
 
   it('should render typography component inside <h1></h1> with given text', () => {
     const wrapper = mount(Typography, {
-      propsData: { type: 'h1' },
+      propsData: { variant: 'h1' },
       slots: { default: 'Typography' },
     })
 
@@ -19,7 +19,7 @@ describe('Typography.vue', () => {
 
   it('should render typography component inside <h2></h2> with given text', () => {
     const wrapper = mount(Typography, {
-      propsData: { type: 'h2' },
+      propsData: { variant: 'h2' },
       slots: { default: 'Typography' },
     })
 
@@ -28,7 +28,7 @@ describe('Typography.vue', () => {
 
   it('should render typography component and truncate', () => {
     const wrapper = mount(Typography, {
-      propsData: { type: 'h2', truncate: true },
+      propsData: { variant: 'h2', truncate: true },
       slots: { default: 'Typography' },
     })
 
