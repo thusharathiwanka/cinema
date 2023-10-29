@@ -1,7 +1,7 @@
 import { DraftBookingForm } from '../types/storage.type'
 import { Seat } from '@/lib/types/seat.type'
 import { getShowTime } from '@/lib/utils/movie.util'
-import { seatLayout } from '@/configs/movie.config'
+import { movieShowTimesWithMovie, seatLayout } from '@/configs/movie.config'
 
 export const saveDraftBookingForm = (
   label: string,
@@ -27,6 +27,13 @@ export const saveSeatLayoutsAndShowTimeForMovies = (movieId: string) => {
     `${movieId}`,
     JSON.stringify({ seatLayout, showTime: getShowTime(Number(movieId)) })
   )
+}
+
+export const saveSeatLayoutsForMovie = (
+  movieId: string,
+  seatLayout?: Record<number, Seat[]>
+) => {
+  localStorage.setItem(`${movieId}`, JSON.stringify({ seatLayout }))
 }
 
 export const getDraftBookingForm = () =>
@@ -60,6 +67,27 @@ export const replaceSeatLayoutsForMovies = (
       JSON.stringify({ ...JSON.parse(movieDetails), seatLayout })
     )
   }
+}
+
+export const removePastBookings = () => {
+  const yesterday = new Date()
+  yesterday.setDate(yesterday.getDate() - 1)
+
+  movieShowTimesWithMovie.forEach((movie) => {
+    const seatLayout: Record<number, Seat[]> = getSeatLayoutForMovie(
+      movie.id.toString()
+    )
+
+    if (!seatLayout) return
+
+    for (const row in seatLayout) {
+      seatLayout[row].forEach((seat) => {
+        if (new Date(seat.date) < yesterday) seat.date = ''
+      })
+    }
+
+    saveSeatLayoutsForMovie(movie.id.toString(), seatLayout)
+  })
 }
 
 export const removeDraftBookingForm = () =>

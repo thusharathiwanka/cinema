@@ -24,6 +24,7 @@ import { MovieOverviewProps } from '@/components/MovieOverview/props'
 import {
   getDraftBookingForm,
   removeDraftBookingForm,
+  removePastBookings,
   saveSeatLayoutsAndShowTimeForMovies,
 } from '@/lib/utils/storage.util'
 
@@ -80,6 +81,7 @@ export default Vue.extend({
   },
   mounted() {
     saveSeatLayoutsAndShowTimeForMovies(this.movieId)
+    removePastBookings()
   },
   methods: {
     isConfirmationNeeded() {
