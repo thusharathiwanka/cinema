@@ -5,11 +5,8 @@
 </template>
 
 <script>
-import clearDraftFormMixin from '@/mixins/clearDraftForm.mixin'
-
 export default {
   name: 'EmptyLayout',
-  mixins: [clearDraftFormMixin],
 }
 </script>
 

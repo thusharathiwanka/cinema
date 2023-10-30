@@ -32,11 +32,7 @@ export default Vue.extend({
   name: 'MoviePage',
   components: { MovieOverview, Spinner, FetchError, Button },
   beforeRouteLeave(to, _, next) {
-    if (
-      to.path.includes('booking-summary') ||
-      Object.keys(getDraftBookingForm()).length === 2
-    )
-      return next()
+    if (to.path.includes('booking-summary')) return next()
 
     if (this.isConfirmationNeeded()) {
       if (confirm('You have unsaved changes. Do you really want to leave?')) {
@@ -85,7 +81,7 @@ export default Vue.extend({
   },
   methods: {
     isConfirmationNeeded() {
-      return Object.keys(getDraftBookingForm()).length > 0
+      return Object.keys(getDraftBookingForm()).length > 2
     },
   },
 })

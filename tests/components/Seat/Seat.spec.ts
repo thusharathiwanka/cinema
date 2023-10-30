@@ -4,34 +4,35 @@ import Typography from '@/components/Typography/Typography.vue'
 
 describe('SeatComponent.vue', () => {
   it('should render the seat name correctly', () => {
-    const name = 'A1'
+    const seat = { seatNumber: 'A1', bookings: [] }
     const wrapper = mount(Seat, {
       propsData: {
-        name,
+        seat,
       },
     })
 
-    expect(wrapper.findComponent(Typography).text()).toBe(name)
+    expect(wrapper.findComponent(Typography).text()).toBe(seat.seatNumber)
   })
 
   it('should emits a "seat-clicked" event when the seat is clicked', async () => {
-    const name = 'A1'
+    const seat = { seatNumber: 'A1', bookings: [] }
     const wrapper = mount(Seat, {
       propsData: {
-        name,
+        seat,
       },
     })
 
     await wrapper.trigger('click')
 
     expect(wrapper.emitted('seat-clicked')).toBeTruthy()
-    expect(wrapper.emitted('seat-clicked')?.[0]).toEqual([name])
+    expect(wrapper.emitted('seat-clicked')?.[0]).toEqual([seat.seatNumber])
   })
 
   it('should apply secondary color to the Typography component', () => {
+    const seat = { seatNumber: 'A1', bookings: [] }
     const wrapper = mount(Seat, {
       propsData: {
-        name: 'A1',
+        seat,
       },
     })
 
