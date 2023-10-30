@@ -1,13 +1,6 @@
 <template>
   <div class="seat" @click="triggerSeatClickedEvent">
-    <Typography
-      :color="
-        status === 'idle' || (status === 'booked' && date !== bookedDate)
-          ? 'secondary'
-          : 'background'
-      "
-      >{{ name }}</Typography
-    >
+    <Typography :color="computedColor">{{ seat.seatNumber }}</Typography>
   </div>
 </template>
 
@@ -16,22 +9,15 @@ import Vue from 'vue'
 import { PropType } from 'vue/types'
 import Typography from '../Typography/Typography.vue'
 import { SeatProps } from './props'
+import { Seat } from '@/lib/types/seat.type'
 
 export default Vue.extend({
   name: 'SeatComponent',
   components: { Typography },
   props: {
-    name: {
-      type: String as PropType<SeatProps['name']>,
-      default: '',
-    },
-    status: {
-      type: String as PropType<SeatProps['status']>,
-      default: 'idle',
-    },
-    date: {
-      type: String as PropType<SeatProps['date']>,
-      default: '',
+    seat: {
+      type: Object as PropType<SeatProps['seat']>,
+      default: () => ({} as Seat),
     },
     bookedDate: {
       type: String as PropType<SeatProps['bookedDate']>,
@@ -40,13 +26,22 @@ export default Vue.extend({
   },
   computed: {
     computedColor() {
-      return this.status === 'idle' ? 'secondary' : 'background'
+      const isBooked = this.seat.bookings.find(
+        (booking) =>
+          booking.status === 'booked' && booking.date === this.bookedDate
+      )
+
+      const isPending = this.seat.bookings.find(
+        (booking) => booking.status === 'pending' && booking.date
+      )
+
+      return isBooked || isPending ? 'background' : 'secondary'
     },
   },
   methods: {
     triggerSeatClickedEvent() {
-      this.$emit('seat-clicked', this.name)
-      this.$parent?.$emit('seat-clicked', this.name)
+      this.$emit('seat-clicked', this.seat.seatNumber)
+      this.$parent?.$emit('seat-clicked', this.seat.seatNumber)
     },
   },
 })

@@ -8,14 +8,9 @@
         <Seat
           v-for="seat in row"
           :key="seat.seatNumber"
-          :class="{
-            booked: seat.status === 'booked' && seat.date === bookedDate,
-            pending: seat.status === 'pending',
-          }"
+          :class="computeClasses(seat)"
           :bookedDate="bookedDate"
-          :date="seat.date"
-          :name="seat.seatNumber"
-          :status="seat.status"
+          :seat="seat"
           @seat-clicked="handleSeatClicked"
         />
       </div>
@@ -33,8 +28,9 @@ import {
   replaceSeatLayoutsForMovies,
   saveDraftBookingForm,
 } from '@/lib/utils/storage.util'
-import { Seat as SeatType } from '@/lib/types/seat.type'
+import { Booking, Seat as SeatType } from '@/lib/types/seat.type'
 import { NUMBER_OF_MAX_SEATS, SEAT_ROWS } from '~/configs/app.config'
+import { getColumnFromSeatNumber } from '~/lib/utils/movie.util'
 
 export default Vue.extend({
   name: 'SeatLayoutComponent',
@@ -65,6 +61,21 @@ export default Vue.extend({
   },
 
   methods: {
+    computeClasses(seat: SeatType) {
+      const isBooked = seat.bookings.find(
+        (booking) =>
+          booking.status === 'booked' && booking.date === this.bookedDate
+      )
+
+      const isPending = seat.bookings.find(
+        (booking) => booking.status === 'pending' && booking.date
+      )
+
+      return {
+        booked: isBooked,
+        pending: isPending,
+      }
+    },
     handleSeatClicked(seatNumber: string) {
       const rowLetter = seatNumber[0]
       const rowIndex = SEAT_ROWS.indexOf(rowLetter) + 1
@@ -86,24 +97,27 @@ export default Vue.extend({
         this.selectedSeats.splice(seatIndexInSelectedSeats, 1)
       }
 
-      if (rowIndex !== -1) {
-        const seatIndex = this.seats[rowIndex].findIndex((seat: SeatType) => {
-          return (
-            seat.seatNumber === `${seatNumber}` &&
-            (seat.status === 'idle' || seat.status === 'pending')
-          )
-        })
+      const column = getColumnFromSeatNumber(seatNumber)
 
-        if (seatIndex !== -1) {
-          const seat = this.seats[rowIndex][seatIndex]
-          this.selectedSeatLayout[rowIndex][seatIndex] = {
-            seatNumber,
-            status: seat.status === 'idle' ? 'pending' : 'idle',
-            date:
-              seat.status === 'idle'
-                ? (getDraftBookingFormPropertyValue('bookedDate') as string)
-                : '',
-          }
+      if (rowIndex !== -1) {
+        const pendingBookingIndex = this.seats[rowIndex][
+          column - 1
+        ].bookings.findIndex(
+          (booking) =>
+            booking.status === 'pending' && booking.date === this.bookedDate
+        )
+
+        if (pendingBookingIndex !== -1) {
+          this.selectedSeatLayout[rowIndex][column - 1].bookings.splice(
+            pendingBookingIndex,
+            1
+          )
+        } else {
+          const booking = {
+            status: 'pending',
+            date: this.bookedDate,
+          } as Booking
+          this.selectedSeatLayout[rowIndex][column - 1].bookings.push(booking)
         }
 
         const id = this.$route.params.id
