@@ -30,6 +30,7 @@ import {
 } from '@/lib/utils/storage.util'
 import { Booking, Seat as SeatType } from '@/lib/types/seat.type'
 import { NUMBER_OF_MAX_SEATS, SEAT_ROWS } from '~/configs/app.config'
+import { getColumnFromSeatNumber } from '~/lib/utils/movie.util'
 
 export default Vue.extend({
   name: 'SeatLayoutComponent',
@@ -96,26 +97,27 @@ export default Vue.extend({
         this.selectedSeats.splice(seatIndexInSelectedSeats, 1)
       }
 
+      const column = getColumnFromSeatNumber(seatNumber)
+
       if (rowIndex !== -1) {
         const pendingBookingIndex = this.seats[rowIndex][
-          Number(seatNumber[1]) - 1
+          column - 1
         ].bookings.findIndex(
           (booking) =>
             booking.status === 'pending' && booking.date === this.bookedDate
         )
 
         if (pendingBookingIndex !== -1) {
-          this.selectedSeatLayout[rowIndex][
-            Number(seatNumber[1]) - 1
-          ].bookings.splice(pendingBookingIndex, 1)
+          this.selectedSeatLayout[rowIndex][column - 1].bookings.splice(
+            pendingBookingIndex,
+            1
+          )
         } else {
           const booking = {
             status: 'pending',
             date: this.bookedDate,
           } as Booking
-          this.selectedSeatLayout[rowIndex][
-            Number(seatNumber[1]) - 1
-          ].bookings.push(booking)
+          this.selectedSeatLayout[rowIndex][column - 1].bookings.push(booking)
         }
 
         const id = this.$route.params.id
