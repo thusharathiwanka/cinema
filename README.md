@@ -57,6 +57,15 @@ A web application built with Nuxt and Vue.js that simplifies the movie ticket bo
 - TMDB API
 - SCSS
 
+# Environments
+
+### UAT
+- https://cinema-1csy.onrender.com/
+### Stage
+- https://cinema-stage.onrender.com/
+### Production
+- https://cinema-vp2y.onrender.com/
+
 # Contributing
 If you'd like to contribute to this project, please feel free to submit a pull request or open an issue.
 
