@@ -99,7 +99,7 @@ export default Vue.extend({
     next() {
       if (
         !this.validateSteps() ||
-        this.emailError.length ||
+        (this.activeStep === 2 && this.emailError.length) ||
         this.mobileNumberError.length ||
         this.nameError.length
       )

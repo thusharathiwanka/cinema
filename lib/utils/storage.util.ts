@@ -10,12 +10,12 @@ export const saveDraftBookingForm = (
   if (!label) return
 
   const draftBookingForm = JSON.parse(
-    localStorage.getItem('draftBookingForm') || '{}'
+    sessionStorage.getItem('draftBookingForm') || '{}'
   )
 
   draftBookingForm[label] = value
 
-  localStorage.setItem('draftBookingForm', JSON.stringify(draftBookingForm))
+  sessionStorage.setItem('draftBookingForm', JSON.stringify(draftBookingForm))
 }
 
 export const saveSeatLayoutsAndShowTimeForMovies = (movieId: string) => {
@@ -37,13 +37,13 @@ export const saveSeatLayoutsForMovie = (
 }
 
 export const getDraftBookingForm = () =>
-  JSON.parse(localStorage.getItem('draftBookingForm') || '{}')
+  JSON.parse(sessionStorage.getItem('draftBookingForm') || '{}')
 
 export const getDraftBookingFormPropertyValue = (
   property: keyof DraftBookingForm
 ) => {
   const draftBookingForm: DraftBookingForm = JSON.parse(
-    localStorage.getItem('draftBookingForm') || '{}'
+    sessionStorage.getItem('draftBookingForm') || '{}'
   )
 
   return draftBookingForm[property] !== undefined
@@ -94,4 +94,4 @@ export const removePastBookings = () => {
 }
 
 export const removeDraftBookingForm = () =>
-  localStorage.removeItem('draftBookingForm')
+  sessionStorage.removeItem('draftBookingForm')
