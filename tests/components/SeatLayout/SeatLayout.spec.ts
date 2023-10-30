@@ -5,8 +5,14 @@ import Seat from '@/components/Seat/Seat.vue'
 describe('SeatLayout.vue', () => {
   it('should render the correct number of seats', () => {
     const seats = {
-      row1: [{ seatNumber: 'A1' }, { seatNumber: 'A2' }],
-      row2: [{ seatNumber: 'B1' }, { seatNumber: 'B2' }],
+      row1: [
+        { seatNumber: 'A1', bookings: [] },
+        { seatNumber: 'A2', bookings: [] },
+      ],
+      row2: [
+        { seatNumber: 'B1', bookings: [] },
+        { seatNumber: 'B2', bookings: [] },
+      ],
     }
     const wrapper = mount(SeatLayout, {
       propsData: {
@@ -20,7 +26,7 @@ describe('SeatLayout.vue', () => {
 
   it('should emits "seat-clicked" event when a seat is clicked', async () => {
     const seats = {
-      row1: [{ seatNumber: 'A1' }],
+      row1: [{ seatNumber: 'A1', bookings: [] }],
     }
     const wrapper = mount(SeatLayout, {
       propsData: {
@@ -37,7 +43,10 @@ describe('SeatLayout.vue', () => {
 
   it('should tracks selected seats when seats are clicked', async () => {
     const seats = {
-      row1: [{ seatNumber: 'A1' }, { seatNumber: 'A2' }],
+      row1: [
+        { seatNumber: 'A1', bookings: [] },
+        { seatNumber: 'A2', bookings: [] },
+      ],
     }
     const wrapper = mount(SeatLayout, {
       propsData: {

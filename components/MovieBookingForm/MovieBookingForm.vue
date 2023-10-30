@@ -97,13 +97,8 @@ export default Vue.extend({
   },
   methods: {
     next() {
-      if (
-        !this.validateSteps() ||
-        this.emailError.length ||
-        this.mobileNumberError.length ||
-        this.nameError.length
-      )
-        return
+      if (!this.validateSteps()) return
+      if (this.activeStep === 2 && this.hasAnyValidationError()) return
       this.activeStep = this.activeStep + 1
       saveDraftBookingForm('activeStep', this.activeStep)
     },
@@ -114,6 +109,7 @@ export default Vue.extend({
     },
     submit() {
       const draftForm: DraftBookingForm = getDraftBookingForm()
+      if (this.hasAnyValidationError()) return
       if (!draftForm.selectedSeats?.length && this.activeStep === 3) {
         this.seatSelectionError = ['Please select seats']
         return
@@ -126,10 +122,12 @@ export default Vue.extend({
         const updatedSeatLayout = {} as Record<number, Seat[]>
 
         for (const rowIndex in seats) {
-          updatedSeatLayout[rowIndex] = seats[rowIndex].map((seat: Seat) => ({
-            ...seat,
-            status: seat.status === 'pending' ? 'booked' : seat.status,
-          }))
+          updatedSeatLayout[rowIndex] = seats[rowIndex].map((seat: Seat) => {
+            seat.bookings.forEach((booking) => {
+              if (booking.status === 'pending') booking.status = 'booked'
+            })
+            return { ...seat }
+          })
         }
 
         replaceSeatLayoutsForMovies(id, updatedSeatLayout)
@@ -219,6 +217,15 @@ export default Vue.extend({
       if (this.activeStep >= NUMBER_OF_BOOKING_STEPS) return false
 
       return true
+    },
+    hasAnyValidationError() {
+      return (
+        this.bookedDateError.length ||
+        this.nameError.length ||
+        this.emailError.length ||
+        this.mobileNumberError.length ||
+        this.seatSelectionError.length
+      )
     },
   },
 })

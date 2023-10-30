@@ -23,3 +23,6 @@ export const getShowTime = (movieId: number) => {
 
   return movieWithShowTime?.showtime || '-'
 }
+
+export const getColumnFromSeatNumber = (seatNumber: string) =>
+  +seatNumber.replace(/[^0-9]/g, '')
