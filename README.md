@@ -26,7 +26,7 @@ A web application built with Nuxt and Vue.js that simplifies the movie ticket bo
 ```bash
   BASE_URL='https://api.themoviedb.org/3/'
   IMAGE_BASE_URL='https://image.tmdb.org/t/p/w500'
-  AUTH_TOKEN='Bearer YOUR API KEY
+  AUTH_TOKEN='Bearer YOUR API KEY'
 ```
 #### Install Dependencies
 ```bash
