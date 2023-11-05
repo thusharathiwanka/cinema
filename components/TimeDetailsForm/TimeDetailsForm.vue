@@ -1,5 +1,5 @@
 <template>
-  <div class="multistep-form" data-cy="personal-details-form">
+  <div class="multistep-form" data-cy="time-details-form">
     <Input
       v-model="bookedDate"
       label="Select Date*"
@@ -8,7 +8,13 @@
       :error="errors"
       @input="(e) => handleInputChange('date', 'bookedDate', e)"
     />
-    <ShowTime :showTime="showTime" />
+
+    <div v-if="showTime" class="time-details-form__showtime">
+      <Typography>Show Time</Typography>
+      <div class="time-details-form__showtime-value">
+        <Typography variant="h1">{{ showTime }}</Typography>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,7 +23,7 @@ import Vue from 'vue'
 import { PropType } from 'vue/types'
 import { TimeDetailsFormProps, ValidationError } from './props'
 import Input from '@/components/Input/Input.vue'
-import ShowTime from '@/components/ShowTime/ShowTime.vue'
+import Typography from '@/components/Typography/Typography.vue'
 import {
   getDraftBookingForm,
   saveDraftBookingForm,
@@ -26,7 +32,7 @@ import { getShowTime } from '@/lib/utils/movie.util'
 
 export default Vue.extend({
   name: 'TimeDetailsFormComponent',
-  components: { Input, ShowTime },
+  components: { Input, Typography },
   props: {
     errors: {
       type: Array as PropType<TimeDetailsFormProps['errors']>,
@@ -66,4 +72,5 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/assets/scss/utility';
+@import 'time-details-form';
 </style>

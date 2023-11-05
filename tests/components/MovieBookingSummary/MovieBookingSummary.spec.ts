@@ -1,31 +1,30 @@
-import { Wrapper, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { movieBookingSummaryMockData } from './mockData'
 import MovieBookingSummary from '@/components/MovieBookingSummary/MovieBookingSummary.vue'
 
 describe('MovieBookingSummary.vue', () => {
-  let wrapper: Wrapper<Vue>
-
-  beforeEach(() => {
-    wrapper = mount(MovieBookingSummary, {
+  it('should render booking summary component with correct props', () => {
+    const wrapper = mount(MovieBookingSummary, {
       propsData: movieBookingSummaryMockData,
       stubs: ['nuxt-link'],
     })
-  })
-
-  afterEach(() => {
-    wrapper.destroy()
-  })
-
-  it('should render booking summary component with correct props', () => {
     expect(wrapper.find('.booking-summary').exists()).toBeTruthy()
   })
 
-  it('should not render booking summary component', async () => {
-    await wrapper.setProps({ movie: {} })
+  it('should not render booking summary component', () => {
+    const wrapper = mount(MovieBookingSummary, {
+      propsData: { movie: {} },
+      stubs: ['nuxt-link'],
+    })
     expect(wrapper.find('.booking-summary').exists()).toBeFalsy()
   })
 
   it('should render the movie details correctly', () => {
+    const wrapper = mount(MovieBookingSummary, {
+      propsData: movieBookingSummaryMockData,
+      stubs: ['nuxt-link'],
+    })
+
     expect(wrapper.find('[data-cy="booking-summary__title"]').text()).toBe(
       'Booking Summary'
     )
@@ -43,6 +42,11 @@ describe('MovieBookingSummary.vue', () => {
   })
 
   it('should render the booked date and time correctly', () => {
+    const wrapper = mount(MovieBookingSummary, {
+      propsData: movieBookingSummaryMockData,
+      stubs: ['nuxt-link'],
+    })
+
     expect(wrapper.find('.booking-summary__booked-date').text()).toContain(
       'Booked Date:'
     )
@@ -53,6 +57,11 @@ describe('MovieBookingSummary.vue', () => {
   })
 
   it('should render a "Done" button', () => {
+    const wrapper = mount(MovieBookingSummary, {
+      propsData: movieBookingSummaryMockData,
+      stubs: ['nuxt-link'],
+    })
+
     expect(wrapper.find('.booking-summary__back').exists()).toBe(true)
   })
 })
