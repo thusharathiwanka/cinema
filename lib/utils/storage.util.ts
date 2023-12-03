@@ -1,4 +1,4 @@
-import { DraftBookingForm } from '../types/storage.type'
+import { DraftBookingForm } from '@/lib/types/storage.type'
 import { Seat } from '@/lib/types/seat.type'
 import { getShowTime } from '@/lib/utils/movie.util'
 import { movieShowTimesWithMovie, seatLayout } from '@/configs/movie.config'
