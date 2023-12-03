@@ -5,7 +5,6 @@ import {
   getDraftBookingFormPropertyValue,
   getSeatLayoutForMovie,
   removeDraftBookingForm,
-  removePastBookings,
   replaceSeatLayoutsForMovies,
   saveDraftBookingForm,
   saveSeatLayoutsAndShowTimeForMovies,
