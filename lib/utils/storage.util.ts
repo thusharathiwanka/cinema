@@ -25,7 +25,7 @@ export const saveSeatLayoutsAndShowTimeForMovies = (movieId: string) => {
 
   localStorage.setItem(
     `${movieId}`,
-    JSON.stringify({ seatLayout, showTime: getShowTime(Number(movieId)) })
+    JSON.stringify({ seatLayout, showTime: getShowTime(+movieId) })
   )
 }
 
