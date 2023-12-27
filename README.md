@@ -62,6 +62,12 @@ A web application built with Nuxt and Vue.js that simplifies the movie ticket bo
   $ yarn unit
 ```
 
+#### Run All E2E Tests
+
+```bash
+  $ yarn cy:run
+```
+
 ## Key Features
 
 - **Movie Discovery**: Easily explore a list of ongoing movies using data from the [TMDB API](https://www.themoviedb.org/).
