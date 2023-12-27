@@ -1,3 +1,5 @@
+![logo](https://github.com/thushara-thiwanka/cinema/assets/142310256/2f839aaa-b645-4985-8320-f62af92f9147)
+
 # Cinema - Movie Ticket Booking App
 
 ![cover](https://github.com/thushara-thiwanka/cinema/assets/142310256/e59d60fa-eed1-4b66-a5a1-c8a137295465)
