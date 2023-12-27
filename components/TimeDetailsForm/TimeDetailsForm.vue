@@ -6,6 +6,7 @@
       variant="date"
       required
       :error="errors"
+      data-cy="booked-date-input"
       @input="(e) => handleInputChange('date', 'bookedDate', e)"
     />
 
@@ -57,7 +58,7 @@ export default Vue.extend({
       this.bookedDate = draftForm.bookedDate
     }
 
-    this.showTime = getShowTime(Number(id))
+    this.showTime = getShowTime(+id)
     saveDraftBookingForm('showTime', this.showTime)
   },
   methods: {

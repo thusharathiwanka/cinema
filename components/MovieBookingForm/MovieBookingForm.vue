@@ -1,6 +1,8 @@
 <template>
   <form class="booking-form">
-    <Typography variant="h1">Book My Show</Typography>
+    <Typography variant="h1" data-cy="booking-form__title"
+      >Book My Show</Typography
+    >
     <div class="booking-form__steps">
       <TimeDetailsForm
         v-if="isFirstStep"
