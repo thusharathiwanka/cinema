@@ -16,5 +16,6 @@ module.exports = {
     '<rootDir>/pages/**/*.vue',
     '<rootDir>/lib/**/*.ts',
   ],
+  coveragePathIgnorePatterns: ['<rootDir>/pages'],
   testEnvironment: 'jsdom',
 }
