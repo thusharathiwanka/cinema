@@ -26,12 +26,12 @@ export default Vue.extend({
   },
   computed: {
     computedColor() {
-      const isBooked = this.seat.bookings.find(
+      const isBooked = this.seat?.bookings?.find(
         (booking) =>
           booking.status === 'booked' && booking.date === this.bookedDate
       )
 
-      const isPending = this.seat.bookings.find(
+      const isPending = this.seat?.bookings?.find(
         (booking) => booking.status === 'pending' && booking.date
       )
 

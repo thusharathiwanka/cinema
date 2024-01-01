@@ -3,6 +3,7 @@ import {
   getMovieYear,
   getMovieGenresFromArray,
   getShowTime,
+  getColumnFromSeatNumber,
 } from '@/lib/utils/movie.util'
 
 const sampleGenres = [
@@ -75,5 +76,37 @@ describe('getShowTime', () => {
     const result = getShowTime(movieId)
 
     expect(result).toBe('-')
+  })
+})
+
+describe('getMovieGenresFromArray', () => {
+  it('should returns the array of movie genres form genre objects array', () => {
+    const result = getMovieGenresFromArray(sampleGenres)
+
+    expect(result).toStrictEqual(['Action', 'Drama', 'Science Fiction'])
+  })
+
+  it('should returns an empty array when the empty genre objects array is passed', () => {
+    const result = getMovieGenresFromArray([])
+
+    expect(result.length).toEqual(0)
+  })
+
+  it('should returns an empty array when the undefined is passed', () => {
+    const result = getMovieGenresFromArray(undefined)
+
+    expect(result.length).toEqual(0)
+  })
+})
+
+describe('getColumnFromSeatNumber', () => {
+  it('should return the column number from a valid seat number', () => {
+    const seatNumber = 'A2'
+    expect(getColumnFromSeatNumber(seatNumber)).toBe(2)
+  })
+
+  it('should return 0 for an empty seat number', () => {
+    const seatNumber = ''
+    expect(getColumnFromSeatNumber(seatNumber)).toBe(0)
   })
 })

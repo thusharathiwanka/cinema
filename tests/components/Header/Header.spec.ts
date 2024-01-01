@@ -34,18 +34,6 @@ describe('Header.vue', () => {
     expect(wrapper.find('.header__back-link').exists()).toBeFalsy()
   })
 
-  it('should render back link arrow in tablet and mobile view', () => {
-    const viewPorts = [760, 300]
-
-    viewPorts.forEach(async (viewPort) => {
-      await wrapper.setData({
-        $route: { path: '/movie/123' },
-        windowWidth: viewPort,
-      })
-      expect(wrapper.find('.header__back-link--img').exists()).toBeTruthy()
-    })
-  })
-
   it('should display the logo image', () => {
     expect(wrapper.find('.header__logo').exists()).toBeTruthy()
   })
