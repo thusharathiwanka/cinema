@@ -23,6 +23,9 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  // Deployment target: https://v2.nuxt.com/docs/configuration-glossary/configuration-target/
+  target: 'static',
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
@@ -44,10 +47,6 @@ export default {
   publicRuntimeConfig: {
     baseUrl: process.env.BASE_URL,
     imageBaseUrl: process.env.IMAGE_BASE_URL,
-    authToken: process.env.AUTH_TOKEN,
-  },
-
-  privateRuntimeConfig: {
     authToken: process.env.AUTH_TOKEN,
   },
 }

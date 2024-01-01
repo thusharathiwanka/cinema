@@ -6,6 +6,7 @@ describe('TimeDetailsForm.vue', () => {
   it('should render the Input component with labels', () => {
     const wrapper = mount(TimeDetailsForm, {
       mocks: { $route: { params: { id: '' } } },
+      propsData: { errors: [] },
     })
 
     const dateInput = wrapper.findComponent(Input)

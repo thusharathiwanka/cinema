@@ -29,7 +29,7 @@ export default Vue.extend({
   props: {
     errors: {
       type: Array as PropType<SeatDetailsFormProps['errors']>,
-      default: [] as ValidationError[],
+      default: () => [] as ValidationError[],
     },
     validate: {
       type: Function,

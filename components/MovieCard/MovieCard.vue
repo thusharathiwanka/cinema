@@ -1,5 +1,9 @@
 <template>
-  <nuxt-link v-if="!isMovieEmpty" :to="`movies/${movie.id}`">
+  <nuxt-link
+    v-if="!isMovieEmpty"
+    :to="`movies/${movie.id}`"
+    data-cy="movie-card"
+  >
     <div class="movie-card">
       <MoviePoster :imageUrl="movie.imageUrl" :rating="movie.rating" />
       <div class="movie-card__text-container">

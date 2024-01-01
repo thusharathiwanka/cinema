@@ -5,6 +5,7 @@
       label="Your Name*"
       required
       :error="errors[0]"
+      data-cy="name-input"
       @input="(e) => handleInputChange('name', e)"
     />
     <Input
@@ -13,6 +14,7 @@
       variant="email"
       required
       :error="errors[1]"
+      data-cy="email-input"
       @input="(e) => handleInputChange('email', e)"
     />
     <Input
@@ -21,6 +23,7 @@
       variant="tel"
       required
       :error="errors[2]"
+      data-cy="mobile-input"
       @input="(e) => handleInputChange('mobileNumber', e)"
     />
   </div>
@@ -42,7 +45,7 @@ export default Vue.extend({
   props: {
     errors: {
       type: Array as PropType<PersonalDetailsFormProps['errors']>,
-      default: [] as ValidationError[],
+      default: () => [] as ValidationError[],
     },
     validate: {
       type: Function,

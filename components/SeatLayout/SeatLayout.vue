@@ -23,6 +23,7 @@ import Vue from 'vue'
 import { PropType } from 'vue/types'
 import { SeatLayoutProps } from './props'
 import Seat from '@/components/Seat/Seat.vue'
+import Typography from '@/components/Typography/Typography.vue'
 import {
   getDraftBookingFormPropertyValue,
   replaceSeatLayoutsForMovies,
@@ -36,6 +37,7 @@ export default Vue.extend({
   name: 'SeatLayoutComponent',
   components: {
     Seat,
+    Typography,
   },
   props: {
     seats: {
@@ -62,12 +64,12 @@ export default Vue.extend({
 
   methods: {
     computeClasses(seat: SeatType) {
-      const isBooked = seat.bookings.find(
+      const isBooked = seat?.bookings?.find(
         (booking) =>
           booking.status === 'booked' && booking.date === this.bookedDate
       )
 
-      const isPending = seat.bookings.find(
+      const isPending = seat?.bookings?.find(
         (booking) => booking.status === 'pending' && booking.date
       )
 
@@ -80,21 +82,21 @@ export default Vue.extend({
       const rowLetter = seatNumber[0]
       const rowIndex = SEAT_ROWS.indexOf(rowLetter) + 1
 
-      const seatIndexInSelectedSeats = this.selectedSeats.findIndex(
+      const seatIndexInSelectedSeats = this.selectedSeats?.findIndex(
         (seat) => seat === seatNumber
       )
 
       if (seatIndexInSelectedSeats === -1) {
-        this.selectedSeats.push(seatNumber)
+        this.selectedSeats?.push(seatNumber)
 
         if (this.selectedSeats.length > NUMBER_OF_MAX_SEATS) {
           this.error = 'You cannot book more than 3 seats'
-          this.selectedSeats.pop()
+          this.selectedSeats?.pop()
           return
         }
       } else {
         this.error = ''
-        this.selectedSeats.splice(seatIndexInSelectedSeats, 1)
+        this.selectedSeats?.splice(seatIndexInSelectedSeats, 1)
       }
 
       const column = getColumnFromSeatNumber(seatNumber)
@@ -102,13 +104,13 @@ export default Vue.extend({
       if (rowIndex !== -1) {
         const pendingBookingIndex = this.seats[rowIndex][
           column - 1
-        ].bookings.findIndex(
+        ]?.bookings?.findIndex(
           (booking) =>
             booking.status === 'pending' && booking.date === this.bookedDate
         )
 
         if (pendingBookingIndex !== -1) {
-          this.selectedSeatLayout[rowIndex][column - 1].bookings.splice(
+          this.selectedSeatLayout[rowIndex][column - 1]?.bookings?.splice(
             pendingBookingIndex,
             1
           )
@@ -117,7 +119,7 @@ export default Vue.extend({
             status: 'pending',
             date: this.bookedDate,
           } as Booking
-          this.selectedSeatLayout[rowIndex][column - 1].bookings.push(booking)
+          this.selectedSeatLayout[rowIndex][column - 1]?.bookings?.push(booking)
         }
 
         const id = this.$route.params.id
