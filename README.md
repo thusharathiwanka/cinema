@@ -1,8 +1,8 @@
-![logo](https://github.com/thushara-thiwanka/cinema/assets/142310256/2f839aaa-b645-4985-8320-f62af92f9147)
+![logo](https://github.com/thusharathiwanka/cinema/assets/46595464/197e96e5-ddab-485e-a3cc-529f294974a3)
 
 # Cinema - Movie Ticket Booking App
 
-![cover](https://github.com/thushara-thiwanka/cinema/assets/142310256/e59d60fa-eed1-4b66-a5a1-c8a137295465)
+![cover](https://github.com/thusharathiwanka/cinema/assets/46595464/708326e8-18d2-40a7-8502-9555a312da74)
 
 A web application built with Nuxt and Vue.js that simplifies the movie ticket booking experience. This app allows users to effortlessly browse ongoing movies, view showtimes, select seats, and receive a reservation summary.
 
