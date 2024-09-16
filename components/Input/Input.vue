@@ -58,7 +58,7 @@ export default Vue.extend({
     triggerInputEvent(event: Event) {
       if (event && event.target) {
         const newValue = (event.target as HTMLInputElement).value
-        this.$emit('input', newValue.trim())
+        this.$emit('input', newValue)
       }
     },
     getMinDate() {
