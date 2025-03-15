@@ -221,7 +221,7 @@ export default Vue.extend({
 
       return true
     },
-    hasAnyValidationError(activeStep) {
+    hasAnyValidationError(activeStep: number = 0) {
       if (activeStep === 1) {
         return this.bookedDateError.length
       } else if (activeStep === 2) {
