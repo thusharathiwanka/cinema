@@ -18,12 +18,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Enable corepack and prepare yarn
-        run: |
-          corepack enable
-          corepack prepare yarn@4.2.2 --activate
-          yarn --version
-
       - name: Install dependencies
         run: yarn install --immutable
 
