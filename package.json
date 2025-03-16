@@ -2,6 +2,10 @@
   "name": "cinema",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "16.20.2",
+    "npm": "8.19.4"
+  },
   "scripts": {
     "dev": "nuxt --o --p 4000",
     "build": "nuxt build",
