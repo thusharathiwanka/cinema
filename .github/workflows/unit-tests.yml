@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.x, 18.x, 20.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -17,16 +17,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
 
-      - name: Enable corepack
-        run: corepack enable
-
-      - name: Install yarn 4
-        run: corepack prepare yarn@4.2.2 --activate
-
-      - name: Check yarn version
-        run: yarn --version
+      - name: Enable corepack and prepare yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@4.2.2 --activate
+          yarn --version
 
       - name: Install dependencies
         run: yarn install --immutable
