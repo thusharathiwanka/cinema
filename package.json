@@ -2,6 +2,7 @@
   "name": "cinema",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "nuxt --o --p 4000",
     "build": "nuxt build",
@@ -50,5 +51,5 @@
     "sass-loader": "10",
     "ts-jest": "^29.0.3",
     "vue-jest": "^3.0.4"
-  }
+  },
 }
