@@ -2,6 +2,7 @@
   "name": "cinema",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "nuxt --o --p 4000",
     "build": "nuxt build",
