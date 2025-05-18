@@ -100,7 +100,8 @@ export default Vue.extend({
   methods: {
     next() {
       if (!this.validateSteps()) return
-      if (this.activeStep === 2 && this.hasAnyValidationError()) return
+      if (this.activeStep === 2 && this.hasAnyValidationError(this.activeStep))
+        return
       this.activeStep = this.activeStep + 1
       saveDraftBookingForm('activeStep', this.activeStep)
     },
@@ -220,14 +221,18 @@ export default Vue.extend({
 
       return true
     },
-    hasAnyValidationError() {
-      return (
-        this.bookedDateError.length ||
-        this.nameError.length ||
-        this.emailError.length ||
-        this.mobileNumberError.length ||
-        this.seatSelectionError.length
-      )
+    hasAnyValidationError(activeStep: number = 0) {
+      if (activeStep === 1) {
+        return this.bookedDateError.length
+      } else if (activeStep === 2) {
+        return (
+          this.nameError.length ||
+          this.emailError.length ||
+          this.mobileNumberError.length
+        )
+      } else {
+        return this.seatSelectionError.length
+      }
     },
   },
 })
