@@ -1,0 +1,77 @@
+name: Development Pipeline
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  lint-typecheck:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup environment
+        uses: ./.github/actions/setup
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Type check
+        run: yarn type-check
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint-typecheck
+
+    steps:
+      - name: Setup environment
+        uses: ./.github/actions/setup
+
+      - name: Run unit tests
+        run: yarn unit
+
+  # build-deploy:
+  #   name: Build & Deploy to Netlify
+  #   runs-on: ubuntu-latest
+  #   needs: unit-tests
+
+  #   outputs:
+  #     deploy-url: ${{ steps.build-deploy.outputs.deploy_url }}
+
+  #   steps:
+  #     - name: Setup environment
+  #       uses: ./.github/actions/setup
+
+  #     - name: Build as static site
+  #       run: yarn generate
+
+  #     - name: Install netlify cli
+  #       run: yarn global add netlify-cli
+
+  #     - name: Deploy to netlify
+  #       id: deploy
+  #       run: |
+  #         export DEPLOY_URL=$(netlify deploy --prod --dir=dist \
+  #           --site $NETLIFY_SITE_ID \
+  #           --auth $NETLIFY_AUTH_TOKEN \
+  #           --json | jq -r '.deploy_url')
+  #         echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+  #       env:
+  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  # integration-tests:
+  #   name: Integration Tests
+  #   runs-on: ubuntu-latest
+  #   needs: build-deploy
+
+  #   steps:
+  #     - name: Setup environment
+  #       uses: ./.github/actions/setup
+
+  #     - name: Run integration tests
+  #       env:
+  #         BASE_URL: ${{ needs.build-deploy.outputs.deploy-url }}
+  #       run: yarn test:integration
