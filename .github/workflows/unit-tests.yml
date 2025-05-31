@@ -15,6 +15,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Enable corepack
+        run: corepack enable
+
       - name: Install dependencies
         run: yarn install --immutable
 
