@@ -35,7 +35,7 @@ jobs:
       - name: Setup environment
         uses: ./.github/actions/setup/
 
-      - name: Run unit tests
+      - name: Unit tests
         run: yarn unit
 
   # build-deploy:
