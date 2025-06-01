@@ -29,7 +29,7 @@ runs:
 
     - name: Build project artifacts
       shell: bash
-      run: vercel build --prod --token=${{ inputs.vercel_token }}
+      run: vercel build --token=${{ inputs.vercel_token }}
 
     - name: Deploy project artifacts
       shell: bash
