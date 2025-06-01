@@ -21,7 +21,7 @@ runs:
   steps:
     - name: Install vercel cli
       shell: bash
-      run: yarn global add --global vercel@latest
+      run: yarn global add vercel@latest
 
     - name: Pull vercel environment information
       shell: bash
