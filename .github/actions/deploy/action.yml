@@ -1,0 +1,36 @@
+name: Deploy to Vercel
+description: Deploy app to vercel using vercel API
+
+inputs:
+  vercel_org_id:
+    description: 'Vercel organization ID'
+    required: true
+  vercel_project_id:
+    description: 'Vercel project ID'
+    required: true
+  vercel_token:
+    description: 'Vercel API token'
+    required: true
+
+# outputs:
+#   deployed-url:
+#     description: 'URL of the deployed app'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install vercel cli
+      shell: bash
+      run: yarn global add --global vercel@latest
+
+    - name: Pull vercel environment information
+      shell: bash
+      run: vercel pull --yes --environment=preview --token=${{ inputs.vercel_token }}
+
+    - name: Build project artifacts
+      shell: bash
+      run: vercel build --prod --token=${{ inputs.vercel_token }}
+
+    - name: Deploy project artifacts to vercel
+      shell: bash
+      run: vercel deploy --prebuilt --token=${{ inputs.vercel_token }}
