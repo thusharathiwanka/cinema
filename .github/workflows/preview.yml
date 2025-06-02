@@ -74,23 +74,8 @@ jobs:
         uses: ./.github/actions/setup/
 
       - name: Run integration tests
+        env:
+          CYPRESS_BASE_URL: ${{ needs.deploy.outputs.preview-url }}
         run: |
           echo "Running tests against ${{ needs.deploy.outputs.preview-url }}"
-          yarn cy:run --url=${{ needs.deploy.outputs.preview-url }}
-
-# integration-tests:
-  #   name: Integration Tests
-  #   runs-on: ubuntu-latest
-  #   needs: build-deploy
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-
-  #     - name: Setup environment
-  #       uses: ./.github/actions/setup/
-
-  #     - name: Run integration tests
-  #       env:
-  #         BASE_URL: ${{ needs.build-deploy.outputs.deploy-url }}
-  #       run: yarn test:integration
+          yarn cy:run
