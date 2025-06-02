@@ -44,9 +44,8 @@ jobs:
       name: Deploy
       needs: unit-tests
       runs-on: ubuntu-latest
-
-      # outputs:
-      #   deployed-url: ${{ steps.deploy.outputs.deployed-url }}
+      outputs:
+        preview-url: ${{ steps.deploy.outputs.deployment-url }}
 
       steps:
       - name: Checkout code
@@ -64,7 +63,22 @@ jobs:
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           branch: ${{ github.ref_name }}
 
-  # integration-tests:
+  integration-tests:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup/
+
+      - name: Run integration tests
+        run: |
+          echo "Running tests against ${{ needs.deploy.outputs.preview-url }}"
+          yarn cy:run --url=${{ needs.deploy.outputs.preview-url }}
+
+# integration-tests:
   #   name: Integration Tests
   #   runs-on: ubuntu-latest
   #   needs: build-deploy

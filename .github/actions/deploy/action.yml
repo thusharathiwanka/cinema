@@ -15,6 +15,11 @@ inputs:
     description: 'Current branch name'
     required: true
 
+outputs:
+  deployment-url:
+    description: 'Preview deployment URL'
+    value: ${{ steps.deploy.outputs.url }}
+
 runs:
   using: "composite"
   steps:
@@ -57,7 +62,7 @@ runs:
           echo "Deploying to PREVIEW"
           URL=$(vercel deploy --prebuilt --token=${{ inputs.vercel_token }})
         fi
-        # Extract just the URL from the output
+
         URL=$(echo "$URL" | grep -Eo 'https://[^ ]+' | head -1)
         echo "DEPLOY_URL=$URL" >> $GITHUB_ENV
         echo "url=$URL" >> $GITHUB_OUTPUT
@@ -66,7 +71,7 @@ runs:
       if: ${{ env.is_prd == 'false' && github.event_name == 'pull_request' }}
       shell: bash
       run: |
-        COMMENT="Preview deployment for this PR is available at: ${{ env.DEPLOY_URL }}"
+        COMMENT="Preview Deployment URL 🚀: ${{ env.DEPLOY_URL }}"
         curl -X POST \
           -H "Authorization: token ${{ github.token }}" \
           -H "Accept: application/vnd.github.v3+json" \
