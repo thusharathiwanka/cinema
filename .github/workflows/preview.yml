@@ -64,6 +64,7 @@ jobs:
           branch: ${{ github.ref_name }}
 
   integration-tests:
+    name: Integration Tests
     needs: deploy
     runs-on: ubuntu-latest
     steps:
