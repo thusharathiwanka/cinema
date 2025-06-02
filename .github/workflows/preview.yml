@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+permissions:
+  pull-requests: write
+
 jobs:
   lint-typecheck:
     name: Lint & Type Check
@@ -60,25 +63,6 @@ jobs:
           vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           branch: ${{ github.ref_name }}
-
-
-        # - name: Comment PR with deployed URL
-        #   uses: actions/github-script@v6
-        #   with:
-        #     github-token: ${{ secrets.GITHUB_TOKEN }}
-        #     script: |
-        #       const url = "${{ steps.deploy.outputs.deployed-url }}";
-        #       const pr = context.payload.pull_request;
-        #       if (pr) {
-        #         await github.rest.issues.createComment({
-        #           owner: context.repo.owner,
-        #           repo: context.repo.repo,
-        #           issue_number: pr.number,
-        #           body: `🚀 The app has been deployed to: ${url}`
-        #         });
-        #       } else {
-        #         console.log("No pull request found.");
-        #       }
 
   # integration-tests:
   #   name: Integration Tests
