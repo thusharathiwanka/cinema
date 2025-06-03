@@ -19,7 +19,7 @@ describe('movie page', () => {
       .should(
         'have.attr',
         'src',
-        'https://image.tmdb.org/t/p/w500//aQPeznSu7XDTrrdCtT5eLiu52Yu.jpg'
+        'https://image.tmdb.org/t/p/w500//u7Lp1Hi8aBS73jv4KRMIv5aK4ax.jpg'
       )
       .should('exist')
     cy.get('.movie-poster__rating').should('be.visible')
