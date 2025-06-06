@@ -15,7 +15,7 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@types/jest", "@nuxtjs/axios"]
+    "types": ["@nuxt/types", "@types/node", "@types/jest", "@nuxtjs/axios"]
   },
   "exclude": ["node_modules", ".nuxt", "dist", "cypress.config.ts", "cypress"]
 }
