@@ -1,8 +1,8 @@
-![logo](https://github.com/thushara-thiwanka/cinema/assets/142310256/2f839aaa-b645-4985-8320-f62af92f9147)
+![logo](https://private-user-images.githubusercontent.com/46595464/452582348-47f08da6-b1de-45cf-9cbe-25123bf3e7e2.svg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDkzMDIyMzYsIm5iZiI6MTc0OTMwMTkzNiwicGF0aCI6Ii80NjU5NTQ2NC80NTI1ODIzNDgtNDdmMDhkYTYtYjFkZS00NWNmLTljYmUtMjUxMjNiZjNlN2UyLnN2Zz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MDclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjA3VDEzMTIxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTU3MzU3NzUzODc1MGY4MGVhMmM1YTEyZmJhZTIwNWNjYjBjM2ZmODhlNGE5ZDc5NTZiN2Y0YTZiMTQ2MzA0OTcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.fIfHC2BaSnTKVtuFC5zsN4dVs9CNgZQIPiq-GC0Qwl0)
 
 # Cinema - Movie Ticket Booking App
 
-![cover](https://github.com/thushara-thiwanka/cinema/assets/142310256/e59d60fa-eed1-4b66-a5a1-c8a137295465)
+![cover](https://private-user-images.githubusercontent.com/46595464/452582819-05adcd77-bf0d-4873-ac36-5b42802147f7.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDkzMDIyMzYsIm5iZiI6MTc0OTMwMTkzNiwicGF0aCI6Ii80NjU5NTQ2NC80NTI1ODI4MTktMDVhZGNkNzctYmYwZC00ODczLWFjMzYtNWI0MjgwMjE0N2Y3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MDclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjA3VDEzMTIxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTgwNTliOTdmZTNiYzMzNDhlNWQwNzQ3MzNlODkxYTE5NWE0ZTNhNTQxNDI2MDY1NTNmM2IwNGY3ODA5ZTg2YjAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Y8xO81ULZiAM6tew3iYYyGfxdPoZHXmJ_1PRBm5stGQ)
 
 A web application built with Nuxt and Vue.js that simplifies the movie ticket booking experience. This app allows users to effortlessly browse ongoing movies, view showtimes, select seats, and receive a reservation summary.
 
@@ -35,6 +35,7 @@ A web application built with Nuxt and Vue.js that simplifies the movie ticket bo
   BASE_URL='https://api.themoviedb.org/3/'
   IMAGE_BASE_URL='https://image.tmdb.org/t/p/w500'
   AUTH_TOKEN='Bearer YOUR API KEY'
+  CYPRESS_BASE_URL='http://localhost:4000'
 ```
 
 #### Install Dependencies
@@ -85,17 +86,13 @@ A web application built with Nuxt and Vue.js that simplifies the movie ticket bo
 
 ## Environments
 
-#### UAT
+#### Development
 
-- https://cinema-1csy.onrender.com/
-
-#### Stage
-
-- https://cinema-stage.onrender.com/
+- URLs will be generated automatically once PR is created.
 
 #### Production
 
-- https://cinema-vp2y.onrender.com/
+- https://cinema-7mad4bfvb-thushara-thiwankas-projects-a10c4464.vercel.app/
 
 ## Contributing
 
