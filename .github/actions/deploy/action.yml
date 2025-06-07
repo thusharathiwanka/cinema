@@ -40,10 +40,10 @@ runs:
       shell: bash
       run: |
         if [ "$is_prd" = "true" ]; then
-          echo "Pulling production environment"
+          echo "Pulling PRODUCTION environment"
           vercel pull --yes --environment=production --token=${{ inputs.vercel_token }}
         else
-          echo "Pulling preview environment"
+          echo "Pulling PREVIEW environment"
           vercel pull --yes --environment=preview --token=${{ inputs.vercel_token }}
         fi
 
@@ -52,10 +52,10 @@ runs:
       run: |
         if [ "$is_prd" = "true" ]; then
           echo "Building for PRODUCTION"
-          VERCEL_ENV=production vercel build --token=${{ inputs.vercel_token }}
+          vercel build --prod build --token=${{ inputs.vercel_token }}
         else
           echo "Building for PREVIEW"
-          VERCEL_ENV=preview vercel build --token=${{ inputs.vercel_token }}
+          vercel build --token=${{ inputs.vercel_token }}
         fi
 
     - name: Deploy to Vercel and get URL
