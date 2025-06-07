@@ -8,15 +8,16 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "type-check": "tsc --noEmit --project tsconfig.json",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
+    "lint:fix": "prettier --write --list-different . && yarn lint:js --fix",
     "unit": "export TS_JEST_DISABLE_VER_CHECKER=true && jest --silent",
     "cy:run": "cypress run",
     "cy:open": "cypress open --e2e --browser=chrome",
     "prepare": "husky install",
-    "prepush": "yarn lint --quiet && yarn unit"
+    "prepush": "yarn lint --quiet && yarn type-check && yarn unit"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",

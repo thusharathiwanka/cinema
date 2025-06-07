@@ -49,4 +49,8 @@ export default {
     imageBaseUrl: process.env.IMAGE_BASE_URL,
     authToken: process.env.AUTH_TOKEN,
   },
+
+  typescript: {
+    typeCheck: true,
+  },
 }
