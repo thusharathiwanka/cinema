@@ -1,0 +1,47 @@
+name: Production Pipeline
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    outputs:
+        preview-url: ${{ steps.deploy.outputs.deployment-url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup/
+
+      - name: Deploy to vercel on production
+        id: deploy
+        uses: ./.github/actions/deploy/
+        with:
+          vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel_token: ${{ secrets.VERCEL_TOKEN }}
+          branch: ${{ github.ref_name }}
+
+  integration-tests:
+    name: Integration Tests
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup/
+
+      - name: Run integration tests
+        env:
+          CYPRESS_BASE_URL: ${{ needs.deploy.outputs.preview-url }}
+        run: |
+          echo "Running tests against ${{ needs.deploy.outputs.preview-url }}"
+          yarn cy:run

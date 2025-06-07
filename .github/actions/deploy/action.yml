@@ -1,0 +1,78 @@
+name: Deploy to Vercel
+description: Deploy app to vercel using vercel API
+
+inputs:
+  vercel_org_id:
+    description: 'Vercel organization ID'
+    required: true
+  vercel_project_id:
+    description: 'Vercel project ID'
+    required: true
+  vercel_token:
+    description: 'Vercel API token'
+    required: true
+  branch:
+    description: 'Current branch name'
+    required: true
+
+outputs:
+  deployment-url:
+    description: 'Preview deployment URL'
+    value: ${{ steps.deploy.outputs.url }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set is_prd variable
+      shell: bash
+      run: |
+        if [ "${{ inputs.branch }}" = "main" ]; then
+          echo "is_prd=true" >> $GITHUB_ENV
+        else
+          echo "is_prd=false" >> $GITHUB_ENV
+        fi
+
+    - name: Install Vercel CLI
+      shell: bash
+      run: yarn global add vercel@latest
+
+    - name: Pull Vercel environment information
+      shell: bash
+      run: |
+        if [ "$is_prd" = "true" ]; then
+          echo "Pulling production environment"
+          vercel pull --yes --environment=production --token=${{ inputs.vercel_token }}
+        else
+          echo "Pulling preview environment"
+          vercel pull --yes --environment=preview --token=${{ inputs.vercel_token }}
+        fi
+
+    - name: Build project artifacts
+      shell: bash
+      run: vercel build --token=${{ inputs.vercel_token }}
+
+    - name: Deploy to Vercel and get URL
+      id: deploy
+      shell: bash
+      run: |
+        if [ "$is_prd" = "true" ]; then
+          echo "Deploying to PRODUCTION"
+          URL=$(vercel deploy --prebuilt --prod --token=${{ inputs.vercel_token }})
+        else
+          echo "Deploying to PREVIEW"
+          URL=$(vercel deploy --prebuilt --token=${{ inputs.vercel_token }})
+        fi
+        URL=$(echo "$URL" | grep -Eo 'https://[^ ]+' | head -1)
+        echo "DEPLOY_URL=$URL" >> $GITHUB_ENV
+        echo "url=$URL" >> $GITHUB_OUTPUT
+
+    - name: Create github comment for preview deployments
+      if: ${{ env.is_prd == 'false' && github.event_name == 'pull_request' }}
+      shell: bash
+      run: |
+        COMMENT="Preview Deployment URL 🚀: ${{ env.DEPLOY_URL }}"
+        curl -X POST \
+          -H "Authorization: token ${{ github.token }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+          -d "{\"body\":\"$COMMENT\"}"
