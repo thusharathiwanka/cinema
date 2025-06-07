@@ -92,7 +92,7 @@ A web application built with Nuxt and Vue.js that simplifies the movie ticket bo
 
 #### Production
 
-- https://cinema-7mad4bfvb-thushara-thiwankas-projects-a10c4464.vercel.app/
+- https://cinema-eight-lyart.vercel.app/
 
 ## Contributing
 
