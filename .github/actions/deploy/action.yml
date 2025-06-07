@@ -49,7 +49,14 @@ runs:
 
     - name: Build project artifacts
       shell: bash
-      run: vercel build --token=${{ inputs.vercel_token }}
+      run: |
+        if [ "$is_prd" = "true" ]; then
+          echo "Building for PRODUCTION"
+          VERCEL_ENV=production vercel build --token=${{ inputs.vercel_token }}
+        else
+          echo "Building for PREVIEW"
+          VERCEL_ENV=preview vercel build --token=${{ inputs.vercel_token }}
+        fi
 
     - name: Deploy to Vercel and get URL
       id: deploy
