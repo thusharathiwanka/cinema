@@ -1,14 +1,14 @@
-/* Colors */
-$primary-background-color: #ffffff;
-$primary-accent-color: #f98f01;
-$primary-font-color: #202b33;
-$primary-error-color: #f9012e;
+/* Colors - resolved via CSS custom properties defined in main.scss */
+$primary-background-color: var(--primary-background-color);
+$primary-accent-color: var(--primary-accent-color);
+$primary-font-color: var(--primary-font-color);
+$primary-error-color: var(--primary-error-color);
 
-$secondary-background-color: #f9f7f7;
-$secondary-accent-color: #9ba8b1;
-$secondary-font-color: #bac3ca;
+$secondary-background-color: var(--secondary-background-color);
+$secondary-accent-color: var(--secondary-accent-color);
+$secondary-font-color: var(--secondary-font-color);
 
-$modal-background-color: #202b338a;
+$modal-background-color: var(--modal-background-color);
 
 /* Typography */
 $primary-font-stack: 'Alata', sans-serif;

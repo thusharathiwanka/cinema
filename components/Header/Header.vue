@@ -15,17 +15,20 @@
       />
     </nuxt-link>
     <img src="@/assets/images/logo.svg" alt="logo" class="header__logo" />
+    <ThemeSwitcher class="header__theme-switcher" />
   </nav>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Typography from '@/components/Typography/Typography.vue'
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue'
 
 export default Vue.extend({
   name: 'HeaderComponent',
   components: {
     Typography,
+    ThemeSwitcher,
   },
   computed: {
     isRootRoute(): boolean {
