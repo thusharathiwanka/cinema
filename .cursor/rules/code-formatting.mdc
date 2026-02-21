@@ -1,0 +1,73 @@
+---
+description: Code formatting and TypeScript style rules (prefer types, exact types, no eslint-disable)
+globs: **/*.{ts,tsx,js,jsx,vue}
+alwaysApply: false
+---
+
+# Code formatting and typing
+
+- Prefer the existing project formatter (Prettier/eslint) for indentation, spacing, and quotes.
+- Do not introduce manual visual alignment or decorative spacing; let the formatter decide.
+- Keep files cohesive and focused; extract helpers when functions/components become large or do many things.
+
+## Type vs interface
+
+- Use `type` aliases instead of `interface` for new structural definitions in TypeScript and Vue script blocks.
+- Do not add new `interface` declarations in this project.
+- When touching code that already uses `interface`, prefer refactoring to `type` if it is practical and low-risk.
+
+```typescript
+// ❌ Avoid
+interface UserProps {
+  id: number;
+  name: string;
+}
+
+// ✅ Prefer
+type UserProps = {
+  id: number;
+  name: string;
+};
+```
+
+## Exact and precise types
+
+- Avoid overly broad types such as `any`, `unknown`, `object`, `{ [key: string]: any }`, or `Record<string, any>` when a more precise type is possible.
+- Prefer exact object shapes, string literal unions, and discriminated unions instead of loose index signatures.
+- Give exported functions, composables, and Vue component props/emit definitions explicit parameter and return types.
+- Model nullability and optionality explicitly with unions like `Foo | null` or `Foo | undefined`.
+
+```typescript
+// ❌ Avoid
+type ApiResponse = any;
+
+// ✅ Prefer
+type ApiStatus = "idle" | "loading" | "success" | "error";
+
+type ApiResponse =
+  | { status: "success"; data: Movie[] }
+  | { status: "error"; message: string };
+```
+
+## ESLint usage
+
+- Do not use `// eslint-disable`, `// eslint-disable-next-line`, or similar directives in new or modified code.
+- If a lint rule is too strict, change the implementation or adjust the shared eslint configuration instead of disabling it locally.
+
+```typescript
+// ❌ Avoid
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleEvent(payload: any) {
+  /* ... */
+}
+
+// ✅ Prefer
+type EventPayload = {
+  type: "click" | "submit";
+  targetId: string;
+};
+
+function handleEvent(payload: EventPayload) {
+  /* ... */
+}
+```
