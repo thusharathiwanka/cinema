@@ -14,8 +14,10 @@
         class="header__back-link--img"
       />
     </nuxt-link>
-    <img src="@/assets/images/logo.svg" alt="logo" class="header__logo" />
-    <ThemeSwitcher class="header__theme-switcher" />
+    <client-only>
+      <img :src="logoSrc" alt="logo" class="header__logo" />
+      <ThemeSwitcher class="header__theme-switcher" />
+    </client-only>
   </nav>
 </template>
 
@@ -36,6 +38,14 @@ export default Vue.extend({
     },
     isBookingSummaryRoute(): boolean {
       return this.$route.path.includes('booking-summary')
+    },
+    logoSrc(): string {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const theme = (this as any).$theme
+      const isDark = !!(theme && theme.theme === 'dark')
+      return isDark
+        ? require('@/assets/images/logo-dark.svg')
+        : require('@/assets/images/logo-light.svg')
     },
   },
 })
