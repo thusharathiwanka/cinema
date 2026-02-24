@@ -77,20 +77,17 @@ export default Vue.extend({
   gap: 0.5rem;
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
-  border: 1px solid $secondary-accent-color;
-  background: $secondary-background-color;
+  border: none;
+  background: $primary-background-color;
   cursor: pointer;
   outline: none;
   transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
-
-  &:hover {
-    border-color: $primary-accent-color;
-  }
 }
 
 .theme-switcher__icon-svg {
-  width: 16px;
-  height: 16px;
+  display: flex;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: $secondary-font-color;
   stroke-width: 1.5;
@@ -100,20 +97,24 @@ export default Vue.extend({
 
 .theme-switcher__track {
   position: relative;
-  width: 34px;
-  height: 18px;
+  width: 36px;
+  height: 20px;
   border-radius: 999px;
   background: $primary-background-color;
   border: 1px solid $secondary-accent-color;
   display: inline-flex;
   align-items: center;
   padding: 1px;
+
+  &:hover {
+    border-color: $primary-accent-color;
+  }
 }
 
 .theme-switcher__thumb {
   position: relative;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: $primary-accent-color;
   transform: translateX(0);
@@ -121,6 +122,6 @@ export default Vue.extend({
 }
 
 .theme-switcher__thumb--dark {
-  transform: translateX(14px);
+  transform: translateX(16px);
 }
 </style>
