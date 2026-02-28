@@ -38,5 +38,11 @@
 .header__theme-switcher {
   position: absolute;
   right: 0;
+  top: 0.1rem;
   padding-right: 1rem;
+
+  @media (max-width: $mobile-max-width) {
+    top: -1.8rem;
+    right: -0.8rem;
+  }
 }
