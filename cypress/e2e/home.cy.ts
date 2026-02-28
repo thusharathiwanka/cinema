@@ -18,15 +18,13 @@ describe('home page', () => {
   })
 
   it('should link to correct movie page', () => {
-    const movie = cy.get('.movie-card')
-    if (movie) {
-      movie
-        .get('[data-cy="movie-card"]')
-        .eq(0)
-        .invoke('attr', 'href')
-        .then((href) => {
+    cy.get('[data-cy="movie-card"]')
+      .first()
+      .should('have.attr', 'href')
+      .then((href) => {
+        if (typeof href === 'string') {
           cy.request(href).its('status').should('eq', 200)
-        })
-    }
+        }
+      })
   })
 })

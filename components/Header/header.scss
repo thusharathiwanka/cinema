@@ -28,6 +28,10 @@
 
 .header__back-link--img {
   display: none;
+
+  @media (max-width: $tablet-max-width) {
+    display: inline-block;
+  }
 }
 
 .header__logo {
