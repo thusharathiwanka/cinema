@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "nuxt --o --p 4000",
     "build": "nuxt build",

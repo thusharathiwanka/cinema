@@ -1,6 +1,33 @@
 @import 'variables';
 @import 'typography';
 
+/* Theme tokens */
+:root {
+  --primary-background-color: #ffffff;
+  --primary-accent-color: #f98f01;
+  --primary-font-color: #202b33;
+  --primary-error-color: #fc5050;
+
+  --secondary-background-color: #f9f7f7;
+  --secondary-accent-color: #9ba8b1;
+  --secondary-font-color: #bac3ca;
+
+  --modal-background-color: rgba(32, 43, 51, 0.541);
+}
+
+[data-theme='dark'] {
+  --primary-background-color: #202b33;
+  --primary-accent-color: #f98f01;
+  --primary-font-color: #ffffff;
+  --primary-error-color: #fc5050;
+
+  --secondary-background-color: #111827;
+  --secondary-accent-color: #6b7280;
+  --secondary-font-color: #5b6973;
+
+  --modal-background-color: rgba(15, 23, 42, 0.8);
+}
+
 /* Resets */
 *,
 *::after,

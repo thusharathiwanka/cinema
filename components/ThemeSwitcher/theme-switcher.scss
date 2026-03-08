@@ -1,0 +1,59 @@
+@import '@/assets/scss/variables';
+
+.theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  border: none;
+  background: $primary-background-color;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  @media (max-width: $mobile-max-width) {
+    padding: 0.25rem 0rem;
+  }
+}
+
+.theme-switcher__icon-svg {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: $secondary-font-color;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-switcher__track {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: $primary-background-color;
+  border: 1px solid $secondary-accent-color;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px;
+
+  &:hover {
+    border-color: $primary-accent-color;
+  }
+}
+
+.theme-switcher__thumb {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: $primary-accent-color;
+  transform: translateX(0);
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.theme-switcher__thumb--dark {
+  transform: translateX(16px);
+}

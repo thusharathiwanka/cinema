@@ -14,18 +14,34 @@
         class="header__back-link--img"
       />
     </nuxt-link>
-    <img src="@/assets/images/logo.svg" alt="logo" class="header__logo" />
+    <client-only>
+      <img
+        v-if="!isDarkTheme"
+        src="@/assets/images/logo-light.svg"
+        alt="logo"
+        class="header__logo"
+      />
+      <img
+        v-else
+        src="@/assets/images/logo-dark.svg"
+        alt="logo"
+        class="header__logo"
+      />
+      <ThemeSwitcher class="header__theme-switcher" />
+    </client-only>
   </nav>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Typography from '@/components/Typography/Typography.vue'
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue'
 
 export default Vue.extend({
   name: 'HeaderComponent',
   components: {
     Typography,
+    ThemeSwitcher,
   },
   computed: {
     isRootRoute(): boolean {
@@ -33,6 +49,11 @@ export default Vue.extend({
     },
     isBookingSummaryRoute(): boolean {
       return this.$route.path.includes('booking-summary')
+    },
+    isDarkTheme(): boolean {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const theme = (this as any).$theme
+      return !!(theme && theme.theme === 'dark')
     },
   },
 })
